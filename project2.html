@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>CS142 Төсөл 2: ЖаваСкрипт дасгал</title>
+    <meta name="description" content="Web Applications course at Stanford University">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <script src="js/jquery.min.js"></script> 
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+
+
+  <body>
+
+    <header>
+
+  <nav class="navbar">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">CS142 (2023 оны Өвөл)</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          
+            
+            
+            <li class="">
+              <a href="index.html">Home</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="info.html">Class Info</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="lectures.html">Lectures</a> 
+            </li>
+          
+            
+            
+            <li class="nav-active">
+              <a href="projects.html">Projects</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="staff.html">Staff</a> 
+            </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+</header>
+
+
+    
+
+        <main><div class="container">
+	<h1>CS142 Төсөл 2: ЖаваСкрипт дасгал</h1>
+	<h4 class="text-muted">Сүүлийн хугацаа: 2023-02-28-ны 11:59PM</h4>
+
+	<section>
+		<h3 class="left-border">Тохиргоо</h3>
+		<p>
+			Хэдийгээр энэ төслийг өөрийн веб хөтөч дээрээ ажиллуулж болох ч гэсэн таны үйлдлийн системд Node.js суусан байх хэрэг болно. 
+            Энэ програмыг ашиглан кодын чанарыг шалгах юм. Хэрэв суулгаагүй бол Node.js болон npm модуль менежер програмыг
+            <a href="install.html">зааврын</a> дагуу одоо суулгаарай.
+		</p>
+		<p>
+		Node.js суулгасны дараа <code>project2</code> нэртэй хавтас үүсгээд <a href="downloads/project2.zip">энэ zip файлыг</a> дотор нь задлаарай. 
+		Энэ zip файлд <code>cs142-test-project2.html</code> болон
+		<code>cs142-test-project2.js</code> файлууд байх бөгөөд эдгээрийг ашиглаад төслийн кодоо тестлэх фрэймвөрк маягаар ашиглах юм.
+		</p>
+		<p>
+		Та кодын чанарыг шалгадаг багаж ("linter" гэж нэрлэдэг), <a href="https://eslint.org/">ESLint</a> багажийг татаж аваад <code>project2</code> хавтас дотроос 
+        дараах командаар ажиллуулна:
+		</p>
+		<div class="code">
+			<pre>npm install</pre>
+		</div>
+		<p>
+		Энэ нь ESLint багажийг <code>node_modules</code> дэд хавтас дотор татаж авна. Та <code>project2</code> хавтас дотор байгаа бүх ЖаваСкрипт файлууд үүнийг 
+        ажиллуулах боломжтой болох юм. Дараах командаар кодынхоо чанарыг шалгаарай:
+		</p>
+		<div class="code">
+			<pre>npm run lint</pre>
+		</div>
+		<p>
+		Таны илгээх бүх ЖаваСкрипт файлын код чинь <code>'use strict';</code> мөрөөр эхлэх ёстой. Мөн ESLint програмаар шалгахад ямар нэг алдаа эсвэл санамж (warning)
+        байх ёсгүй юм шүү. <strong>Ямар нэг алдаа эсвэл санамжтай бол загварын онооноос хасагдах болно.</strong>
+		</p>
+
+		<p>
+		Энэ даалгаварыг ажиллуулахад танд хоёр сонголт байна:
+		</p>
+		<ol>
+			<li>
+				<strong>Өөрийн веб хөтөч дээр</strong>: <code>cs142-test-project2.html</code> файлыг шууд нээж ажиллуулах. 
+                Энэ веб хуудас нь таны бичсэн ЖаваСкрипт файлыг ажиллуулах бөгөөд хэд хэдэн тестийг ажиллуулж үр дүнг харуулна.
+			</li>
+			<li>
+				<strong>Node.js дээр</strong>: Та тестийг веб хөтөчгүйгээр ажиллуулах. Дараах командыг ажиллуулаарай.
+				<div class="code">
+					<pre>npm test</pre>
+				</div>
+			</li>
+		</ol>
+		<p>
+		Бид хөгжүүлэлтийн үед веб хөтчийг ашиглахыг санал болгож байна. Энэ нь програмаа алхам бүрээр ажиллуулж үр дүнг нь харахад (debugging) илүү дээр.
+		Гэсэн хэдий ч бид таны төслийг үнэлэхдээ Node.js ашиглана.
+		</p>
+		<p><strong>Санамж:</strong> Эдгээр тестүүд нь бүх нөхцлийг тооцоогүй. Эдгээр нь та үндсэн кодоо бичиж дуусмагц програм бүхэлдээ яаж ажилладагийг зааварчилж таниулах болно.
+        Бидний өгсөн файлд байгаа тестүүд даалгаварт өгсөн тодорхойлолтуудыг бүгдийг бүрэн тестлээгүй учир тодорхойлолтын дагуу бүрэн хэрэгжүүлэх эсэх нь таны хариуцах ажил юм шүү.
+        </p>
+		<p>
+        Энэ төслөөр хэд хэдэн ЖаваСкрипт функц бичнэ. Энэ бие даалтаар өгч буй 
+        даалгаваруудаар хөгжүүлэх бодит практик болон функцүүд нь хичээлийн бусад
+        төслүүдэд дараа хэрэг болно.
+        Өгсөн ЖаваСкриптийн ямар даалгаврыг гүйцэтгэхэд шаардлагатай ЖаваСкриптийн зарим стандарт функцүүдийг хэдэн
+        мөрөнд ашиглаж болно. Энэ төслийн зорилго нь ЖаваСкриптийг сурахад чиглэж байгаа тул ЖаваСкриптийн бусад
+        бэлэн санг <strong>ашиглахыг зөвшөөрөхгүй</strong>. Зөвхөн ЖаваСкриптийн өөрийнх нь функцүүдийг (built-in), жишээ нь, Arrays, Date Objects гэх мэт, 
+        ашиглахыг зөвшөөрнө.
+		</p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Даалгавар 1: Олон шүүлтүүрт функцийг үүсгэх (10 оноо)</h3>
+		<p><code>project2</code> хавтас дотроо <code>cs142-make-multi-filter.js</code> нэртэй шинэ файл үүсгэнэ. Таны үүсгэх Олон шүүлтүүрт функцийн код энэ файлд байна.</p>
+		<p>
+		<code>cs142MakeMultiFilter</code> нэртэй гадаад функц тодорхойлно. Энэ нь нэг хүснэгтэн хувьсагч (<code>originalArray</code>)
+        параметртээ авч тухайн хүснэгтэн хувьсагчийн элементүүдийг шүүж гаргахад хэрэглэх нэг функц буцаадаг байна. Буцааж буй (<code>arrayFilterer</code>) функц нь
+        дотроо <code>currentArray</code> гэж нэрлэх хувьсагчид шүүгдэж үлдсэн элементүүдийг хадгалж явдаг байх юм. Эхэндээ <code>currentArray</code> нь <code>originalArray</code>
+        хувьсагчтай ижил утгатай байна. <code>arrayFilterer</code>
+        функц нь хоёр функцийг параметртээ авна. Үүнд:
+		<ol>
+			<li><code>filterCriteria</code> - Энэ функц параметртээ нэг хүснэгтэн хувьсагчийг авч boolean утга буцаадаг. 
+                Энэ функц <code>currentArray</code> хувьсагчийн элемент бүрийн хувьд дуудагдах бөгөөд 
+                <code>currentArray</code> нь <code>filterCriteria</code> функцийн үр дүнд шинэчлэгддэг байна. 
+                Хэрэв <code>filterCriteria</code> функц тухайн элементийн хувьд <code>false</code> утга буцаавал тэр элемент <code>currentArray</code>
+                хувьсагчаас хасагдана. Эсрэг тохиолдолд тухайн элемент нь <code>currentArray</code> хувьсагчдаа үлдэнэ. Хэрэв
+            <code>filterCriteria</code> функц биш байвал буцааж буй (<code>arrayFilterer</code>) функц <code>currentArray</code> хувьсагчийн утгыг
+            ямар нэг шүүлт хийлгүйгээр шууд буцаадаг байна.</li>
+			<li><code>callback</code> - Энэ функц нь шүүлт хийгдэж дуусмагц дуудагддаг. <code>callback</code> нь <code>currentArray</code> хувьсагчийн утгыг аргументдээ
+                авдаг. <code>callback</code> функц дотроос <code>this</code> хувьсагчаар хандахад
+            <code>originalArray</code> хувьсагчийн утгыг заадаг байх ёстой. Хэрэв <code>callback</code> функц биш бол үүнийг дуудахгүй. 
+            <code>callback</code> нь ямар нэг утга буцаахгүй.</li>
+		</ol>
+        <code>arrayFilterer</code> функц нь <code>filterCriteria</code> параметр тодорхойлогдоогүй, <code>currentArray</code> хувьсагчийг буцаагаагүй бусад нөхцөлд өөрийгөө буцаадаг байна.
+        Энэ нь <code>arrayFilterer</code> функцийг нэг агшинд олон удаа ажиллуулах боломжийг олгодог байна.
+		</p>
+
+        <p>
+		Дараах кодоор таны тодорхойлсон функцийг хэрхэн ашиглаж болохыг харууллаа:
+		<div class="code">
+			<pre>// cs142MakeMultiFilter() функцийг originalArray = [1, 2, 3] параметртэйгээ дуудахад нэг функц буцаана, 
+// энэ нь arrayFilterer1 хувьсагчид хадгалагдана, үүнийг олон давтамжтай дуудаж
+// оролтын хүснэгтэн хувьсагчийн элементийг шүүнэ.
+var arrayFilterer1 = cs142MakeMultiFilter([1, 2, 3]);
+
+// Call arrayFilterer1 (with a callback function) to filter out all the numbers
+// not equal to 2.
+arrayFilterer1(function (elem) {
+  return elem !== 2; // check if element is not equal to 2
+}, function (currentArray) {
+  // 'this' within the callback function should refer to originalArray which is [1, 2, 3]
+  console.log(this); // prints [1, 2, 3]
+  console.log(currentArray); // prints [1, 3]
+});
+
+// Call arrayFilterer1 (without a callback function) to filter out all the
+// elements not equal to 3.
+arrayFilterer1(function (elem) {
+  return elem !== 3; // check if element is not equal to 3
+});
+
+// Calling arrayFilterer1 with no filterCriteria should return the currentArray.
+var currentArray = arrayFilterer1();
+console.log('currentArray', currentArray); // prints [1] since we filtered out 2 and 3
+
+// Since arrayFilterer returns itself, calls can be chained
+function filterTwos(elem) { return elem !== 2; }
+function filterThrees(elem) { return elem !== 3; }
+var arrayFilterer2 = cs142MakeMultiFilter([1, 2, 3]);
+var currentArray2 = arrayFilterer2(filterTwos)(filterThrees)();
+console.log('currentArray2', currentArray2); // prints [1] since we filtered out 2 and 3
+
+// Multiple active filters at the same time
+var arrayFilterer3 = cs142MakeMultiFilter([1, 2, 3]);
+var arrayFilterer4 = cs142MakeMultiFilter([4, 5, 6]);
+console.log(arrayFilterer3(filterTwos)()); // prints [1, 3]
+console.log(arrayFilterer4(filterThrees)()); // prints [4, 5, 6]</pre></div>
+		</p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Problem 2: Template Processor (5 points)</h3>
+		<p>In your <code>project2</code> directory, make a new file named <code>cs142-template-processor.js</code>. The code for your Template Processor will go in this file.</p>
+
+		<p>
+		Create a template processor class (<code>Cs142TemplateProcessor</code>)
+		that is constructed with a string parameter <code>template</code> and has a
+        method <code>fillIn</code>. When invoked with an argument of a <code>dictionary</code> object,
+		<code>fillIn</code> returns a string with the template filled in with values from
+		the dictionary object. <code>Cs142TemplateProcessor</code> should be written using the standard
+        JavaScript constructor and prototype structure.
+
+		</p>
+		<p>
+		The <code>fillIn</code> method returns the <code>template</code> string with any text
+		of the form <code>&#123;&#123;property&#125;&#125;</code> replaced with the corresponding <code>property</code>
+		of the <code>dictionary</code> object passed to the function.
+		</p>
+
+		<p>
+		If the template specifies a property that is not defined in the dictionary object, the property should be replaced with an empty string. If the property is between two words, you'll notice that replacing the property with an empty string will result in two consecutive whitespaces. Example: <code>"This &#123;&#123;undefinedProperty&#125;&#125; is cool"</code> → <code class="example">"This  is cool"</code>. This is fine. You do not have to worry about getting rid of the extra whitespace.
+		</p>
+
+		<p>
+		Your system need only handle properly formatted properties. Its behavior can be left undefined in the following cases as we will not be checking explicitly for them.
+		</p>
+		<ul>
+			<li>nested properties - <code>&#123;&#123;foo &#123;&#123;bar&#125;&#125;&#125;&#125;</code> or <code>&#123;&#123;&#123;&#123;bar&#125;&#125;&#125;&#125;</code> or <code>&#123;&#123;&#123;bar&#125;&#125;&#125;</code> </li>
+			<li>unbalanced brackets - <code>&#123;&#123;bar&#125;&#125;&#125;</code></li>
+			<li>stray brackets in any property string - <code>da&#123;y</code> or <code>da&#125;y</code> </li>
+		</ul>
+
+		<p>
+		 The following code shows how one might make use of the functions you define in this problem:
+		<div><pre>var template = 'My favorite month is &#123;&#123;month&#125;&#125; but not the day &#123;&#123;day&#125;&#125; or the year &#123;&#123;year&#125;&#125;';
+var dateTemplate = new Cs142TemplateProcessor(template);
+
+var dictionary = {month: 'July', day: '1', year: '2016'};
+var str = dateTemplate.fillIn(dictionary);
+
+assert(str === 'My favorite month is July but not the day 1 or the year 2016');
+
+//Case: property doesn't exist in dictionary
+var dictionary2 = {day: '1', year: '2016'};
+var str = dateTemplate.fillIn(dictionary2);
+
+assert(str === 'My favorite month is  but not the day 1 or the year 2016');</pre></div>
+		</p>
+
+	</section>
+
+
+	<section>
+		<h3 class="left-border">Problem 3: Fix <code>cs142-test-project2.js</code> to not pollute the global namespace (5 points)</h3>
+		<p>
+		The test JavaScript file we give you (<code>cs142-test-project2.js</code>) declares
+		numerous symbols in the global JavaScript namespace. For example, after the script
+		is loaded the symbol <code>p1Message</code> appears in the global namespace. Another
+        JavaScript file would then be able to access and change <code>p1Message</code>.
+        Change <code>cs142-test-project2.js</code> to
+		use the standard JavaScript module pattern using an <strong>anonymous function</strong> to hide
+		symbols in the global namespace yet keep the same checking functionality.
+		</p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Style Points (5 points)</h3>
+		<p>
+		These points will be awarded if your JavaScript code for the problems above is clean, readable, and ESLint warning-free.
+		</p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Useful Hints</h3>
+		<ul>
+			<li>In JavaScript, the convention for checking equality/inequality is <code>===</code> and <code>!==</code>, instead of <code>==</code> and <code>!=</code>.</li>
+			<li>When running ESLint, make sure the <code>.eslintrc.json</code> (hidden file) is present, or ESLint will throw an error. You can use the command <code>ls -a</code> (<code>dir /a</code> in a Windows command line) to view all the files in your current directory, including hidden files.</li>
+			<li>If ESLint output shows a lot of style issues, you can ask ESLint to fix many of them for you by running <code>npm run lint -- --fix</code>.</li>
+
+			<li>When moving files around, make sure to do that using the command line. Dragging/dropping files usually does not move hidden files which is a common reason for students missing their <code>.eslintrc.json</code> file, which is included in the zip file you extracted at the start.</li>
+			<li>The requirement that your solution to Problem 1 support multiple simultaneous uses of
+				<code>cs142MakeMultiFilter</code> means that you should not be using global variables to store the <code>currentArray</code> state.</li>
+			<li>In problem 3, you only need to address symbols created by the test file. Also, you will need to leave the variable <code>cs142Project2Results</code> as a global (i.e., property on the <code>window</code> object) so that you can continue to run the tests using the <code>run-tests-using-node.js</code> script.</li>
+		</ul>
+	</section>
+
+	<section>
+		<h3 class="left-border">Deliverables</h3>
+		<p>
+		Use the standard class <a href="submit.html">submission mechanism</a>
+		to submit the <code>project2</code> directory.  This directory should include the starter files
+		we gave you along with code files you created or modified for the problems including
+		<code>cs142-make-multi-filter.js</code>, <code>cs142-template-processor.js</code>,
+		<code>cs142-test-project2.js</code>, and <code>cs142-test-project2.html</code>. Make sure
+		your submission runs <code>npm run lint</code> and <code>npm test</code> with no errors or warnings.
+		</p>
+	</section>
+
+</div>
+</main>
+
+    
+
+    <footer>
+        <div class="container text-center">
+            <small class="text-muted">
+                Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+                <br>
+                <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com" target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
+            </small>
+          </div>
+</footer>
+
+
+  </body>
+
+</html>

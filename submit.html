@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Хичээлийн даалгаврыг илгээх</title>
+    <meta name="description" content="Web Applications course at Stanford University">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <script src="js/jquery.min.js"></script> 
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+
+
+  <body>
+
+    <header>
+
+  <nav class="navbar">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">CS142 (Winter 2023)</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          
+            
+            
+            <li class="">
+              <a href="index.html">Home</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="info.html">Class Info</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="lectures.html">Lectures</a> 
+            </li>
+          
+            
+            
+            <li class="nav-active">
+              <a href="projects.html">Projects</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="staff.html">Staff</a> 
+            </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+</header>
+
+
+        <main><div class="container">
+  <h1>Хичээлийн даалгаврыг илгээх</h1>
+  <h3 class="left-border">Урт шүү; уншаад хэрэггүй</h3>
+  </p>
+    Хичээлд үүсгэсэн
+      <a href="https://teams.microsoft.com/l/team/19%3aqQ-vIIxk67SblKK8uBTGro0hAQuDNHbGrDG1a0QOwQ41%40thread.tacv2/conversations?groupId=864fcd5c-eda5-46c7-959d-560964c84232&tenantId=9fc13a43-2d3c-4727-916f-6db7ed337b9f" target="_blank">
+        Тиймс группын
+      </a>
+    Assignments график интерфэйсийг ашиглан төслийн хавтсаар <a href="https://en.wikipedia.org/wiki/Zip_(file_format)" target="_blank">zip файл</a> үүсгэн илгээнэ. 
+    Энэ zip файл дотор нэг ширхэг хавтас байх бөгөөд <code>projectN</code> нэртэй байна. Энд <code>N</code> бол төслийн дугаар. Жишээ нь, Project1.zip, Project2.zip гэх мэт.
+  </p>
+  <h3 class="left-border">Хэрэггүй файлуудыг хаях/цэвэрлэх</h3>
+  <p>
+    Ажлаа илгээхээсээ өмнө төслийн хавтаст байгаа шаардлагагүй файлуудыг устгаарай. 
+    Төсөлд хэрэглэсэн веб багажууд (tools) хэдэн зуун мегабайт хэмжээтэй файлуудыг төслийн хавтаст чинь үүсгэх бөгөөд эдгээрийг бид авахгүй, илгээх хэрэггүй юм. 
+    Дараах хавтаст үүсгэсэн файлуудыг устгасны дараа шахаж zip файл үүсгэнэ.
+    <ul>
+      <li><code>node_modules</code> - <code>package.json</code> файлд тодорхойлогдсон, npm багажаар татаж авсан модулиуд.
+      <li><code>compiled</code> - React.js багажуудын үүсгэсэн ЖаваСкриптүүд
+      </li>
+    </ul>
+  </p>
+  <h3 class="left-border">Төслийн хавтсаа шахаж илгээх</h3>
+  <p>
+    Төслөө хөгжүүлж дуусаад өөрийнхөө өөрчилсөн, нэмсэн бүх файл, дэд хавтсууд чинь бүгд төслийн хавтас дотор орсон эсэхийг шалгаарай. 
+    Энэ дотор энгийн горимд дэлгэцлэгдэггүй олон нуугдсан файлууд (hidden files) байдаг шүү. Консол орчноос zip командыг ашиглаад эсвэл 
+    хэрэглэгчийн график интерфэйсээр, альнаар нь ч төслийн хавтсаа шахаж zip файл үүсгэж болно. 
+  </p>
+  <p>
+    MacOS системийн хувьд Finder програмаас 
+    төслийн хавтас дээрээ хулгана/падын баруун товчийг (control-click) дарж гарч ирэх дэд цэснээс "Compress" командыг ашиглаж болно. 
+    Виндоус үйлдлийн системийн хувьд хавтас дээрээ баруун товчийг дарж "Send to..." -> "Compressed (zipped) folder.". 
+    Зөвхөн ZIP өргөтгөлтэй файлыг хүлээж авна.
+  </p>
+  <p>
+    Линакс төрлийн үйлдлийн системийн хувьд терминал програмаас, одоо ажиллаж байгаа хавтас дотроо дараах командыг ажиллуулж болно:
+    <blockquote class="blockquote">
+      <code>zip -r projectN.zip projectN</code>
+    </blockquote>
+    Энд <code>projectN</code> төслийн нэр болно.
+  </p>
+  Дээрх аргууд бүгд <code>".zip"</code> өргөтгөлтэй файл үүсгэх бөгөөд үүнийг Тиймсийн assignment-аар илгээгээрэй.
+  </p>
+  <h3 class="left-border">Төслийн ажлыг хамгаалж дүгнүүлэх</h3>
+  <p>
+    Төслийн ажлыг Assignment-аар илгээснээр шалгах үйл явц эхэлнэ. Төслийн ажлыг биечлэн лабораторийн хичээлийн цаг дээр хамгаалуулж шалгана. 
+    Төслийн ажлыг хамгаалахдаа өөрийн компьютер дээр ажиллуулж харуулах, асуултад хариулах, кодыг өөрчилж үзүүлэх болон кодыг тайлбарлана.
+  </p>
+
+</div>
+</main>
+
+    <footer>
+  <div class="container text-center">
+    <small class="text-muted">
+    	Designed by Raymond Luong for CS142 at Stanford University
+    	<br>
+    	Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="https://jekyllrb.com" target="_blank">Jekyll</a> – <a href="website.html"><strong>learn more</strong></a>
+    </small>
+  </div>
+</footer>
+
+
+  </body>
+
+</html>
