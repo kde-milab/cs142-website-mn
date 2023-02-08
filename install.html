@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Installing MERN Software</title>
+    <title>MERN програм суулгах заавар</title>
     <meta name="description" content="Web Applications course at Stanford University">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -80,58 +80,55 @@
 
 
         <main><div class="container">
-  <h1>Installing MERN Software</h1>
+  <h1>MERN програм суулгах заавар</h1>
   <p>
-  The programming projects for this class require you to install Node.js and MongoDB.
-  If you don't already have these packages installed on your laptop,
-  follow the instructions below to install them.
+  Энэ хичээлээр хийх програмын төслүүдэд Node.js болон MongoDB суулгаж ашиглах хэрэгтэй.
+  Хэрэв таны компьютер, нөтбүүк дээр эдгээр програмууд суугаагүй бол дараах зааврын дагуу суулгаарай.
   </p>
-  <h3 class="left-border">Installing Node.js</h3>
+  <h3 class="left-border">Node.js суулгах</h3>
   <p>
-  Install the latest "Long Term Support (LTS)" version of Node.js (currently version 18.12.1).
-  It can be downloaded from the URL
-  <a href="https://nodejs.org/en/download">https://nodejs.org/en/download</a>.
-  To verify you have Node.js and its package manager (npm), try running the commands:
+  Node.js програмын хамгийн сүүлийн "Урт хугацаанд дэмжих - Long Term Support (LTS)" хувилбарыг (одоогоор 18.14.0) суулгана.
+  Үүнийг <a href="https://nodejs.org/en/download">https://nodejs.org/en/download</a> URL хаягаар татаж авах боломжтой.
+  Node.js болон модуль меженер (npm) програмыг суусан эсэхийг шалгахдаа доорх командыг ажиллуулна:
   <div class="code">
     <pre>node -v</pre>
   </div>
-  and:
+  болон:
   <div class="code">
     <pre>npm -v</pre>
   </div>
-  which should run and print out the version numbers of your node and npm programs.
+  энэ нь дээрх хоёр програмын хувилбарыг дэлгэцлэж харуулна.
   </p>
-  <h3 class="left-border">Installing MongoDB</h3>
+  <h3 class="left-border">MongoDB суулгах</h3>
   <p>
-  Install the <a href="https://www.mongodb.com/what-is-mongodb">MongoDB Community Edition</a> from the website
-  <a href="https://docs.mongodb.com/manual/administration/install-community/">https://docs.mongodb.com/manual/administration/install-community/</a>.
+  <a href="https://www.mongodb.com/what-is-mongodb">MongoDB Community Edition</a> хувилбарыг
+  <a href="https://docs.mongodb.com/manual/administration/install-community/">https://docs.mongodb.com/manual/administration/install-community/</a> хаягаар татаж суулгана.
   </p>
   <p>
-  Once you start the MongoDB server using the command
+  Дараах командыг ашиглан MongoDB серверийг асаана.
   <pre>mongod (the exact arguments depend on where you placed the database)</pre>
-  you should be able to directly interact with the MongoDB database by running the command:
+  Мөн доор командаар MongoDB өгөгдлийн санг шууд удирдан ажиллах боломжтой:
   <div class="code">
     <pre>mongosh</pre>
   </div>
-  Type help at the command prompt to see the available commands.
+  Команд промт дээр help гэж бичээд боломжит командуудыг харж болно.
   </p>
   <p>
-    For Windows users, you may need to add the location of where MongoDB was installed to your environment path variable in order to run
-    the commands. 
-    This is usually located at <pre>C:\Program Files\MongoDB\Server\&lt;version_number&gt;\bin</pre>    
+    Виндоус системийн хэрэглэгчдийн хувьд MongoDB суусан замыг үйлдлийн системийнхээ environment path хувьсагчид нэмж өгнө. 
+    Ихэнхдээ <pre>C:\Program Files\MongoDB\Server\&lt;version_number&gt;\bin</pre> зам дээр суусан байдаг.
   </p>
 
 </div>
 </main>
 
-    <footer>
+<footer>
   <div class="container text-center">
-    <small class="text-muted">
-    	Designed by Raymond Luong for CS142 at Stanford University
-    	<br>
-    	Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="https://jekyllrb.com" target="_blank">Jekyll</a> – <a href="website.html"><strong>learn more</strong></a>
-    </small>
-  </div>
+      <small class="text-muted">
+          Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+          <br>
+          <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com" target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
+      </small>
+    </div>
 </footer>
 
 

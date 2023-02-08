@@ -183,75 +183,77 @@
 // оролтын хүснэгтэн хувьсагчийн элементийг шүүнэ.
 var arrayFilterer1 = cs142MakeMultiFilter([1, 2, 3]);
 
-// Call arrayFilterer1 (with a callback function) to filter out all the numbers
-// not equal to 2.
+// arrayFilterer1 функцийг (callback функц өгч) дуудаад 2-той тэнцүү биш утгуудыг
+// шүүнэ.
 arrayFilterer1(function (elem) {
-  return elem !== 2; // check if element is not equal to 2
+  return elem !== 2; // элемент 2-той тэнцүү биш эсэхийг шалгах
 }, function (currentArray) {
-  // 'this' within the callback function should refer to originalArray which is [1, 2, 3]
-  console.log(this); // prints [1, 2, 3]
-  console.log(currentArray); // prints [1, 3]
+  // callback функц доторх 'this' хувьсагч [1, 2, 3] утгатай originalArray-г заана.
+  console.log(this); // [1, 2, 3] гэж дэлгэцлэнэ
+  console.log(currentArray); // [1, 3] гэж дэлгэцлэнэ
 });
 
-// Call arrayFilterer1 (without a callback function) to filter out all the
-// elements not equal to 3.
+// arrayFilterer1 функцийг (callback функцгүй) дуудахад 3-тай тэнцүү биш
+// утгуудыг шүүнэ.
 arrayFilterer1(function (elem) {
-  return elem !== 3; // check if element is not equal to 3
+  return elem !== 3; // элемент 3-тай тэнцүү биш эсэхийг шалгах
 });
 
-// Calling arrayFilterer1 with no filterCriteria should return the currentArray.
+// arrayFilterer1 функцийг filterCriteria параметргүй дуудахад currentArray-г буцаана.
 var currentArray = arrayFilterer1();
-console.log('currentArray', currentArray); // prints [1] since we filtered out 2 and 3
+console.log('currentArray', currentArray); // [1] гэж дэлгэцлэнэ. Учир нь 2 болон 3 утгууд хасагдсан.
 
-// Since arrayFilterer returns itself, calls can be chained
+// arrayFilterer өөрийгөө буцаадаг тул, ар араас нь гинжилж дуудаж болно.
 function filterTwos(elem) { return elem !== 2; }
 function filterThrees(elem) { return elem !== 3; }
 var arrayFilterer2 = cs142MakeMultiFilter([1, 2, 3]);
 var currentArray2 = arrayFilterer2(filterTwos)(filterThrees)();
-console.log('currentArray2', currentArray2); // prints [1] since we filtered out 2 and 3
+console.log('currentArray2', currentArray2); // [1] гэж дэлгэцлэнэ. Учир нь 2 болон 3 утгууд хасагдсан.
 
-// Multiple active filters at the same time
+// Олон шүүлтүүрт функцийг нэг агшинд олон удаа нь хэрэглэнэ.
 var arrayFilterer3 = cs142MakeMultiFilter([1, 2, 3]);
 var arrayFilterer4 = cs142MakeMultiFilter([4, 5, 6]);
-console.log(arrayFilterer3(filterTwos)()); // prints [1, 3]
-console.log(arrayFilterer4(filterThrees)()); // prints [4, 5, 6]</pre></div>
+console.log(arrayFilterer3(filterTwos)()); // [1, 3] дэлгэцлэнэ
+console.log(arrayFilterer4(filterThrees)()); // [4, 5, 6] дэлгэцлэнэ</pre></div>
 		</p>
 	</section>
 
 	<section>
-		<h3 class="left-border">Problem 2: Template Processor (5 points)</h3>
-		<p>In your <code>project2</code> directory, make a new file named <code>cs142-template-processor.js</code>. The code for your Template Processor will go in this file.</p>
+		<h3 class="left-border">Даалгавар 2: Загвар процессор (5 оноо)</h3>
+		<p><code>project2</code> хавтас дотроо <code>cs142-template-processor.js</code> нэрээр нэг файл үүсгэнэ. Загвар процессорын код энэ файлд байх ёстой.</p>
 
 		<p>
-		Create a template processor class (<code>Cs142TemplateProcessor</code>)
-		that is constructed with a string parameter <code>template</code> and has a
-        method <code>fillIn</code>. When invoked with an argument of a <code>dictionary</code> object,
-		<code>fillIn</code> returns a string with the template filled in with values from
-		the dictionary object. <code>Cs142TemplateProcessor</code> should be written using the standard
-        JavaScript constructor and prototype structure.
+		Нэг Загвар процессор класс үүсгэнэ (<code>Cs142TemplateProcessor</code>).
+		Энэ нь нэг string (тэмдэгт мөр) төрлийн <code>template</code> параметр авдаг байгуулагчтай, <code>fillIn</code> нэртэй нэг методтой байна. 
+        Энэ <code>fillIn</code> методыг <code>dictionary</code> объект өгч дуудахад тэмдэгт мөр буцаах бөгөөд энэ утгыг dictionary объектын утгуудаар 
+        загварыг (template) дүүргэсэн байна.
+		<code>Cs142TemplateProcessor</code> классыг ЖаваСкриптын стандарт байгуулагч болон prototype бүтцийг ашиглан бичнэ.
 
 		</p>
 		<p>
-		The <code>fillIn</code> method returns the <code>template</code> string with any text
-		of the form <code>&#123;&#123;property&#125;&#125;</code> replaced with the corresponding <code>property</code>
-		of the <code>dictionary</code> object passed to the function.
+		<code>fillIn</code> метод <code>template</code> тэмдэгт мөрийг буцаах ба <code>&#123;&#123;property&#125;&#125;</code> (шинж) хэлбэртэй/форматтай ямар ч бичвэрийг 
+        методод дамжуулж өгсөн <code>dictionary</code> объектын харгалзах <code>property</code>
+		утгуудаар сольдог байна.
 		</p>
 
 		<p>
-		If the template specifies a property that is not defined in the dictionary object, the property should be replaced with an empty string. If the property is between two words, you'll notice that replacing the property with an empty string will result in two consecutive whitespaces. Example: <code>"This &#123;&#123;undefinedProperty&#125;&#125; is cool"</code> → <code class="example">"This  is cool"</code>. This is fine. You do not have to worry about getting rid of the extra whitespace.
+		Хэрэв загвар нь dictionary объектод байхгүй шинжийг агуулж байвал тэр шинж байх газар хоосон тэмдэгтээр солино. 
+        Хэрэв шинж нь хоёр үгийн хооронд байрласан бол хоёр хоосон зай харагдах болно. 
+        Жишээ нь: <code>"This &#123;&#123;undefinedProperty&#125;&#125; is cool"</code> → <code class="example">"This  is cool"</code>. Энэ бол байж болно. 
+        Та нэмэлт хоосон зайг яах талаар санаа зовох хэрэггүй.
 		</p>
 
 		<p>
-		Your system need only handle properly formatted properties. Its behavior can be left undefined in the following cases as we will not be checking explicitly for them.
+		Таны систем зөвхөн зөв форматтай шинжийг л авч үздэг байна. Магадгүй энэ нь дараах тохиолдолд, бид нэг бүрчлэн шалгаагүй учир undefined байж болзошгүй.
 		</p>
 		<ul>
-			<li>nested properties - <code>&#123;&#123;foo &#123;&#123;bar&#125;&#125;&#125;&#125;</code> or <code>&#123;&#123;&#123;&#123;bar&#125;&#125;&#125;&#125;</code> or <code>&#123;&#123;&#123;bar&#125;&#125;&#125;</code> </li>
-			<li>unbalanced brackets - <code>&#123;&#123;bar&#125;&#125;&#125;</code></li>
-			<li>stray brackets in any property string - <code>da&#123;y</code> or <code>da&#125;y</code> </li>
+			<li>давхарлагдсан шинжүүд - <code>&#123;&#123;foo &#123;&#123;bar&#125;&#125;&#125;&#125;</code> эсвэл <code>&#123;&#123;&#123;&#123;bar&#125;&#125;&#125;&#125;</code> эсвэл <code>&#123;&#123;&#123;bar&#125;&#125;&#125;</code> </li>
+			<li>ижил биш уян хаалт - <code>&#123;&#123;bar&#125;&#125;&#125;</code></li>
+			<li>шинжийн нэрэнд байх уян хаалт - <code>da&#123;y</code> or <code>da&#125;y</code> </li>
 		</ul>
 
 		<p>
-		 The following code shows how one might make use of the functions you define in this problem:
+		 Дараах кодоор энэ даалгавраар тодорхойлж буй функцүүдийг хэрхэн ашиглаж болохыг харууллаа:
 		<div><pre>var template = 'My favorite month is &#123;&#123;month&#125;&#125; but not the day &#123;&#123;day&#125;&#125; or the year &#123;&#123;year&#125;&#125;';
 var dateTemplate = new Cs142TemplateProcessor(template);
 
@@ -260,7 +262,7 @@ var str = dateTemplate.fillIn(dictionary);
 
 assert(str === 'My favorite month is July but not the day 1 or the year 2016');
 
-//Case: property doesn't exist in dictionary
+//тохиолдол: шинж dictionary объектод байхгүй байх
 var dictionary2 = {day: '1', year: '2016'};
 var str = dateTemplate.fillIn(dictionary2);
 
@@ -271,48 +273,44 @@ assert(str === 'My favorite month is  but not the day 1 or the year 2016');</pre
 
 
 	<section>
-		<h3 class="left-border">Problem 3: Fix <code>cs142-test-project2.js</code> to not pollute the global namespace (5 points)</h3>
+		<h3 class="left-border">Даалгавар 3: <code>cs142-test-project2.js</code> кодыг засаж гадаад орчныг (global namespace) бохирдуулахгүй болгох (5 оноо)</h3>
 		<p>
-		The test JavaScript file we give you (<code>cs142-test-project2.js</code>) declares
-		numerous symbols in the global JavaScript namespace. For example, after the script
-		is loaded the symbol <code>p1Message</code> appears in the global namespace. Another
-        JavaScript file would then be able to access and change <code>p1Message</code>.
-        Change <code>cs142-test-project2.js</code> to
-		use the standard JavaScript module pattern using an <strong>anonymous function</strong> to hide
-		symbols in the global namespace yet keep the same checking functionality.
+		Бидний өгсөн тестийн ЖаваСкрипт файл 
+        (<code>cs142-test-project2.js</code>) нь нэлээд олон хувьсагчийг ЖаваСкриптийн гадаад орчинд зарласан байгаа.
+        Жишээ нь, энэ файлыг дуудахад <code>p1Message</code> хувьсагч гадаад орчинд харагдана. Иймд өөр нэг
+        ЖаваСкрипт файлаас <code>p1Message</code> энэ хувьсагчид хандах боломжтой гэсэн үг.
+        <code>cs142-test-project2.js</code> файлын кодыг ЖаваСкриптийн стандарт модулийн <strong>anonymous function</strong> ашигладаг загвараар 
+        гадаад орчинд байх хувьсагчуудыг нуудаг, бас таны бичсэн кодууд өмнөх шиг шалгаж болдог байхаар өөрчилнө.
 		</p>
 	</section>
 
 	<section>
-		<h3 class="left-border">Style Points (5 points)</h3>
+		<h3 class="left-border">Загварын оноо (5 оноо)</h3>
 		<p>
-		These points will be awarded if your JavaScript code for the problems above is clean, readable, and ESLint warning-free.
+		Энэ оноог таны бичсэн ЖаваСкрипт код цэвэрхэн, уншууртай, ESLint санамжгүй тохиолдолд өгнө.
 		</p>
 	</section>
 
 	<section>
-		<h3 class="left-border">Useful Hints</h3>
+		<h3 class="left-border">Зөвлөмж</h3>
 		<ul>
-			<li>In JavaScript, the convention for checking equality/inequality is <code>===</code> and <code>!==</code>, instead of <code>==</code> and <code>!=</code>.</li>
-			<li>When running ESLint, make sure the <code>.eslintrc.json</code> (hidden file) is present, or ESLint will throw an error. You can use the command <code>ls -a</code> (<code>dir /a</code> in a Windows command line) to view all the files in your current directory, including hidden files.</li>
-			<li>If ESLint output shows a lot of style issues, you can ask ESLint to fix many of them for you by running <code>npm run lint -- --fix</code>.</li>
-
-			<li>When moving files around, make sure to do that using the command line. Dragging/dropping files usually does not move hidden files which is a common reason for students missing their <code>.eslintrc.json</code> file, which is included in the zip file you extracted at the start.</li>
-			<li>The requirement that your solution to Problem 1 support multiple simultaneous uses of
-				<code>cs142MakeMultiFilter</code> means that you should not be using global variables to store the <code>currentArray</code> state.</li>
-			<li>In problem 3, you only need to address symbols created by the test file. Also, you will need to leave the variable <code>cs142Project2Results</code> as a global (i.e., property on the <code>window</code> object) so that you can continue to run the tests using the <code>run-tests-using-node.js</code> script.</li>
+			<li>ЖаваСкрипт хэлэнд тэнцүү/тэнцүү бишийг шалгахад <code>==</code> болон <code>!=</code> операторуудын оронд <code>===</code> болон <code>!==</code> операторыг ашиглаарай.</li>
+			<li>ESLint програмыг ажиллуулах үед <code>.eslintrc.json</code> (нуугдмал файл) байгаа эсэхийг шалгаарай. Үгүй бол ESLint алдаа өгнө. <code>ls -a</code> (<code>dir /a</code> Виндоус дээр) командын мөрөөр тухайн хавтас дотор байгаа бүх файлыг, нуугдмал файлыг ч харж болно.</li>
+			<li>Хэрэв ESLint олон тооны загварыг асуудлуудыг гаргавал <code>npm run lint -- --fix</code> командаар ихэнхийг нь засах боломжтой.</li>
+			<li>Файлуудаа хуулахдаа командын мөрийг ашиглаарай. Чирээд хуулах нь ихэвчлэн нуугдмал файлыг хуулдаггүй нь zip файлд орох ёстой <code>.eslintrc.json</code> файлгүйгээр илгээх нөхцлийг үүсгэдэг.                 </li>
+			<li>Даалгавар 1-д үзүүлсэн шаардлага <code>cs142MakeMultiFilter</code> функцийг нэгэн зэрэг олон удаа ашиглах тул <code>currentArray</code> хувьсагчийг гадаад орчинд хадгалахгүй байх ёстой.</li>
+			<li>Даалгавар 3-т, зөвхөн тест файлд байгаа хувьсагчуудтай л ажилла. Бас <code>cs142Project2Results</code> хувьсагчийг гадаад орчинд нь (жишээ нь, <code>window</code> объектын шинжээр) үлдээх ёстой. 
+                 Ийм байж <code>run-tests-using-node.js</code> скриптыг ажиллуулж болно.</li>
 		</ul>
 	</section>
 
 	<section>
-		<h3 class="left-border">Deliverables</h3>
+		<h3 class="left-border">Илгээх</h3>
 		<p>
-		Use the standard class <a href="submit.html">submission mechanism</a>
-		to submit the <code>project2</code> directory.  This directory should include the starter files
-		we gave you along with code files you created or modified for the problems including
-		<code>cs142-make-multi-filter.js</code>, <code>cs142-template-processor.js</code>,
-		<code>cs142-test-project2.js</code>, and <code>cs142-test-project2.html</code>. Make sure
-		your submission runs <code>npm run lint</code> and <code>npm test</code> with no errors or warnings.
+		Даалгаврыг <a href="submit.html">илгээхдээ</a>
+		<code>project2</code> нэртэй хавтас дотор <code>cs142-make-multi-filter.js</code>, <code>cs142-template-processor.js</code>,
+		<code>cs142-test-project2.js</code>, болон <code>cs142-test-project2.html</code> файлуудыг оруулсан байна. Эдгээр файлуудад 
+        <code>npm run lint</code> болон <code>npm test</code> командуудыг ажиллуулсан байх ба ямар нэг алдаа, санамжгүй болсон байх ёстой.
 		</p>
 	</section>
 
