@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>CS142 Project 4: Page Generation with ReactJS</title>
+    <title>CS142 Төсөл 2: ReactJS хуудас үүсгэх</title>
     <meta name="description" content="Web Applications course at Stanford University">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -35,7 +35,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">CS142 (Winter 2023)</a>
+        <a class="navbar-brand" href="index.html">CS142 (2023 оны Өвөл)</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -83,356 +83,307 @@
 
         <main><div class="container">
 
-  <h1>CS142 Project 4: Page Generation with ReactJS</h1>
+  <h1>CS142 Төсөл 2: ReactJS хуудас үүсгэх</h1>
   <h4 class="text-muted">
-    Due: Thursday, February 9, 2023 at 11:59 PM
+    Сүүлийн хугацаа: Thursday, February 9, 2023 at 11:59 PM
   </h4>
 
   <section>
-    <h3 class="left-border">Setup</h3>
+    <h3 class="left-border">Тохиргоо</h3>
     <p>
-      You should already have installed Node.js and the npm package manager on
-      your system. If not, follow the <a href="install.html">installation
-      instructions</a> now.
+      Та өөрийн систем дээрээ Node.js болон npm модуль менежерийг суулгасан байх ёстой.
+      Хэрэв үгүй бол, <a href="install.html">суулгах
+      instructions</a> зааврыг дагаж одоо суулгаарай.
     </p>
     <p>
-      Create a directory <code>project4</code> and extract the contents of <a
+      <code>project4</code> нэрээр хавтас үүсгэж <a
       href="downloads/project4react.zip">
-        this zip file</a> into the directory. The zip file contains the starter
-        files for this assignment.
+        энэ файлыг</a> дотор нь задалж хуулаарай. Энэ zip файл энэ даалгавар ашиглах гарааны файлуудыг агуулж байгаа.
     </p>
     <p>
-      This assignment requires many node modules that contain the tools (e.g. <a
+      Энэ даалгаварт нэлээд олон node модулийг ашиглана. Жишээ нь, <a
       href="https://webpack.js.org/">Webpack</a>,
       <a href="https://babeljs.io/">Babel</a>,
-      <a href="https://eslint.org/">ESLint</a>) needed to build a
-      <a href="https://reactjs.org/">ReactJS</a> web application as well as a
-      simple Node.js web server (<a href="http://expressjs.com/">ExpressJS</a>)
-      to serve it to your browser. These modules can be fetched by running the
-      following command in the <code>project4</code> directory:
+      <a href="https://eslint.org/">ESLint</a>. Эдгээр багаж 
+      <a href="https://reactjs.org/">ReactJS</a> веб апп босгох (build), мөн веб аппыг веб хөтчид өгч үйчлэх 
+      энгийн Node.js веб сервер (<a href="http://expressjs.com/">ExpressJS</a>)
+      үүсгэхэд хэрэг болно. Эдгээр модулийг <code>project4</code> хавтас дотроос дараах командыг
+      ажиллуулж суулгана:
     <pre>npm install</pre>
-    That command will fetch around 600 node modules using around 100 megabytes
-    of space into the subdirectory <code>node_modules</code>.
+    Энэ команд ойролцоогоор 100 мегабайт хэмжээтэй 600 node модуль <code>node_modules</code>
+    хавтас дотор татаж авна.
     </p>
     <p>
-      We can use npm to run the various tools we had it fetch. As can be seen in
-      the <code>"scripts"</code> property of the <code>package.json</code> file,
-      the following run commands are available:
+      Бид npm командыг янз бүрийн багажууд татаж авахад хэрэглэдэг.
+      <code>package.json</code> файлын <code>"scripts"</code> шинжид харагдаж байгаа шиг
+      дараах командуудыг ажиллуулах боломжтой:
     <ul>
-      <li><code>npm run build</code> - Runs
-        <a href="https://webpack.js.org/">Webpack</a> using the configuration
-        file <code>webpack.config.js</code> to package all of the project's JSX
-        files into a single JavaScript bundle in the directory
-        <code>compiled</code>.
+      <li><code>npm run build</code> - 
+        <a href="https://webpack.js.org/">Webpack</a> багажийг <code>webpack.config.js</code> файлд байгаа тохиргоогоор ажиллуулж 
+        төсөлд байгаа бүх JSX файлуудыг багцалж <code>compiled</code> хавтас дотор нэг ширхэг ЖаваСкрипт багц (bundle) файл үүсгэнэ.
       </li>
-      <li><code>npm run build:w</code> - Runs
-        <a href="https://webpack.js.org/">Webpack</a> like the <code>npm run
-        build</code> command except it invokes webpack with <a
-        href="https://webpack.js.org/api/cli/#watch">--watch</a>, so it will
-        monitor the React components and regenerate the bundle if any of them
-        change. This option is useful for development so changes made to
-        components can be picked up by simply refreshing the browser to load the
-        newly updated bundle. Otherwise, you would need to remember to run
-        <code>npm run build</code> after every change. You might get a
-        deprecation warning <code>[DEP_WEBPACK_WATCH_WITHOUT_CALLBACK]</code>
-        that you can safely ignore.
+      <li><code>npm run build:w</code> - 
+        <code>npm run build</code> командтай адил, гэхдээ <a href="https://webpack.js.org/api/cli/#watch">--watch</a> горимоор 
+        <a href="https://webpack.js.org/">Webpack</a> багажийг ажиллуулна. 
+        Ингэснээр React компонентийг хянах, хэрэв тэдгээрийн аль нэгийг нь өөрчилбөл дахин шинэчилж үүсгэдэг.
+        Энэ нь хөгжүүлэлтийн үед хэрэгтэй байдаг бөгөөд өөрчлөгдсөн компонентоор шинээр багц үүсгэж 
+        веб хөтчийг дахин ачаалдаг (refresh). Үгүй бол та өөрчлөлт бүрийн дараа
+        <code>npm run build</code> командыг үргэлж дуудаж ажиллуулж байх шаардлагатай болно. 
+        Ямар нэг юм хуучирсан тухай санамж <code>[DEP_WEBPACK_WATCH_WITHOUT_CALLBACK]</code>
+        гарч болзошгүй, үүнийг алгасахад аюулгүй.
       </li>
-      <li><code>npm run lint</code> - Runs ESLint on all the project's
-      JavaScript files. The code you submit should run ESLint without warnings.
+      <li><code>npm run lint</code> - ESLint багажийг төслийн бүх ЖаваСкрипт файлд ажиллуулна. 
+        Даалгавраар илгээх таны код чинь ESLint програмыг ямар нэг санамжгүйгээр (warnings) давсан байх ёстой.
       </li>
     </ul>
     </p>
     <p>
-      Your solutions for all of the problems below should be implemented in the
-      <code>project4</code> directory.
+      Бүх даалгаварыг гүйцэтгэсэн кодууд <code>project4</code> хавтас дотор байх ёстой.
     </p>
     <p>
-      This project uses <a href="https://reactjs.org/">ReactJS</a>, a popular
-      framework for building web applications. The project's goal is to get you
-      enough up to speed with ReactJS and the CS142 coding conventions that you
-      will be able to build a web application with it in the next project.
+      Энэ төсөлд веб аппыг хөгжүүлэхэд түгээмэл болсон <a href="https://reactjs.org/">ReactJS</a> фрэймвөркийг ашиглана. 
+      Энэ төслийн зорилго бол таныг ReactJS-д хурдан суралцаж CS142 хичээлийн дараагийн төслүүдээр хийх веб аппыг хөгжүүлэхэд бэлэн болгох юм.
     </p>
     <p>
-      In order to fetch our web app via the HTTP protocol, we use a simple
-      Node.js web server that can be started with this command from the
-      <code>project4</code> directory:
+      Бид веб аппдаа HTTP протоколоор хандахын тулд энгийн Node.js сервер ашиглана.
+      Үүнийг <code>project4</code> хавтас дотроос дараах командаар асаана:
     <pre>node webServer.js</pre>
     </p>
     <p>
-      All the files in the <code>project4</code> can be fetched using an URL
-      starting with
-      <a href="http://localhost:3000">http://localhost:3000</a>. Click on
-      <a href="http://localhost:3000">http://localhost:3000</a> to verify your
-      web server is running. It should serve the file <code>index.html</code> to
-      your browser.
+      <code>project4</code> хавтас доторх бүх файлуудад <a href="http://localhost:3000">http://localhost:3000</a>
+      гэж эхлэх URL хаягаар хандана. <a href="http://localhost:3000">http://localhost:3000</a> линк дээр давхарлагдахгүй
+      өөрийнхөө серверийг ажиллаж байгаа эсэхийг шалгаж болно. Энэ нь <code>index.html</code> файлыг таны веб хөтчид өгөх болно.
     </p>
     <p>
-      We recommend you configure your development environment to run webpack in
-      watch mode, which means you will need to run the node webserver
-      (<code>node webServer.js</code>) and webpack (<code>npm run
-      build:w</code>) when building and testing your project. You could do this
-      by running the programs in different command line windows. Syntax errors
-      get detected and reported by Babel, so the output of webpack is useful.
+      Та хөгжүүлэлтийн орчноо webpack багажийг watch горимоор тохируулахыг зөвлөж байна.
+      Энэ нь та node веб сервер (<code>node webServer.js</code>) болон webpack (<code>npm run
+      build:w</code>) програмыг төслөө босгох болон туршихдаа ашиглаарай. 
+      Та тус тусад командын мөрөөр ажиллуулж болно. Ингэвэл Babel багажаар илрүүлсэн алдаа, түүний мэдэгдэл зэргийг
+      webpack програмын гаралтад харуулдаг учраас хэрэгтэй байх болно.
     </p>
     <p>
-      If you are running on a system with a unix-like shell like MacOS, the
-      command:
+      Хэрэв та MacOS зэрэг юникс-төст үйлдлийн системд ажиллаж байгаа бол команд нь:
       <pre>node webServer.js & npm run build:w</pre>
-      runs the web server in background and the webpack in foreground within a
-      single window.
+      Энэ нь нэг цонх дээр веб серверийг ард нь (background), webpack-ийг наана нь (foreground) харуулж ажиллуулдаг.
     </p>
     <p>
-      On Windows you can start the web server in background and webpack in
-      foreground with the two Windows commands:
+      Виндоус үйлдлийн систем дээр веб серверийг ард нь, webpack-ийг наана нь ажиллуулахад
+      Виндоусын хоёр команд нь:
     <pre>start /B node webServer.js<br/>npm run build:w</pre>
-    You can stop the background webserver with the command:
+    Ард нь ажиллаж байгаа веб серверийг зогсоохын тулд дараах командыг ажиллуулна:
     <pre>taskkill /IM node.exe /F</pre>
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Getting Started</h3>
+    <h3 class="left-border">Эхлэл</h3>
     <p>
-      In this project we require that you use the model, view, controller
-      pattern described in class. There are many ways of organizing code under
-      this pattern so we provide an example that both demonstrates some basic
-      ReactJS features as well as showing the file system layout and module
-      pattern we would like you to follow in your projects.
+      Энэ төслөөр таныг хичээлээр танилцсан model, view, controller (модель, харагдац, удирдлага) үлгэр загварыг ашиглах хэрэгтэй.
+      Энэ загварын дагуу кодыг зохион байгуулах олон янзын арга бий. Бид нэгийг нь жишээ болгож
+      ReactJS-ийн зарим үндсэн онцлог, мөн файл системд дэх байршлын зохиомж, модуль загвар зэргийг харуулж байна.
+      Энэ үлгэр загварыг та дараагийн төслөөр хэрэгжүүлж яваарай.
     </p>
     <p>
-      You should start by opening the example in your browser by navigating to
-      the URL <a
-      href="http://localhost:3000/getting-started.html">http://localhost:3000/getting-started.html</a>.
-      The page displays examples of ReactJS in action. The HTML in
-      <code>getting-started.html</code> provides a <code>&lt;div&gt;</code> for
-      ReactJS to draw the app into and a script tag include the app's JavaScript
-      bundle <code>compiled/gettingStarted.bundle.js</code>. The webpack config
-      file
+      Та энэ жишээг веб хөтөч дээрээ <a
+      href="http://localhost:3000/getting-started.html">http://localhost:3000/getting-started.html</a> URL хаягаар эхлүүлэн харж болно.
+      Энэ хуудас нь ReactJS-ийг бодитоор ажиллуулж буй жишээ юм. <code>getting-started.html</code> 
+      хуудсанд байгаа HTML нь ReactJS аппыг зурж харуулахад зориулж нэг <code>&lt;div&gt;</code> элементийг
+      , аппын ЖаваСкрипт багцыг
+      <code>compiled/gettingStarted.bundle.js</code> холбож ажиллуулахад хэрэгтэй нэг script элементийг агуулж байгаа. 
+      webpack тохиргооны файлд 
       <code><a
       href="http://localhost:3000/webpack.config.js">webpack.config.js</a></code>
-      directs that this bundle be created from the ReactJS file
-      <code>gettingStarted.jsx</code>, a JSX program that renders the ReactJS
-      component named <code>Example</code> into the <code>&lt;div&gt;</code> in
-      <code>getting-started.html</code>.
+      <code>gettingStarted.jsx</code> ReactJS файлаас үүсэх багцыг чиглүүлэн зааж өгсөн болно. <code>gettingStarted.jsx</code> бол 
+      нэг JSX програм бөгөөд ReactJS-ийн 
+      <code>Example</code> нэртэй компонентийг <code>getting-started.html</code> дотор байгаа нөгөө <code>&lt;div&gt;</code> рендерлэж харагдана.
     </p>
     <p>
-      To support reusable components, we adopt a file organization that
-      co-locates the ReactJS component and its associated CSS stylesheet in a
-      subdirectory of a directory named <code>components</code>. The
-      <code>Example</code> component is located in the files
-      <code>components/example/{Example.jsx,Example.css}</code>.
+      Дахин ашиглах компонентийг хөгжүүлэхэд ReactJS компонент болон түүнд холбоотой
+      CSS файлуудыг <code>components</code> дэд хавтас дотор зохион байгуулсан.
+      Жишээ нь, <code>Example</code> компонентийг <code>components/example/{Example.jsx,Example.css}</code> файлуудад хөгжүүлсэн.
     </p>
-    You should look through the files invoked in the
-    <code>getting-started.html</code> view (<code>getting-started.html</code>,
+    Та
+    <code>getting-started.html</code> хуудсыг дуудахад хэрэг болж байгаа файлуудыг (<code>getting-started.html</code>,
     <code>gettingStarted.jsx</code>,
-    <code>components/example/{Example.jsx</code>) since it shows the JavaScript
-    and JSX statements needed to run an ReactJS web application along with
-    explanatory comments. You should use this pattern and file naming convention
-    for the other components you build for the class.
+    <code>components/example/Example.jsx</code>) үзээрэй. Эдгээр нь ReactJS веб аппыг ажиллуулахад шаардлагатай 
+    ЖаваСкрипт болон JSX командуудыг тайлбар комментын хамт харуулж байгаа.
+    Та хичээлээр босгох бусад компонентоо хөгжүүлэхэд энэ үлгэр загварыг нэрийн зохицолтойгоор (naming conventions) хэрэглэх ёстой.
     </p>
     <p>
-      Model data is typically fetched from the webserver which retrieves the
-      data from a database. To avoid having to set up a database for this
-      project we will give you an HTML script tag to load the model data
-      directly into the browser's DOM from the local file system. The models
-      will appear in the DOM under the property name <code>cs142models</code>.
-      You will be able to access it under the name
-      <code>window.cs142models</code> in a ReactJS component.
+      Моделийн өгөгдөлийг ихэвчлэн веб серверээс авдаг. Веб сервер нь өгөгдлийн сангаас авдаг.
+      Энэ төслөөр өгөгдлийн санг тохируулж хэрэглэхээс зайлсхийж дотоод файл системээс веб хөтчийн
+      DOM-д шууд өгөгдлийг ачаалах HTML script тагийг бэлдэж өгсөн байгаа.
+      Модел нь DOM-ийн <code>cs142models</code> нэртэй шинжид хадгалагдана.
+      ReactJS компонент дотроос <code>window.cs142models</code> гэж шууд чөлөөтэй хандах боломжтой.
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Problem 1: Understand and update the example view (5
-    points)</h3>
+    <h3 class="left-border">Даалгавар 1: Example харагдацыг ойлгох ба шинэчлэх (5
+    оноо)</h3>
     <p>
-      You should look through and understand the
-      <code>getting-started.html</code> view and the <code>Example</code>
-      component. To demonstrate your understanding do the following:
+      <code>getting-started.html</code> харагдац болон <code>Example</code>
+      компонентийг үзэж ойлгох хэрэгтэй. Өөрийгөө ойлгосон гэдгийг харуулахын тулд дараах зүйлсийг хийнэ:
     </p>
     <ol>
       <li>
-        Update the model data for the Example component to use your name rather
-        than "Unknown name". You should find where "Unknown name" is and replace
-        it.
+        Example компонентийн модель өгөгдлийг "Unknown name" гэсний оронд өөрийн нэрээр шинэчлэнэ. 
+        "Unknown name" гэж хаана байгааг хайж болоод үүнийг солино.
       </li>
       <li>
-        Replace the contents of the <code>div</code> region with the class
-        <code>motto-update</code> in the Example component with some JSX
-        statements that display your name and a short (up to 20 characters)
-        motto. Like the user's name, the initial value for motto should come in
-        with the model data. You must include some styling for this display in
-        <code>Example.css</code>.
+        Example компонентод байгаа <code>motto-update</code> гэсэн класстай <code>div</code> элементийн агуулгыг
+        таны нэр болон богино (20 тэмдэгт хүртэл) уриа үг (motto) харуулдаг JSX командаар солино.
+        Хэрэглэгчийн нэртэй адилхан уриа үгний утга нь моделийн өгөгдлөөс гарч ирэх ёстой.
+        Үүнийг дэлгэцлэх зарим загвар <code>Example.css</code> файлд бичээрэй.
       </li>
       <li>
-        Extend the display you did in the previous step so it allows the user to
-        update the motto being displayed. The default value should continue to
-        be retrieved from the model data.
+        Өмнөх алхамаар хийсэн дэлгэцлэх хэсгийг хэрэглэгч өөрөө уриа үгийг шинэчилж болдог байхаар өргөтгөнө.
+        Гарааны утга нь моделийн өгөгдлөөс гарч ирдэг байх ёстой.
       </li>
     </ol>
   </section>
 
   <section>
-    <h3 class="left-border">Problem 2: Create a new component - states view (10
-    points)</h3>
+    <h3 class="left-border">Даалгавар 2: Шинэ компонент үүсгэх - муж улсын харагдац (10
+    оноо)</h3>
     <p>
-      Create a new component view that will display the names of all states
-      containing a given substring. Your view must implement an input field that
-      accepts a substring. The view will display in alphabetical order a
-      <strong>list</strong> of all states whose names contain the given
-      substring (ignoring differences in case). For example, the view for the
-      substring of "al" should list the states Alabama, Alaska, and California.
-      The page should also display the substring that was used to filter the
-      states. If there are no matching states then the web page should display a
-      message indicating that fact (rather than just showing nothing). All
-      states should be displayed when the substring is empty.
+      Өгөгдсөн тэмдэгт мөрийг агуулж байгаа муж улсын бүх нэрсийг дэлгэцлэх шинэ компонент үүсгэнэ.
+      Таны харагдац тэмдэгт мөр авдаг оролтын талбартай байх ёстой. Харагдац нь тухайн тэмдэгт мөрийг 
+      агуулж байгаа (том жижиг үсгийн ялгаагүй) муж улсын нэрсийг нэг <strong>жагсаалтад</strong> цагаан толгойн үсгийн 
+      дарааллаар дэлгэцлэнэ. Жишээ нь, тэмдэгт мөр нь "al" гэсэн утгатай байвал
+      Alabama, Alaska, and California нэрс гарч ирнэ.
+      Энэ хуудас муж улсын нэрсийг шүүхэд хэрэглэсэн тэмдэгт мөр утгыг бас дэлгэцлэдэг байна.
+      Хэрэв тохирох муж улсын нэр олдохгүй бол веб хуудас нь холбогдох зурвасыг 
+      (юу ч харуулахгүй байхын оронд) харуулдаг байна.
+      Тэмдэгт мөрийн утга хоосон бол бүх муж улсын нэрийг харуулдаг байна.
     </p>
     <p>
-      As in Problem #1 we provide you the model data with states. It can be
-      accessed via <code>window.cs142models.states</code> after it is included
-      with:
+      Даалгавар #1-д өгсөн шиг муж улсын нэрийг модель өгөгдөл болгож өгсөн байгаа. Үүнд 
+      дараах script тагаар холбож өгсөний дараа <code>window.cs142models.states</code> гэж хандаж болно:
     </p>
     <pre>&lt;script src="modelData/states.js"&gt;&lt;/script&gt;</pre>
     <p>
-      See <code>states.js</code> for a description of the format of the states
-      data.
+      <code>states.js</code> файлаас муж улсын нэрний өгөгдлийн форматын тайлбартай танилцаарай.
     </p>
     <p>
-      To help you get started and guide you to the file naming conventions we
-      want you to use we provided a file <code>p2.html</code> that will load and
-      display the bundle <code>compiled/p2.bundle.js</code> which is generated
-      by webpack from <code>p2.jsx</code> which displays the React component
-      <code>States</code>. You can open this file in your browser via the URL <a
-      href="http://localhost:3000/p2.html">http://localhost:3000/p2.html</a>.
+      Энэ даалгаврыг эхлүүлэхэд туслах, чиглүүлэх зорилгоор <code>compiled/p2.bundle.js</code>
+      файлыг холбож дуудсан <code>p2.html</code> файлыг нэрийн зохицолтойгоор бэлдэж өгсөн байгаа.
+      Энэ ЖаваСкрипт багц файлыг <code>p2.jsx</code> файлаас webpack багажаар үүсгэсэн бөгөөд
+      энэ нь <code>States</code> ReactJS компонентийг дэлгэцлэнэ. Энэ хуудсыг веб хөтөч дээр <a
+      href="http://localhost:3000/p2.html">http://localhost:3000/p2.html</a> URL хаягаар дуудаж үзээрэй.
     </p>
     <p>
-      The files you will need to implement are:
+      Таны хөгжүүлэх файлууд бол:
     <ul>
-      <li><code>components/states/States.jsx</code> - The ReactJS Component of
-      your states component.
+      <li><code>components/states/States.jsx</code> - Муж улсын компонентийг хөгжүүлэх ReactJS компонент.
       </li>
       <li>
-        <code>components/states/States.css</code> - Any CSS styles your
-        component needs. <strong>You must include some styling for your state
-        list here.</strong>
+        <code>components/states/States.css</code> - Компонентод шаардлагатай дурын CSS загварууд. <strong>Муж улсын нэрийн жагсаалтыг
+          харуулахад зарим загваар хэрэгжүүлэх ёстой.
+        </strong>
       </li>
     </ul>
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Problem 3: Personalizing the Layout (5 points)</h3>
+    <h3 class="left-border">Даалгавар 3: Байршлыг өөрчлөх (5 оноо)</h3>
     <p>
-      Create a ReactJS component named <code>Header</code> that will display a
-      personalized header at the top of a view. Add this header to all ReactJS
-      web apps in your assignment (<code>gettingStarted.jsx</code>,
+      <code>Header</code> нэртэй ReactJS компонент үүсгэнэ. Энэ нь харагдацын дээд хэсэгт
+      веб аппын толгойг (header) дэлгэцлэдэг. Толгойг энэ даалгаварт байгаа
+      ReactJS-ийн бүх компонентод (<code>gettingStarted.jsx</code>,
       <code>p2.jsx</code>,
-      <code>p4.jsx</code>, <code>p5.jsx</code>). Note that you <b> should not
-      </b> replace the section from part 1 (your name and motto). That section
-      should be separate from your header. Use your imagination and creativity
-      to create a header that is "uniquely you". This can include additional
-      images, graphics, whatever you like. You can extend the JSX/JavaScript in
-      the components but you may not use external ReactJS Components or
-      JavaScript libraries such as JQuery. Be creative!
+      <code>p4.jsx</code>, <code>p5.jsx</code>) нэмж өгнө.
+      Өмнөх даалгаврын эхний хэсгийг (таны нэр ба уриа үгтэй) <b>өөрчлөхгүй</b>. Тэр хэсэг нь толгойгоос тусдаа 
+      байх ёстой. Өөрийн төсөөлөл, бүтээлч байдлаараа "зөвхөн чинийх" гэж харагдах толгойг үүсгээрэй. Энэ нь
+      нэмэлт зураг, график, юунд таалагдана, тэр бүгдийг агуулж болно. Та компонентууд дахь JSX/ЖаваСкриптийг өргөтгөх бөгөөд
+      гаднын ReactJS компонент, ЖаваСкрипт санг, жишээ нь, JQuery, ашиглаж болохгүй. Бүтээлч байгаарай!
     </p>
     <p>
-      The files you will need to implement are:
+      Таны хөгжүүлэх файлууд бол:
     <ul>
-      <li><code>components/header/Header.jsx</code> - The ReactJS Component of
-      your header component. This is defined as a class Header of type
-        <a
-        href="https://reactjs.org/docs/react-component.html">React.Component</a>.
+      <li><code>components/header/Header.jsx</code> - Толгойг хөгжүүлэх ReactJS компонент. 
+        Энэ нь <a
+        href="https://reactjs.org/docs/react-component.html">React.Component</a> төрлийн Header классаар
+        тодорхойлогдоно.
       </li>
-      <li><code>components/header/Header.css</code> - Any CSS styles your
-      component needs. <strong>You must include some styling for your header
-      here.</strong></li>
+      <li><code>components/header/Header.css</code> - Өөрийн компонентод хэрэгтэй ямар нэг CSS загварууд. 
+        <strong>Толгой компонентод заавал загвар тодорхойлж өгнө.</strong></li>
     </ul>
-    Note: <code>getting-started.html</code> should have the personalized header
-    from Problem 3 at the top of the page and the section with the motto from
-    Problem 1.2 right below it. All other page views (<code>p2.html</code>,
-    <code>p4.html</code> and <code>p5.html</code>) should have your personalized
-    header from Problem 3.
+    Санамж: <code>getting-started.html</code> нь хуудасны дээд талдаа Даалгавар 3-аар хийсэн толгойг агуулж байх ёстой. 
+    Даалгавар 1.2-оор хийсэн уриа үгтэй хэсэг нь үүний яг доор нь байна. Бусад хуудасны харагдацууд (<code>p2.html</code>,
+    <code>p4.html</code> and <code>p5.html</code>) энэ толгойг холбосон байна.
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Problem 4: Add dynamic switching of the views (10
-    points)</h3>
+    <h3 class="left-border">Даалгавар 4: Харагдацуудыг динамикаар солих (10
+    оноо)</h3>
     <p>
-      Create a <code>p4.html</code> and a corresponding JSX file
-      <code>p4.jsx</code>
-      that includes both view components (the <code>Example</code> and
-      <code>States</code> components). The
-      <code>p4.jsx</code> needs to implement an ability to switch between the
-      display of the two components. When a view is displayed there should be a
-      button above it that switches to display the other view. For example, when
-      the <code>States</code> view is displayed the button above it should read
-      "Switch to Example," and when pushed the <code>States</code> should
-      disappear and the <code>Example</code>
-      view should be displayed.
+      <code>p4.html</code> болон холбогдох JSX файлыг
+      <code>p4.jsx</code> үүсгэнэ.
+      Энэ нь хоёр харагдац компонентийг (<code>Example</code> болон
+      <code>States</code> components) агуулна. 
+      <code>p4.jsx</code> нь энэ хоёр компонентийг хооронд нь сольж харуулдаг байх хэрэгтэй.
+      Нэг харагдац нь дэлгэцлэгдсэн байхад нөгөөг нь сольж дэлгэцлэх нэг товч (button) байна. 
+      Жишээ нь, <code>States</code> дэлгэцлэгдсэн байхад үүний дээд талд байрлах товч нь 
+      "Switch to Example" гэж харагдах, <code>States</code> гэж дарахад өөрөө алга болоод <code>Example</code>
+      дэлгэцлэгддэг байна.
     </p>
     <p>
-      For this problem you will need to create the files above as well as
-      modify the webpack configuration file <code>webpack.config.js</code>
-      to build a file <code>compiled/p4.bundle.js</code> that you can uses in
-      <code>p4.html</code> file. Note that if you are using Webpack with the
-      <code>--watch</code> flag (i.e. <code>npm run build:w</code>), you will
-      need to restart it after changing <code>webpack.config.js</code>.
+      Энэ даалгаврын хувьд дээрх файлуудыг үүсгэх хэрэгтэй. Мөн webpack тохиргооны
+      <code>webpack.config.js</code> файлд <code>p4.html</code> хуудсанд ашиглах <code>compiled/p4.bundle.js</code> файлыг босгох тухай зааж өгөх хэрэгтэй болно. 
+      Хэрэв webpack багажийг <code>--watch</code> горимоор (i.e. <code>npm run build:w</code>) ажиллуулж байгаа бол та 
+      <code>webpack.config.js</code> файлаа өөрчилсний дараа дахин ажиллуулах шаардлагатай.
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Problem 5: Single page app (5 points)</h3>
+    <h3 class="left-border">Даалгавар 5: Нэг хуудаст апп (5 оноо)</h3>
     <p>
-      Although the approach taken in Problem 4 allows you to switch between the
-      two views, it does not allow you to bookmark or share a URL pointing at a
-      particular view. Even doing a browser refresh event causes the app to lose
-      track of which view was being displayed.
+      Хэдийгээр Даалгавар 4-т гүйцэтгэсэн аргаар харагдац хооронд шилжиж болох ч 
+      энэ нь тухайн нэг харагдацыг заах URL-ийг хуваалцах (share) болон тэмдэглэж авах (bookmark)
+      боломжийг олгохгүй. Веб хөтчийг дахин ачаалахад веб апп ямар хуудсыг дэлгэцэлж байсныг алдуулна.
     </p>
     <p>
-      We can address this deficiency by storing the view information into the
-      URL.
-      <a href="https://v5.reactrouter.com/">React Router</a> provides this
-      functionality for ReactJS. For this problem make a copy of your
-      <code>p4.html</code> solution into a file named <code>p5.html</code>
-      and copy your <code>p4.jsx</code> into a file named <code>p5.jsx</code>.
-      Convert the code to use <a href="https://v5.reactrouter.com/">React
-      Router</a>
-      to switch between the two component views. You should have a
-      <strong>styled toolbar-like control</strong> (simple plain text links are
-      not sufficient) that will allow the user to switch between the example and
-      states component views.
+      Бид энэ дутагдлыг URL-д харагдацын мэдээллийг хадгалснаар шийдвэрлэх боломжтой.
+      <a href="https://v5.reactrouter.com/">React Router</a> нь ReactJS-д ийм функцээр хангаж өгдөг.
+      Энэ даалгаврын хувьд <code>p4.html</code> файлаа <code>p5.html</code>,
+      <code>p4.jsx</code> файлаа <code>p5.jsx</code> нэртэйгээр хуулбарлаж аваарай.
+      Кодоо <a href="https://v5.reactrouter.com/">React
+      Router</a> модулийг ашиглан хоёр харагдацын хооронд нь сольж харуулдаг болгоно.
+      Та 
+      <strong>тодорхой загвартай хэрэгслийн-мөр маягийн удирдлагатай (styled toolbar-like control)</strong> (энгийн бичвэр линк байх нь хангалтгүй) байх ёстой ба энэ нь хэрэглэгчид example болон states компонент харагдацыг сольж шилжих боломжийг олгодог байна.
     </p>
     <p>
-      Since this is the first extension from the core ReactJS we import, we're
-      providing you with step-by-step instructions.
+      Энэ бол бидний импортлож байгаа үндсэн ReactJS модулиас гаднах эхний өргөтгөл учир бид танд алхам нэг бүрийг нь тайлбарлаж өгье.
     </p>
     <ol>
-      <li>The project's <code>package.json</code> specifies react-router so the
-      npm install command already fetched it for us. We do need to explicitly
-      import it into our <code>p5.jsx</code> file. Add the following import
-      line:
+      <li>Төслийн <code>package.json</code> файлд react-router модулийг тодорхойлсон учир 
+      npm install командаар аль хэдийнэ татаад авчихсан байгаа. Бид үүнийг <code>p5.jsx</code> файл дотроо импортлож оруулах ёстой. 
+      Дараах мөрүүдийг нэмнэ:
         <pre>import { HashRouter, Route, Link } from "react-router-dom";</pre>
-        The line uses the JavaScript
+        Энэ мөр нь ЖаваСкрипт 
         <a
         href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">
           import
         </a>
-        statement to bring in the ReactJS components from React Router:
+        командаар React Router-аас ReactJS компонентуудыг:
         <code><a
         href="https://v5.reactrouter.com/web/api/HashRouter">HashRouter</a></code>,
         <code><a
-        href="https://v5.reactrouter.com/web/api/Route">Route</a></code>, and
-        <code><a href="https://v5.reactrouter.com/web/api/Link">Link</a></code>.
-        The <code>HashRouter</code> module of React Router uses the fragment
-        portion of the URL for storing information. So we can make <code>p5.html#/states</code> mark showing the States view while
-        <code>p5.html#/example</code> specifies the Example component view.
+        href="https://v5.reactrouter.com/web/api/Route">Route</a></code>, болон
+        <code><a href="https://v5.reactrouter.com/web/api/Link">Link</a></code> авч ирнэ.
+        React Router-ийн <code>HashRouter</code> модуль URL-ийн ногдол хэсгийг (fragment portion) мэдээллийг хадгалах зорилгоор ашигладаг. 
+        Иймд бид States харагдацыг илэрхийлэх <code>p5.html#/states</code>, 
+        Example компонент харагдацыг тодорхойлох <code>p5.html#/example</code> тэмдгийг үүсгэж болно.
       </li>
       <li>
-        The most common way of using React Router is to conditionally render the
-        view we want based on the current URL. The <code><a
+        React Router-ийг ашигладаг хамгийн түгээмэл арга нь одоогийн URL дээр нь түшиглээд
+        үзүүлэх гэж байгаа харагдацаа нөхцөлтэй рендерлэх юм.
+        <code><a
         href="https://v5.reactrouter.com/web/api/Route">Route</a></code>
-        component implements this conditional rendering when placed inside a
-        <code>HashRouter</code> element like:
+        компонентийг <code>HashRouter</code> дотор оруулж ийм нөхцөлт рендерлэлтийг хэрэгжүүлж болдог:
 <pre>
 &lt;HashRouter>
   ...
@@ -441,45 +392,38 @@
   ...
 &lt;/HashRouter>
 </pre>
-        which would render the States component if the URL had
-        <code>#/states</code> and the Example component if the URL had
-        <code>#/example</code>.
+      Хэрэв URL-д <code>#/states</code> агуулж байвал States, <code>#/example</code> гэж байвал Example компонентийг рендерлэнэ.
       </li>
       <li>
-        Although we could use hyperlinks (i.e. <code>&lt;a></code> tags) to
-        switch views, react-router recommends using the <code>Link</code>
-        component to generate the hyperlinks. For example:
+        Хэдийгээр бид хайперлинк (жишээ нь, <code>&lt;a></code> tags) ашиглаад
+        харагдацыг сольж болох боловч react-router <code>Link</code>
+        компонентоор хайперлинк үүсгэн ашиглахыг зөвлөдөг. Жишээ нь:
 <pre>
 &lt;Link to="/states">States&lt;/Link>
 </pre>
-        generates a hyperlink with <code>href="#/states"</code> and the text
-        "States".
+        Дээрх код <code>href="#/states"</code> утгатай, "States" бичвэртэй хайперлинк үүсгэж өгнө.
       </li>
     </ol>
   </section>
 
   <section>
-    <h3 class="left-border">Style (5 points)</h3>
+    <h3 class="left-border">Загвар (5 оноо)</h3>
     <p>
-      These points will be awarded if your solutions have proper MVC
-      decomposition and follow the style guidelines discussed in lecture and
-      section. <strong>Note that you should not directly manipulate the DOM in
-      your code.</strong>
-      In addition, your code and templates must be clean and readable. Remember
-      to run ESLint before submitting. ESLint should raise no errors.
+      Энэ оноог лекц дээр хэлэлцсэн MVC загварын зөвлөмжийг дагаж зөв зохион байгуулсан тохиолдолд өгнө.
+      <strong>Таны код DOM-д шууд хандаж удирдсан байж болохгүй.</strong>
+      Нэмж хэлэхэд, таны код болон загвар цэвэрхэн, уншууртай байх ёстой. Илгээхээсээ өмнө ESLint багажийг ажиллуулсан байх хэрэгтэй. ESLint ямар нэг алдаа өгөөгүй байна.
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Deliverables</h3>
+    <h3 class="left-border">Хүлээлгэн өгөх үр дүн</h3>
     <p>
-      <strong>After implementing part 5, make sure parts 1 through 4 still
-      work!</strong>
+      <strong>5 дахь хэсгийг хэрэгжүүлсний дараа 1-ээс 4 хүртэл ажиллаж байгааг нягтлаарай!</strong>
     </p>
     <p>
-      Use the standard class <a href="submit.html">submission mechanism</a>
-      to submit the entire application (everything in the <code>project4</code>
-      directory).
+      <a href="submit.html">Даалгавар илгээх</a>
+      зааврын дагуу аппаа бүхэлд нь (<code>project4</code>
+      хавтас доторх бүгд) илгээнэ.
     </p>
   </section>
 
@@ -487,14 +431,14 @@
 
     
 
-    <footer>
+<footer>
   <div class="container text-center">
-    <small class="text-muted">
-    	Designed by Raymond Luong for CS142 at Stanford University
-    	<br>
-    	Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="https://jekyllrb.com" target="_blank">Jekyll</a> – <a href="website.html"><strong>learn more</strong></a>
-    </small>
-  </div>
+      <small class="text-muted">
+          Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+          <br>
+          <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com" target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
+      </small>
+    </div>
 </footer>
 
 
