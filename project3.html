@@ -1,287 +1,389 @@
-
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>CS142 Project 3: JavaScript and the DOM</title>
-    <meta name="description" content="Web Applications course at Stanford University">
+	<title>CS142 Төсөл 3: ЖаваСкрипт ба DOM</title>
+	<meta name="description" content="Web Applications course at Stanford University">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-    <script src="js/jquery.min.js"></script> 
-    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
 </head>
 
 
-  <body>
+<body>
 
-    <header>
+	<header>
 
-  <nav class="navbar">
-    <div class="container">
+		<nav class="navbar">
+			<div class="container">
 
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">CS142 (Winter 2023)</a>
-      </div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">CS142 (2023 оны Өвөл)</a>
+				</div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          
-            
-            
-            <li class="">
-              <a href="index.html">Home</a> 
-            </li>
-          
-            
-            
-            <li class="">
-              <a href="info.html">Class Info</a> 
-            </li>
-          
-            
-            
-            <li class="">
-              <a href="lectures.html">Lectures</a> 
-            </li>
-          
-            
-            
-            <li class="nav-active">
-              <a href="projects.html">Projects</a> 
-            </li>
-          
-            
-            
-            <li class="">
-              <a href="staff.html">Staff</a> 
-            </li>
-          
-        </ul>
-      </div>
-      
-    </div>
-  </nav>
-</header>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
 
 
-    
 
-        <main><div class="container">
-	<h1>CS142 Project 3: JavaScript and the DOM</h1>
-	<h4 class="text-muted">Due: Thursday, February 2, 2023 at 11:59 PM</h4>
+						<li class="">
+							<a href="index.html">Home</a>
+						</li>
 
-  	<section>
-  		<h3 class="left-border">Setup</h3>
-		  <p>
-			Although this project has you run code in your browser, you need to have Node.js installed on your
-			system to run the code quality checker. If you haven't already installed Node.js and the npm package
-			manager, follow the <a href="install.html">installation instructions</a> now.
-		</p>
-		<p>
-		Once you have Node.js installed, create a directory <code>project3</code> and extract the contents of
-		<a href="downloads/project3.zip">this zip file</a> into the directory.
-		</p>
-		<p>
-		You can fetch the code quality tool (also known as a "linter"), <a href="https://eslint.org/">ESLint</a>, by running the following command in the
-		<code>project3</code> directory:
-		</p>
-		<div class="code">
-			<pre>npm install</pre>
-		</div>
-		<p>
-		This will fetch ESLint into the <code>node_modules</code> subdirectory. You will be able to run
-		it on all the JavaScript files in <code>project3</code> directory by running the command:
-		</p>
-		<div class="code">
-			<pre>npm run lint</pre>
-		</div>
-		<p>
-		The code you submit should start with <code>'use strict';</code> in each JavaScript file and running ESLint using the command above should not output any errors or warnings. <strong>Any errors or warnings will be used to deduct style points.</strong>
-		</p>
-	</section>
 
-	<section>
-		<h3 class="left-border">Problem 1: JavaScript Date Picker (25 points)</h3>
-		<p>
-			For this problem, you will be implementing two interactive <code>DatePicker</code> <a href="https://www.google.com/search?tbm=isch&q=datepicker&gws_rd=ssl#">displays</a> using a combination of HTML, CSS, and JavaScript.
-		</p>
-		<p>
-			In your <code>project3</code> directory create a file <code>DatePicker.js</code> that implements a JavaScript class named <code>DatePicker</code> that can be used as in the following example:
-		</p>
-		<pre>var datePicker = new DatePicker("div1", function (id, fixedDate) {
+
+						<li class="">
+							<a href="info.html">Class Info</a>
+						</li>
+
+
+
+						<li class="">
+							<a href="lectures.html">Lectures</a>
+						</li>
+
+
+
+						<li class="nav-active">
+							<a href="projects.html">Projects</a>
+						</li>
+
+
+
+						<li class="">
+							<a href="staff.html">Staff</a>
+						</li>
+
+					</ul>
+				</div>
+
+			</div>
+		</nav>
+	</header>
+
+
+
+
+	<main>
+		<div class="container">
+			<h1>CS142 Төсөл 3: ЖаваСкрипт ба DOM</h1>
+			<h4 class="text-muted">Сүүлийн хугацаа: 2023-03-08-ны 11:59PM </h4>
+
+			<section>
+				<h3 class="left-border">Тохиргоо</h3>
+				<p>
+					Хэдийгээр энэ төслийг өөрийн вэб хөтөч дээрээ ажиллуулж болох ч гэсэн таны үйлдлийн системд Node.js
+					суусан байх хэрэгтэй.
+					Энэ програмыг ашиглан кодын чанарыг шалгах юм. Хэрэв суулгаагүй бол Node.js болон npm модуль менежер
+					програмыг
+					<a href="install.html">зааврын</a> дагуу одоо суулгаарай.
+				</p>
+				<p>
+					Node.js суулгасны дараа <code>project3</code> нэртэй хавтас үүсгээд <a
+						href="downloads/project3.zip">энэ zip файлыг</a> дотор нь задлаарай.
+				</p>
+				<p>
+					Та кодын чанарыг шалгадаг багаж ("linter" гэж нэрлэдэг), <a href="https://eslint.org/">ESLint</a>
+					багажийг татаж аваад <code>project3</code> хавтас дотроос
+					дараах командаар ажиллуулна:
+				</p>
+				<div class="code">
+					<pre>npm install</pre>
+				</div>
+				<p>
+					Энэ нь ESLint багажийг <code>node_modules</code> дэд хавтас дотор татаж авна. Таны
+					<code>project3</code> хавтас дотор байгаа бүх ЖаваСкрипт файлууд дээр үүнийг
+					ажиллуулах боломжтой болох юм. Дараах командаар кодынхоо чанарыг шалгаарай:
+				</p>
+				<div class="code">
+					<pre>npm run lint</pre>
+				</div>
+				<p>
+					Таны илгээх бүх ЖаваСкрипт файлын код чинь <code>'use strict';</code> мөрөөр эхлэх ёстой. Мөн ESLint
+					програмаар шалгахад ямар нэг алдаа эсвэл санамж (warning)
+					байх ёсгүй юм шүү. <strong>Ямар нэг алдаа эсвэл санамжтай бол загварын онооноос хасагдах
+						болно.</strong>
+				</p>
+			</section>
+
+			<section>
+				<h3 class="left-border">Даалгавар 1: ЖаваСкрипт Огноо Сонгогч (25 оноо)</h3>
+				<p>
+					Энэ даалгаврын хувьд та HTML, CSS, ЖаваСкрипт гурвыг хослуулан хоёр <code>DatePicker</code> <a
+						href="https://www.google.com/search?tbm=isch&amp;q=datepicker&amp;gws_rd=ssl#">цонхыг</a>
+					хэрэгжүүлэх юм.
+				</p>
+				<p>
+					<code>project3</code> хавтас дотор <code>DatePicker</code> нэртэй JavaScript классыг хэрэгжүүлэх
+					<code>DatePicker.js</code> файлыг үүсгэнэ үү. Тухайн классыг хэрхэн ашиглаж болохыг дараах жишээн
+					дээрээс харна уу:
+				</p>
+				<pre>var datePicker = new DatePicker("div1", function (id, fixedDate) {
    console.log("DatePicker with id", id,
        "selected date:", fixedDate.month + "/" + fixedDate.day + "/" + fixedDate.year);
 });
 datePicker.render(new Date("July 4, 1776"));</pre>
-		<p>
-			The constructor takes an argument consisting of the <code>id</code> attribute for an existing div and a date selection callback function. When a date is selected the callback function should be called with the <code>id</code> argument and an object containing the properties <code>month</code>,  <code>day</code>,  <code>year</code> with the number encoding of the date (e.g. {month: 1, day: 30, year: 2016} is the encoding of January 30, 2016).
-		</p>
-		<p>
-			The object should have a <code>render</code> method that takes one argument consisting of a <code>Date</code> object that selects a particular month (the object can refer to any time within the month). When <code>render</code> is invoked it replaces the contents of the date picker's div with HTML that displays a small one-month calendar such as those you might see in a travel reservation website:
-		</p>
-		<ul>
-			<li>The calendar must display the days of the selected month in a grid with one line for each week and one column for each day of the week.</li>
-			<li>Weeks run from Sunday on the left to Saturday on the right. The calendar must contain a header row displaying abbreviations for the days of the week, such as "Su", "Mo", etc.</li>
-			<li>Each day of the month is displayed as a number.</li>
-			<li>Some weeks when displayed in the date picker may contain days not in the selected month. These days should be displayed as the number in their respective month, but in a dimmed fashion to indicate they are not part of the current month.</li>
-			<li>All weeks displayed should contain at least one day belonging to the current month. Most months will display 5 weeks, but some months may display 4 or 6 depending on the days. The number of rows in your calendar should not be fixed.</li>
-			<li>The calendar must display the name of the month and year at the top of the calendar. In addition, it must display controls such as "&lt;" and "&gt;" that can be clicked to change the calendar's display to the previous or next month.</li>
-			<li>Clicking on a valid day of the current month should invoke the callback specified on the constructor with the arguments described above. Clicking on days belonging to months other than the current month should not invoke the callback.</li>
-		</ul>
-		<p>
-			Once you have created the JavaScript class, we have provided a file <code>datepicker.html</code> (you do not need to modify this html file) containing two empty div elements, plus a bit of JavaScript code that invokes the DatePicker class to display a date picker in each of the divs. One of the date pickers initially displays the current month and the other displays the month of January 2009. It should be possible to change the month of each date picker <em>independently</em> using the controls on that date picker.
-		</p>
-		<p>
-			The provided html file has no styling so please create a stylesheet with the filename <code>datepicker.css</code> to apply styling to the calendars and make them look nice. The corresponding link tag that requires the css file has already been added for you in the html file.
-		</p>
-	</section>
-
-	<section>
-		<h3 class="left-border">Problem 2: Simple Table Template Processing (15 points)</h3>
-		<p>
-			Create a file <code>TableTemplate.js</code> that implements a JavaScript class named <code>TableTemplate</code> with a <strong>static</strong> method <code>fillIn</code>.
-		</p>
-
-		<p>
-			Requirements for the <code>fillIn</code> method:
-			<ul>
-				<li>
-					This method takes three arguments consisting of the <code>id</code> attribute for a <code>&lt;table&gt;</code>, a dictionary object, and a string <code>columnName</code>.
-				</li>
-				<li>
-					The method must first examine the header row of the table and and replace any text of the form <code>&#123;&#123;property&#125;&#125;</code> with the corresponding <code>property</code> of the dictionary object. It then fills in all <code>&#123;&#123;property&#125;&#125;</code> elements in the column specified by <code>columnName</code> if there exists such a column.
-				</li>
-				<li>
-					The method assumes that the first row of the table holds the column names. You are guaranteed that the column names of the input table are unique.
-				</li>
-				<li>
-					If no <code>columnName</code> argument is specified, the method should process the entire table.
-				</li>
-				<li>
-				  If the specified <code>columnName</code> is not matched, the method should return without replacing any text in the columns. Note that you should still replace template strings in the header row regardless of whether the specified <code>columnName</code> is matched.
-				</li>
-			</ul>
-		</p>
-		<p>
-			For example if you find a <code>td</code> element in the matching column (assuming <code>columnName</code> is specified) that has the text string <code>"The date is the &#123;&#123;day&#125;&#125; day of month &#123;&#123;month&#125;&#125; of the year &#123;&#123;year&#125;&#125;"</code> and the dictionary object argument is <code>{month: "January", day: "30", year: "2016"}</code>, you should update the text of the <code>td</code> to be <code>"The date is the 30 day of month January of the year 2016"</code>.
-		</p>
-        <p>
-			Calling <code>TableTemplate.fillIn("table", dict, 'Part Number')</code>, where <code>"table"</code> is the table on the left and <code>dict</code> is a dictionary of strings, should generate the table on the right:
-		</p>
-        <div class="center-block margin-v">
-			<img class="img-responsive" src="images/project3problem2.png" alt="Problem 2 Example" />
-		</div>
-		<p>
-			If the template specifies a property that is not defined in the dictionary object the template should be replaced with an empty string. Your system need only handle properly formatted templates. Its behavior can be left undefined in the case of nested templates (e.g., <code>&#123;&#123;foo &#123;&#123;bar&#125;&#125;&#125;&#125;</code> or unbalanced <code>&#123;&#123;</code>). You do not need to handle nested tables or complex table cells.
-		</p>
-		<p>
-			You should use your <code>cs142-template-processor.js</code> solution from project 2 to help you implement the <code>fillIn</code> method. See the script tag ordering in the html file in the <code>project3</code> directory to see how your <code>cs142-template-processor.js</code> code would be loaded.
-		</p>
-		<p>
-			Beware that browsers insert a <code>&lt;tbody&gt;</code> element around all of the <code>&lt;tr&gt;</code> elements in a table, if the table doesn't already contain a <code>&lt;tbody&gt;</code>.
-		</p>
-		<p>
-			Once your function has processed the entire table you should examine the <code>visibility</code> property of the table's style and if it is <code>hidden</code> update it to be <code>visible</code>.
-		</p>
-		<p>
-			Once you have created the JavaScript class, open the file <code>cs142-test-table.html</code> in your browser. This file represents an HTML page containing a sample template table that that will run your code and shows what your output should look like. Do not modify this file.
-		</p>
-	</section>
-
-	<section>
-		<h3 class="left-border">Additional Requirements, Hints, etc.</h3>
-		<ul>
-			<li>
-				You are welcome to use either the ECMAScript 2015
-				<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" target=_blank>
-					<code>class</code> syntax
-				</a>
-				or the older style class definition using functions used in Project #2 for JavaScript classes you define in this assignment.
-			</li>
-			<li>
-				You may not use jQuery or any other JavaScript library package in this project. If you were developing a real website then you should definitely take advantage of existing JavaScript libraries, but for this project we want you to learn about the low-level foundational JavaScript/DOM features.
-			</li>
-			<li>
-				You may, however, use any JavaScript built-in functions. For example, you may find the following built-in
-				functions useful in this project:
+				<p>
+					Уг классын байгуулагч функц нь үүссэн байгаа div элементийн <code>id</code> атрибут болон огноо
+					сонгодог
+					callback функцийг аргументээрээ авна. Хэрэглэгч огноог сонгох үед callback функц нь <code>id</code>
+					болон <code>fixedDate</code> объектийг хувьсагчаараа аван дуудагдах ёстой. <code>fixedDate</code>
+					объект нь дотроо <code>month</code>, <code>day</code>, <code>year</code> гэх шинжүүдтэй бөгөөд
+					харгалзах он сарыг тоогоор илэрхийлсэн байна. (жишээ нь: {month: 1, day: 30, year: 2016} объект нь
+					2016 оны 1 сарын 30-ны өдрийг илэрхийлнэ.)
+				</p>
+				<p>
+					Үүссэн объект нь тодорхой сарыг заах <code>Date</code> объектыг аргументээрээ авдаг
+					<code>render</code> функцтэй байх ёстой
+					(<code>Date</code> объект нь тухайн сарын доторх дурын өдрийг илэрхийлж болно). <code>render</code>
+					функцийг ажиллуулах үед энэ нь огноо сонгогчийн div элементийн доторх агуулгыг аялал жуулчлалын
+					захиалгын вэбсайт зэрэгт түгээмэл байдаг жижиг нэг сарын хуанлийн HTML баримтаар солино.
+				</p>
 				<ul>
-					<li>Methods of the Date class.</li>
-					<li><code>parseInt</code>, <code>parseFloat</code>, <code>isNaN</code>.</li>
+					<li>
+						Хуанли нь сарын өдрүүдийг долоо хоног бүрээр нэг мөр, гараг бүрээр нэг багана болгон хүснэгт
+						хэлбэрт харуулна.
+					</li>
+					<li>
+						Гарагийн багана ням гарагаас эхэлж бямба гарагт дуусдаг байна. Хуанли нь толгой хэсэгтээ
+						харгалзах гарагийн товчилсон нэрийг харуулдаг мөртөй байх хэрэгтэй. Жишээлвэл "Ня", "Да", "Мя"
+						гэх мэт.
+					</li>
+					<li>Тухайн сарын өдөр бүрийг тоогоор илэрхийлнэ.</li>
+					<li>
+						Зарим долоо хоногийн мөрөнд тухайн сард багтаагүй өдөр орох тохиолдол гарна. Эдгээр өдрүүдийг
+						өөр сарын өдөр гэдгийг нь илтгэн өнгийг нь бууруулж ялгаж өгнө.
+					</li>
+					<li>
+						Долоо хоногийн мөрүүд нь сонгогдсон сарын ядаж нэг өдрийг агуулдаг байна. Ихэнхи саруудад
+						долоо хоногийн мөр 5 ширхэг байх болов ч, зарим саруудын өдрөөс хамаарч 4 эсвэл 6 мөртэй байх
+						тохиолдол гарна. Таны хийсэн хуанлийн мөрүүдийн тоо нь хувьсдаг байх ёстой.
+					</li>
+					<li>
+						Хуанли нь дээд хэсэгтээ сонгогдсон жил болон сарыг харуулдаг байна. Мөн дээрээс нь, өмнөх эсвэл
+						дараах сар руу шилжих боломжтой "&lt;" болон "&gt;" товчнуудтай байна.
+					</li>
+					<li>
+						Тухайн сарын өдөр дээр дарах үед дээр дурьдсан callback функцийг тохирох аргументээр дуудаж
+						ажиллуулдаг байна. Сонгогдсон сард хамаарахгүй буюу өмнөх болон дараах сарын өдөр дээр дарах үед
+						callback
+						функц дуудагдах ёсгүй.
+					</li>
 				</ul>
-			</li>
-			<li>You may find some of the following DOM element properties useful in this project:
+				<p>
+					Бидний өгсөн <code>datepicker.html</code> файл нь дотроо хоёр хоосон div элементтэй, мөн уг
+					элементүүдэд хуанлиг харуулдаг <code>DatePicker</code> классыг хэрэгжүүлэх багахан ЖаваСкрипт кодыг
+					агуулна. Нэг хуанли нь одооны он сарыг харуулдаг бол нөгөөх нь 2009 оны 1 сарыг харуулдаг байна.
+					Хоёр хуанлийн сарыг сонгох товчлуурууд нь хоорондоо <em>хамааралгүйгээр</em>, тусдаа ажилладаг байх
+					хэрэгтэй.
+				</p>
+				<p>
+					Өгөгдсөн HTML файл нь ямар нэгэн загваргүй байгаа учир <code>datepicker.css</code> нэртэй stylesheet
+					үүсгэн, хуанлинуудыг хэрэглэхэд эвтэйхэн болгон загварчилна уу. Stylesheet болон HTML файл хоёрыг
+					холбох link тагийг аль хэдийн өгөгдсөн файлд бичиж өгсөн байгаа.
+				</p>
+			</section>
+
+			<section>
+				<h3 class="left-border">Даалгавар 2: Хүснэгтийн Загвар Боловсруулагч (15 оноо)</h3>
+				<p>
+					<code>TableTemplate.js</code> файлыг үүсгэж, <code>TableTemplate</code> нэртэй, дотроо
+					<code>fillIn</code> гэсэн <strong>статик</strong> методыг агуулдаг ЖаваСкрипт классыг хэрэгжүүлнэ
+					үү.
+				</p>
+
+				<p>
+					<code>fillIn</code> методод тавигдах шаардлагууд:
 				<ul>
-					<li><code>cells</code></li>
-		      <li><code>firstChild</code></li>
-		      <li><code>nextSibling</code></li>
-		      <li><code>rows</code></li>
-		      <li><code>tagName</code></li>
-		      <li><code>textContent</code></li>
-		      <li><code>innerHTML</code></li>
-		    </ul>
-		  </li>
-		  <li>
-		  	The JavaScript function <code>console.log</code> is very useful for debugging. It takes a string argument, which it prints to the JavaScript log. You can display this log with "More Tools → Developer Tools → JavaScript console" in the Chrome control menu. If you are having trouble figuring out what is happening in your JavaScript, sprinkle <code>console.log</code> statements around your code so you can see which code is being executed.
-		  </li>
-		  <li>
-		  	You may also find the <code>debugger</code> statement useful in debugging. If the text "<code>debugger;</code>" is executed in a JavaScript program, it causes the program to drop into the JavaScript debugger. This is analogous to a breakpoint, except that your code can control when it triggers.
-		  </li>
-		  <li>
-		  	If nothing seems to be happening in your JavaScript code, it's possible that your code contains an error that is causing it to be aborted. To find out if this is happening, open the JavaScript console to see if there are any errors.
-		  </li>
-		  <li>
-		  	The JavaScript console and Chrome DevTools will be your best friends for the remaining projects. We encourage
-		  	you to spend some time this project learning how these tools work. Feel free to stop by any of the office
-		  	hours for a hands-on demonstration.
-		  </li>
-		  <li>When running ESLint, make sure the <code>.eslintrc.json</code> (hidden file) is present, or ESLint will throw an error. You can use the command <code>ls -a</code> (<code>dir /a</code> in a Windows command line) to view all the files in your current directory, including hidden files.</li>
-		  <li>If ESLint output shows a lot of style issues, you can ask ESLint to fix many of them for you by running <code>npm run lint -- --fix</code>.</li>
-		</ul>
-	</section>
+					<li>
+						Энэхүү метод нь <code>&lt;table&gt;</code> элементийн <code>id</code> атрибут,
+						<code>dictionary</code> объект, мөн <code>columnName</code> нэртэй тэмдэгт мөрөөс бүрдсэн
+						гурван аргумент авдаг байна.
+					</li>
+					<li>
+						Энэ метод нь юун түрүүнд эхний мөрөн дэхь <code>&#123;&#123;property&#125;&#125;</code> ийм
+						хэлбэрт байгаа бичвэрийг <code>dictionary</code> объектын харгалзах <code>property</code> (шинж
+						чанараар) сольж бичих юм. Үүний дараа <code>columnName</code> аргументтэй таарж буй баганы
+						доторх <code>&#123;&#123;property&#125;&#125;</code> элементүүдийг өөрчилж бичнэ.
+					</li>
+					<li>
+						Уг метод нь хүснэгтийн эхний мөрөнд баганы нэрнүүд байгаа гэж үзэн ажилладаг байна. Оролтоор орж
+						ирсэн хүснэгтийн баганы нэрнүүд хэзээ ч давхцахгүй гэж тооцно уу.
+					</li>
+					<li>
+						Хэрэв <code>columnName</code> аргументыг тодорхойлж өгөөгүй бол уг метод нь хүснэгтийг бүхэлд нь
+						боловсруулдаг байна.
+					</li>
+					<li>
+						Хэрэв дамжуулж өгсөн <code>columnName</code> нь таараагүй тохиолдолд уг метод нь тухайн багана
+						доторх бичвэрүүдийг өөрчлөх ёсгүй. Гэхдээ <code>columnName</code> нь таараагүй байсан ч эхний
+						мөр дэхь загвар тэмдэгтүүдийн утгыг өөрчлөх хэрэгтэй гэдгийг санаарай.
+					</li>
+				</ul>
+				</p>
+				<p>
+					Жишээлвэл: <code>columnName</code> аргументтэй таарж буй баганад байрлах <code>td</code> элементийн
+					утга нь
+					<code>"Өнөөдөр бол &#123;&#123;year&#125;&#125; оны &#123;&#123;month&#125;&#125;-р сарын &#123;&#123;day&#125;&#125;-ны өдөр."</code>
+					гэж байгаад, <code>dictionary</code> объект аргументын утга нь
+					<code>{year: "2016", month: "1", day: "30"}</code> хэмээн өгөгдөхөд <code>td</code> элементийн утга
+					нь <code>"Өнөөдөр бол 2016 оны 1-р сарын 30-ны өдөр"</code> болж өөрчлөгдөнө.
+				</p>
+				<p>
+					Зүүн талын хүснэгтийн <code>id</code> атрибут нь <code>"table"</code> бөгөөд, <code>dict</code> нь
+					тэмдэгтэн мөрөөс бүрдсэн <code>dictionary</code> объект байх үед
+					<code>TableTemplate.fillIn("table", dict, 'Part Number')</code> уг методыг харгалзах аргументээр
+					дуудсаны дараа баруун талын хүснэгт үүсэх ёстой:
+				</p>
+				<div class="center-block margin-v">
+					<img class="img-responsive" src="images/project3problem2.png" alt="Problem 2 Example" />
+				</div>
+				<p>
+					Хэрэв хүснэгтийн загвар дотор <code>dictionary</code> объектод тодорхойлогдоогүй property байвал
+					түүний оронд хоосон тэмдэгт оруулж өгнө. Таны хэрэгжүүлсэн метод нь зөвхөн зөв хэлбэрт оруулсан
+					загваруудтай ажилладаг байхад хангалттай. Хэд хэдэн загварууд давхардах (ж.нь:
+					<code>&#123;&#123;foo &#123;&#123;bar&#125;&#125;&#125;&#125;</code> эсвэл <code>&#123;&#123;</code>
+					хаалт орхигдох г.м) алдаатай загвар өгөгдөхөд боловсруулах шаардлаггүй. Давхардсан хүснэгтүүд болон
+					олон хэсгээс бүрдэх төвөгтэй хүснэгтийн нүд зэрэгтэй мөн ажиллах шаардлаггүй.
+				</p>
+				<p>
+					Төсөл 2-н хүрээнд бичсэн <code>cs142-template-processor.js</code> кодоо дахин ашиглан
+					<code>fillIn</code> методыг хэрэгжүүлээрэй. <code>project3</code> хавтас доторх HTML файлыг нээж
+					үзэж, script тагийг хэрхэн ашиглан <code>cs142-template-processor.js</code> кодыг оруулж ирж буйг
+					ажиглана уу.
+				</p>
+				<p>
+					Хэрэв хүснэгтэнд тань <code>&lt;tbody&gt;</code> элемент байхгүй бол вэб хөтчүүд автоматаар
+					<code>&lt;tr&gt;</code> элементүүдийн гадуур нь <code>&lt;tbody&gt;</code> нэмж өгдөгийг
+					анхаараарай.
+				</p>
+				<p>
+					Таны хэрэгжүүлсэн метод хүснэгтийг бүхэлд нь боловсруулж дууссаны дараа хүснэгтийн загварын
+					<code>visibility</code> шинж чанарыг шалгаад хэрэв утга нь <code>hidden</code> байвал
+					<code>visible</code> болгон өөрчилнө үү.
+				</p>
+				<p>
+					Дээрх ЖаваСкрипт классыг үүсгэсний дараа <code>cs142-test-table.html</code> файлыг вэб хөтөч
+					дээрээ нээнэ үү. Уг HTML файл нь дотроо жишиг хүснэгтүүд зэргийг агуулдаг бөгөөд таны бичсэн кодыг
+					ажиллуулж, үр дүнг харуулдаг юм. Энэхүү файлыг өөрчилж болохгүй.
+				</p>
+			</section>
 
-	<section>
-		<h3 class="left-border">Style Points (10 points)</h3>
-		<p>
-			Your JavaScript must be clean (appropriate use of classes, no global variables other than constructor functions, etc.), readable, and ESLint warning-free.
-		</p>
-	</section>
+			<section>
+				<h3 class="left-border">Нэмэлт Шаардлагууд, Зөвлөмж, бусад</h3>
+				<ul>
+					<li>
+						Уг даалгаврын хүрээнд тодорхойлох ЖаваСкрипт классуудыг ECMAScript 2015 <a
+							href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes"
+							target=_blank>
+							<code>класс</code> бичиглэлийг
+						</a> ашиглан, эсвэл Төсөл 2-т хэрэглэсэн класс тодорхойлох аргуудаар бичиж болно.
+					</li>
+					<li>
+						Кодоо бичихдээ jQuery болон бусад бүх ЖаваСкрипт бэлэн сангуудыг ашиглаж болохгүй. Жинхэнэ ажил
+						дээр вэб хөгжүүлэх үедээ мэдээж сангууд ашиглаж болох ч, энэ даалгавраар танд ЖаваСкрипт/ДОМ
+						хэрхэн ажилладаг талаар суурь мэдлэгийг олгох нь гол зорилго юм.
+					</li>
+					<li>
+						Харин ЖаваСкрипт доторх төрөлх функцүүдийг ашиглаж болно. Жишээлвэл дараах функцүүд хэрэг болно:
+						<ul>
+							<li><code>Date</code> классын методууд</li>
+							<li><code>parseInt</code>, <code>parseFloat</code>, <code>isNaN</code>.</li>
+						</ul>
+					</li>
+					<li>Дараах ДОМ элементийн шинж чанарууд хэрэг болж болох юм:
+						<ul>
+							<li><code>cells</code></li>
+							<li><code>firstChild</code></li>
+							<li><code>nextSibling</code></li>
+							<li><code>rows</code></li>
+							<li><code>tagName</code></li>
+							<li><code>textContent</code></li>
+							<li><code>innerHTML</code></li>
+						</ul>
+					</li>
+					<li>
+						Бас нэгэн debug хийх үед ихээхэн хэрэгтэй ЖаваСкрипт функц бол <code>console.log</code> юм. Уг
+						функц нь тэмдэгтэн мөрийг аргументээр авч, ЖаваСкрипт log хэсэгт хэвлэн харуулдаг. Энэхүү log
+						буюу бүртгэлийг Chrome хөтчийн control menu дотроос "More Tools → Developer Tools → JavaScript
+						console" харж болно. Бичсэн ЖаваСкрипт код тань ойлгомжгүй байвал <code>console.log</code>
+						тусламжтай кодын аль хэсэг дуудагдаж байгааг төвөггүй мэдэх боломжтой.
+					</li>
+					<li>
+						Мөн debug хийж байх үедээ <code>debugger</code> түлхүүр үгийг ашиглаж болох юм. Хэрэв кодонд
+						"<code>debugger;</code>" мөр дуудагдвал програмыг ЖаваСкрипт debugger-рүү шилжүүлдэг. Энэ нь
+						кодын замаар хэрэгжүүлж болох breakpoint гэсэн үг юм.
+					</li>
+					<li>
+						Хэрэв өөрчлөлт ажиглагдахгүй байвал ЖаваСкрипт кодонд тань алдаа байгаа бөгөөд түүнээс болоод
+						код тань дуудагдахгүй байж болох юм. Тийм эсэхийг шалгахын тулд ЖаваСкрипт console цонхыг нээж
+						error мэдэгдэл байгаа эсэхийг шалгана уу.
+					</li>
+					<li>
+						ЖаваСкрипт console болон Chrome DevTools хэрэглүүрүүд нь дараа дараагийн даалгавруудад таны
+						хамгийн дотны найзууд байх болно. Энэ даалгаврын хүрээнд тодорхой цаг зарцуулан эдгээр
+						багажуудыг хэрэглэж дадхыг санал болгож байна.
+					</li>
+					<li>
+						ESLint програмыг ажиллуулах үед <code>.eslintrc.json</code> (далд файл) байгаа эсэхийг
+						шалгаарай. Эс бөгөөс ESLint алдаа заах болно.
+					</li>
+					<li>
+						Хэрэв ESLint ажиллаад, олон алдаа илрүүлвэл <code>npm run lint -- --fix</code> командаар
+						дийлэнхийг нь засах боломжтой.
+					</li>
+				</ul>
+			</section>
 
-	<section>
-		<h3 class="left-border">Deliverables</h3>
-		<p>Use the standard class <a href="submit.html">submission mechanism</a> to submit the entire <code>project3</code> directory.</p>
-	</section>
+			<section>
+				<h3 class="left-border">Загварын Оноо (10 оноо)</h3>
+				<p>
+					ЖаваСкрипт код тань цэвэрхэн (классуудыг зохистой хэрэглэсэн, байгуулагч функцаас бусад глобал
+					хувьсагч байхгүй, г.м), хялбар уншигдахуйц, мөн ESLint алдаагүй байх хэрэгтэй.
+				</p>
+			</section>
 
-</div>
-</main>
+			<section>
+				<h3 class="left-border">Илгээх</h3>
+				<p>
+					<code>project3</code> хавтсыг бүхэлд нь <a href="submit.html">илгээнэ.</a>
+				</p>
+			</section>
 
-    
-
-    <footer>
-  <div class="container text-center">
-    <small class="text-muted">
-    	Designed by Raymond Luong for CS142 at Stanford University
-    	<br>
-    	Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="https://jekyllrb.com" target="_blank">Jekyll</a> – <a href="website.html"><strong>learn more</strong></a>
-    </small>
-  </div>
-</footer>
+		</div>
+	</main>
 
 
-  </body>
+
+	<footer>
+		<div class="container text-center">
+			<small class="text-muted">
+				Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+				<br>
+				<a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com"
+					target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
+			</small>
+		</div>
+	</footer>
+
+
+</body>
 
 </html>
