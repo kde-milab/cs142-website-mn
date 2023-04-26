@@ -270,138 +270,131 @@
       сэргээх туршилт хийгээд үзээрэй.
     </p>
     <p>
-      Although you don't need to spend a lot of time on the appearance of the
-      app, it should be neat and understandable. The information layout should
-      be clean (e.g., it should be clear which photo each comment applies to).
+      Харагдах байдлын хувьд цаг их зарцуулах хэрэггүй, энэ нь аятайхан, ойлгомжтой
+      байх ёстой. Мэдээллийг дэлгэцлэх зохиомж нь цэвэр байна (Жишээ нь, зураг бүрийн хувьд
+      холбогдох комментууд нь ойлгомжтой байх).
     </p>
-    <h4 class="left-border model-data">Photo App Model Data</h4>
+    <h4 class="left-border model-data">Фото апп модель өгөгдөл</h4>
     <p>
-      For this problem we keep the magic DOM loaded model data we used in the
-      previous project. The model consists of four types of objects:
-      <code>user</code>, <code>photo</code>, <code>comment</code>, and
-      <code>SchemaInfo</code> types.
+      Энэ даалгаврын хувьд бид өмнөх даалгавраар ашигласан, нөгөө DOM-д 
+      ачаалсан шидэт модель өгөгдлийг ашиглана. Модель нь дөрвөн төрлийн объекттой.
+      Эдгээр нь <code>user</code>, <code>photo</code>, <code>comment</code>, болон
+      <code>SchemaInfo</code> төрөл.
     </p>
     <ul>
       <li>
-        Photos in the photo-sharing site are organized by user. We will
-        represent users as an object <code>user</code>
-        with the following properties:
+        Фото хуваалцдаг сайт дээрх фотонуудыг хэрэглэгчээр нь зохион байгуулсан.
+        Бид хэрэглэгчийг <code>user</code> объектоор илэрхийлэх ба дараах шинжүүдтэй:
         <table id="user-model" class="def" cellspacing="0">
           <tr>
             <td class="name">_id:</td>
-            <td>The ID of this user.</td>
+            <td>Хэрэглэгчийн ID.</td>
           </tr>
           <tr>
             <td class="name">first_name:</td>
-            <td>First name of the user.</td>
+            <td>Хэрэглэгчийн өөрийн нэр.</td>
           </tr>
           <tr>
             <td class="name">last_name:</td>
-            <td>Last name of the user.</td>
+            <td>Хэрэглэгчийн овог.</td>
           </tr>
           <tr>
             <td class="name">location:</td>
-            <td>Location of the user.</td>
+            <td>Хэрэглэгчийн байршил.</td>
           </tr>
           <tr>
             <td class="name">description:</td>
-            <td>A brief user description.</td>
+            <td>Хэрэглэгчийн талаарх товч тайлбар.</td>
           </tr>
           <tr>
             <td class="name">occupation:</td>
-            <td>Occupation of the user.</td>
+            <td>Хэрэглэгчийн ажил мэргэжил.</td>
           </tr>
         </table>
-        The DOM function <code>window.cs142models.userModel(user_id)</code>
-        returns the <code>user</code> object of the user with id
-        <code>user_id</code>. The DOM function
-        <code>window.cs142models.userListModel()</code> returns an array with
-        all <code>user</code> objects, one for each the users of the app.
+        <code>window.cs142models.userModel(user_id)</code> DOM функц нь
+        хэрэглэгчийн <code>user_id</code> ID-аар <code>user</code> объектыг буцаадаг. 
+        Харин <code>window.cs142models.userListModel()</code> DOM функц нь 
+        аппын бүх хэрэглэгчийн <code>user</code> объекыг буцаадаг.
       </li>
       <li>
-        Each user can upload multiple photos. We represent each photo by a
-        <code>photo</code> object with the following properties:
+        Хэрэглэгч бүр олон фото серверт хуулах боломжтой. Хэрэглэгчийн нэг зургийг
+        <code>photo</code> объектоор, дараах шинжтэйгээр илэрхийлдэг:
         <table id="photo-model" class="def" cellspacing="0">
           <tr>
             <td class="name">_id:</td>
-            <td>The ID for this photo.</td>
+            <td>Фото зургийн ID.</td>
           </tr>
           <tr>
             <td class="name">user_id:</td>
             <td>
-              The ID of the <code>user</code> who created the photo.
+              Фото зургийг үүсгэсэн хэрэглэгчийн <code>user</code> ID.
             </td>
           </tr>
           <tr>
             <td class="name">date_time:</td>
             <td>
-              The date and time when the photo was added to the database.
+              Фото зургийг өгөгдлийн санд нэмсэн огноо ба цаг.
             </td>
           </tr>
           <tr>
             <td class="name">file_name:</td>
             <td>
-              Name of a file containing the actual photo (in the directory
-              <code>project5/images</code>).
+              Фото зургийг агуулж байгаа файлын нэр (<code>project5/images</code> хавтас доторх).
             </td>
           </tr>
           <tr>
             <td class="name">comments:</td>
             <td>
-              An array of the <code>comment</code> objects representing the
-              comments made on this photo.
+              Фото зургийн бүх сэтгэгдлийг <code>comments</code> хадгалсан объектон хүснэгтэн хувьсагч, Нэг <code>comment</code> нь тухайн фото зураг дээр 
+              бичигдсэн сэтгэгдэл.
             </td>
           </tr>
         </table>
-        The DOM function
-        <code>window.cs142models.photoOfUserModel(user_id)</code>
-        returns an array of the <code>photo</code> objects belonging to the user
-        with id <code>user_id</code>.
+        <code>window.cs142models.photoOfUserModel(user_id)</code> DOM функц нь
+        хэрэглэгчийн <code>user_id</code>-д холбогдох <code>photo</code> объектуудыг 
+        агуулсан хүснэгтэн хувьсагчийг буцаадаг.
       </li>
       <li>
-        For each photo there can be multiple comments (any user can comment on
-        any photo).
-        <code>comment</code> objects have the following properties:
+        Фото бүр олон сэтгэгдэлтэй байж болно (ямар ч хэрэглэгч ямар ч фото зурагт сэтгэгдэл бичиж болно).
+        Сэтгэгдэл <code>comment</code> объект дараах шинжүүдтэй:
         <table id="comment-model" class="def" cellspacing="0">
           <tr>
             <td class="name">_id:</td>
-            <td>The ID for this comment.</td>
+            <td>Сэтгэгдлийн ID.</td>
           </tr>
           <tr>
             <td class="name">photo_id:</td>
-            <td>The ID of the <code>photo</code> to which this comment
-              belongs.</td>
+            <td>Сэтгэгдэл харгалзах <code>photo</code> фото зургийн ID.</td>
           </tr>
           <tr>
             <td class="name">user:</td>
-            <td>The <code>user</code> object of the user who created the
-              comment.</td>
+            <td>Сэтгэгдэл бичсэн хэрэглэгчийн <code>user</code> объект.</td>
           </tr>
           <tr>
             <td class="name">date_time:</td>
-            <td>The date and time when the comment was created.</td>
+            <td>Сэтгэгдлийг бичсэн огноо ба цаг.</td>
           </tr>
           <tr>
             <td class="name">comment:</td>
-            <td>The text of the comment.</td>
+            <td>Сэтгэгдлийн бичвэр.</td>
           </tr>
         </table>
       </li>
       <li>
-        For testing purposes we have
-        <code>SchemaInfo</code> objects have the following properties:
+        Турших зорилгоор 
+        <code>SchemaInfo</code> объекьыш дараах шинжээр үүсгэсэн:
         <table id="schema-model" class="def" cellspacing="0">
           <tr>
             <td class="name">_id:</td>
-            <td>The ID for this SchemaInfo.</td>
+            <td>SchemaInfo схемийн ID.</td>
           </tr>
           <tr>
             <td class="name">__v:</td>
-            <td>Version number of the SchemaInfo object.</td>
+            <td>SchemaInfo объектын хувилбарын дугаар.</td>
           </tr>
           <tr>
             <td class="name">load_date_time:</td>
-            <td>The date and time when the SchemaInfo was loaded. A string.</td>
+            <td>SchemaInfo ачаалах үеийн огноо ба цаг. Нэг тэмдэгт мөр.</td>
           </tr>
         </table>
       </li>
@@ -410,28 +403,25 @@
 
   <!-- Problem 2 -->
   <section>
-    <h3 class="left-border">Problem 2: Fetch model data from the web server (20
-      points)</h3>
+    <h3 class="left-border">Даалгавар 2: Веб серверээс моделийн өгөгдлийг авах (20
+      оноо)</h3>
     <p>
-      After doing Problem 1, our photo sharing app front-end is looking like a
-      real web application. The big barrier to be considered real is the fakery
-      we are doing with the model data loaded as JavaScript into the DOM. In
-      Problem 2, we remove this hack and have the app fetch models from the web
-      server as would typically be done in a real application.
+      Даалгавар 1-ийг гүйцэтгэсэний дараа манай фото аппын front-end бодит апп 
+      шиг харагдах ёстой. Гол асуудал нь ЖаваСкрипт болон DOM-ыг ашиглаад 
+      хуурмаг модель өгөгдлийг ачаалсан байсан. Даалгавар 2-ын хувьд, бид энэ
+      арга залийг хаяад бодит апптай ижил серверээс модель өгөгдөл авдаг болгоно.
     </p>
     <p>
-      The <code>webServer.js</code> given out with this project reads in the
-      <code>cs142Models</code>
-      we were loading into the DOM in Problem 1 and makes them available using
-      <a href="http://expressjs.com">ExpressJS</a> routes. The API exported by
-      <code>webServer.js</code> uses HTTP GET requests to particular URLs to
-      return the
-      <code>cs142Models</code> models. The HTTP response to these GET requests
-      is encoded in JSON. The API is:
+      Энэ төслөөр өгсөн <code>webServer.js</code> нь Даалгавар 1-д DOM-д ачаалж 
+      ашигласан <code>cs142Models</code>-ийг <a href="http://expressjs.com">ExpressJS</a>
+      чиглүүлэгч (route) ашиглан серверээс өгөгдөл авах боломжийг олгож байгаа.
+      Энэ API-ыг <code>webServer.js</code>-ээр гаргаж байгаа ба харгалзах URL хаягаар 
+      HTTP GET хүсэлт явуулахад <code>cs142Models</code> моделиудаас өгөгдлийг буцааж өгдөг.
+      
+      Эдгээр GET хүсэлтэд хариулах HTTP хариут нь JSON форматтай байна. Энэ API бол:
     <ul>
-      <li><code>/test/info</code> - Returns
-        <code>cs142models.schemaInfo()</code>. This URL is useful for testing your
-        model fetching method.
+      <li><code>/test/info</code> - <code>cs142models.schemaInfo()</code> объектыг буцаана. 
+        Энэ нь URL нь модель дуудаж турших зориулалттай.
       </li>
       <li><code>/user/list</code> - Returns
         <code>cs142models.userListModel()</code>.
