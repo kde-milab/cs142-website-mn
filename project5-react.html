@@ -418,75 +418,70 @@
       Энэ API-ыг <code>webServer.js</code>-ээр гаргаж байгаа ба харгалзах URL хаягаар 
       HTTP GET хүсэлт явуулахад <code>cs142Models</code> моделиудаас өгөгдлийг буцааж өгдөг.
       
-      Эдгээр GET хүсэлтэд хариулах HTTP хариут нь JSON форматтай байна. Энэ API бол:
+      Эдгээр GET хүсэлтэд хариулах HTTP хариулт нь JSON форматтай байна. Энэ API бол:
     <ul>
       <li><code>/test/info</code> - <code>cs142models.schemaInfo()</code> объектыг буцаана. 
         Энэ нь URL нь модель дуудаж турших зориулалттай.
       </li>
-      <li><code>/user/list</code> - Returns
-        <code>cs142models.userListModel()</code>.
+      <li><code>/user/list</code> - 
+        <code>cs142models.userListModel() функцийг дуудаж буцаана.</code>.
       </li>
-      <li><code>/user/:id</code> - Returns
-        <code>cs142models.userModel(id)</code>.
+      <li><code>/user/:id</code> - 
+        <code>cs142models.userModel(id) функцийг дуудаж буцаана</code>.
       </li>
-      <li><code>/photosOfUser/:id</code> - Returns
-        <code>cs142models.photoOfUserModel(id)</code>.
+      <li><code>/photosOfUser/:id</code> - 
+        <code>cs142models.photoOfUserModel(id) функцийг дуудаж буцаана.</code>.
       </li>
     </ul>
     <p>
-      You can see the APIs in action by pointing your browser at above URLs. For
-      example, the links
+      Дээрх URL-ийг веб хөтөчийн хаягийн мөр дээрээ бичээд бодитоор хэрхэн ажиллаж байгааг харж болно.
+      Жишээ нь, 
       <a href="http://localhost:3000/test/info">http://localhost:3000/test/info</a>
-      and
+      болон
       <a href="http://localhost:3000/user/list">http://localhost:3000/user/list</a>
-      wiil return the JSON-encoded model data in the browser's window.
+      линк нь веб хөтчийн цонх дээр моделийн өгөгдлийг JSON форматаар харуулна.
     </p>
     <p>
+      Веб сервер дээрээс моделийг авдаг болгож програмаа хөрвүүлэхийн тулд
       To convert your app to fetch models from the web server you should
-      implement a <code>fetchModel</code> function in
-      <code>lib/fetchModelData.js</code>. The function should be declared as
-      follows:
+      <code>lib/fetchModelData.js</code> файлд байгаа <code>fetchModel</code> функцийг хөгжүүлэх ёстой. 
+      Энэ функцийг дараах тодорхойлолтын дагуу хөгжүүлнэ:
     </p>
 <pre>
 /**
- * fetchModel - Fetch a model from the web server.
+ * fetchModel - Веб серверээс моделийг авдаг
  *
- * @param {string} url      The URL to issue the GET request.
+ * @param {string} url     GET хүсэлт явуулах URL
  *
- * @returns a Promise that should be filled with the response of the GET request
- * parsed as a JSON object and returned in the property named "data" of an
- * object. If the request has an error, the Promise should be rejected with an
- * object that contains the properties:
- * {number} status          The HTTP response status
- * {string} statusText      The statusText from the xhr request
+ * @returns GET хүсэлтийн хариултад ирэх JSON объектоор дүүргэсэн Promise буцаана. 
+ * Өгөгдөл нь нэг объектын "data" нэртэй шинжэд байна.
+ * Хэрэв хүсэлт явуулахад алдаа гарвал Promise нь дараах шинжүүдийг агуулсан объектыг буцаана.
+ * {number} status          HTTP хариултын төлөв
+ * {string} statusText      xhr хүсэлтээр ирсэн өгөгдөл
  */
 </pre>
     <p class="noTopMargin">
-      Although there many modules that would make implementing this function
-      trivial, we want you to learn about the low-level details of AJAX. You may
-      not use other libraries to implement <code>fetchModel</code>; you must
-      write Javascript code that creates XMLHttpRequest DOM objects and responds
-      to their events.
+      Хэдийгээр энэ функцийг олон янзын бэлэн хөгжүүлсэн модуль ашиглан хийж болох ч
+      та AJAX-ийн доод түвшний мэдлэгт суралцах хэрэгтэй. Та <code>fetchModel</code>
+      функцийг кодлохдоо өөр бусад санг ашиглахгүй байх; XMLHttpRequest DOM объектыг
+      үүсгэх болон түүний үзэгдлийг барьж авч хэрэглэх ЖаваСкрипт кодыг бичээрэй.
     <p>
-      Your solution needs to be able to handle multiple outstanding
-      <code>fetchModel</code> requests. To demonstrate your
-      <code>fetchModel</code> routine works, your web application should work so
-      that visiting
+      Таны код олон <code>fetchModel</code> хүсэлтүүдийг хүлээн авч хариулдаг байх ёстой.
+      Өөрийн <code>fetchModel</code> функцийг ажиллаж байгаа эсэхийг харахын тулд
       <a href="http://localhost:3000/photo-share.html">http://localhost:3000/photo-share.html</a>
-      displays the version number returned by sending an AJAX request to the
-      <a href="http://localhost:3000/test/info">http://localhost:3000/test/info</a>
-      URL. The version number should be displayed in the <code>TopBar</code>
-      component of your app.
+      хаягаар орж үзээрэй. Энэ нь <a href="http://localhost:3000/test/info">http://localhost:3000/test/info</a>
+      хаягруу хүсэлт явуулаад буцаж ирэх хувилбарын дугаарыг дэлгэцэлдэг юм. Хувилбарын дугаарыг
+      өөрийн аппынхаа <code>TopBar</code> компонентод дэлгэцэлдэг байна.
     </p>
     <p>
-      After successfully implementing the <code>fetchModel</code> function in
-      <code>lib/fetchModelData.js</code>, you should modify the code in
+      <code>lib/fetchModelData.js</code> файлд <code>fetchModel</code> функцийг амжилттай 
+      кодлосны дараа та дараах файлуудын кодыг өөрчлөөрэй.
       <ul>
         <li><code>components/userDetail/UserDetail.jsx</code></li>
         <li><code>components/userList/UserList.jsx</code></li>
         <li><code>components/userPhotos/UserPhotos.jsx</code></li>
       </ul>
-      to use the <code>fetchModel</code> function to request the data from the
+      Дээрх  <code>fetchModel</code> function to request the data from the
       server. There should be no accesses to <code>window.cs142models</code> in
       your code and your app should work without the line in
       <code>photo-share.html</code>:<div class="code">
