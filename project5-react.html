@@ -481,10 +481,10 @@
         <li><code>components/userList/UserList.jsx</code></li>
         <li><code>components/userPhotos/UserPhotos.jsx</code></li>
       </ul>
-      Дээрх  <code>fetchModel</code> function to request the data from the
-      server. There should be no accesses to <code>window.cs142models</code> in
-      your code and your app should work without the line in
-      <code>photo-share.html</code>:<div class="code">
+      Дээрх  <code>fetchModel</code> функц нь серверээс өгөгдлийг авах хүсэлт тавьдаг.
+      Таны кодод <code>window.cs142models</code> хувьсагчийг шууд дуудаж
+      ашиглах код байх ёсгүй бөгөөд таны аппын  
+      <code>photo-share.html</code> файлд дараах мөр байх ёсгүй:<div class="code">
       <pre>&lt;script src="modelData/photoApp.js"&gt;&lt;script&gt;</pre>
     </div>
     </p>
@@ -493,53 +493,50 @@
 
   <!-- Style Points -->
   <section>
-    <h3 class="left-border">Style Points (5 points)</h3>
+    <h3 class="left-border">Загвар (5 оноо)</h3>
     <p>
-      These points will be awarded if your problem solutions have proper MVC
-      decomposition. In addition, your code and components must be clean and
-      readable, and your app must be at least "reasonably nice" in appearance
-      and convenience.
+      Энэ оноог MVC загварын зөвлөмжийг дагаж зөв зохион байгуулсан тохиолдолд өгнө.
+      Нэмж хэлэхэд, таны код болон компонент цэвэрхэн, уншууртай байх ёстой ба 
+      таны апп ядаж"тодорхой хэмжээнд гоё" харагддаг, хэрэглэгддэг байна.
     </p>
 
     <p>
-      Note that we are using <a href="https://mui.com/">Material-UI</a>, React
-      components that implement Google's <a href="https://material.io">Material
-      Design</a>. We have used Material-UI's
-      <a href="https://mui.com/components/grid/">Grid component</a> to layout
-      the Master-Detail pattern as described in class, and a
-      <a href="https://mui.com/components/app-bar/">App Bar</a>
-      header for you. Although you don't need to build a fully Material Design
-      compatible app, you should use <a href="https://mui.com/">Material-UI</a>
-      components when possible.
+      Бид <a href="https://mui.com/">Material-UI</a> гэх Гүүглээс гаргасан 
+      <a href="https://material.io">Material Design</a> зөвлөмжийг хэрэгжүүлсэн
+      React компонентийг ашиглана. Хичээл дээр ярьсан Master-Detail загварыг хэрэгжүүлэхэд
+      Material UI-ийн <a href="https://mui.com/components/grid/">Grid component</a>
+      ашиглаж харуулсан. Мөн <a href="https://mui.com/components/app-bar/">App Bar</a>
+      компонентоор аппын толгой хэсгийг хийсэн байгаа. Хэдийгээр Material Design загварт
+      бүрэн нийцсэн апп хөгжүүлэхийг шаардахгүй ч боломжтой бол 
+      <a href="https://mui.com/">Material-UI</a> элементүүдийг аль болох ашиглаж хийгээрэй.
     </p>
 
     <p>
-      In addition, remember to run ESLint before submitting. ESLint should raise
-      no errors.
+      Бас илгээхээсээ өмнө ESLint ажиллуулахаа мартуузай. ESLint ямар нэг алдаа өгөхгүй ёсгүй.
     </p>
   </section>
 
   <!-- Extra Credit -->
   <section>
-    <h3 class="left-border">Extra Credit (5 points)</h3>
+    <h3 class="left-border">Нэмэлт оноо (5 оноо)</h3>
     <p>
-      The <code>userPhotos</code> component specifies that the display should
-      include all of a user's photos along the photos' comments. This approach
-      doesn't work well for users with a large numbers of photos. For extra
-      credit you can implement a photo viewer that only shows one photo at a
-      time (along with the photo's comments) and provides a mechanism to step
-      forward or backward through the user's photos (i.e. a stepper).
+      <code>userPhotos</code> компонент нь хэрэглэгчийн бүх зургаас гадна
+      зурагт бичсэн комментуудыг харуулах ёстой. Энэ арга нь маш олон зурагтай
+      хэрэглэгчийн хувьд тийм ч сайн ажиллахгүй. Нэмэлт онооны даалгавраар
+      нэг зургийг комменттой нь харуулдаг болгож хөгжүүлэх ба өмнөх болон
+      дараах гэсэн механизмыг (жишээ нь, stepper буюу алхамт байдлаар) хэрэгжүүлж 
+      хэрэглэгчийн зургийг дэлгэцэлдэг байна.
     </p>
     <p>
-      In order to get extra credit on this assignment your solution must:
+      Энэ даалгаврт нэмэлт оноо авахын тулд таны шийдэл дараах шиг байна:
     <ul>
       <li>
-        Introduce the concept of "Advanced Features" to your photo app. On app
-        startup, "Advanced Features" is always disabled. The
-        <code>TopBar</code> should have a checkbox labeled "Enable Advanced
-        Features" that is checked when "Advanced Features" is enabled and
-        unchecked otherwise. Clicking the checkbox should enable/disable
-        "Advanced Features."
+        Фото аппдаа "Нэмэлт сонголт" ойлголтыг оруулж ирнэ. Апп эхлэж ажиллахад
+        энэ сонголт нь үргэлж идэвхгүй байна. <code>TopBar</code> компонент
+        "Нэмэлт сонголтыг" идэвхжүүлэх чагтлах товлууртай (checkbox) байх үүнийг
+        чагталсан тохиолдолд "Нэмэлт сонголт" идэвхтэй байх ба эсрэг тохиолдолд
+        идэвхгүй болно. Чагтлах товчлуур дээр дарж сонголтыг идэвхтэй/идэвхгүй
+        болгоно.         
       </li>
       <li>
         Your app should use the original photo view unless "Advanced Features"
