@@ -382,7 +382,7 @@
       </li>
       <li>
         Турших зорилгоор 
-        <code>SchemaInfo</code> объекьыш дараах шинжээр үүсгэсэн:
+        <code>SchemaInfo</code> объектыг дараах шинжээр үүсгэсэн:
         <table id="schema-model" class="def" cellspacing="0">
           <tr>
             <td class="name">_id:</td>
@@ -443,7 +443,6 @@
     </p>
     <p>
       Веб сервер дээрээс моделийг авдаг болгож програмаа хөрвүүлэхийн тулд
-      To convert your app to fetch models from the web server you should
       <code>lib/fetchModelData.js</code> файлд байгаа <code>fetchModel</code> функцийг хөгжүүлэх ёстой. 
       Энэ функцийг дараах тодорхойлолтын дагуу хөгжүүлнэ:
     </p>
@@ -534,51 +533,50 @@
         Фото аппдаа "Нэмэлт сонголт" ойлголтыг оруулж ирнэ. Апп эхлэж ажиллахад
         энэ сонголт нь үргэлж идэвхгүй байна. <code>TopBar</code> компонент
         "Нэмэлт сонголтыг" идэвхжүүлэх чагтлах товлууртай (checkbox) байх үүнийг
-        чагталсан тохиолдолд "Нэмэлт сонголт" идэвхтэй байх ба эсрэг тохиолдолд
-        идэвхгүй болно. Чагтлах товчлуур дээр дарж сонголтыг идэвхтэй/идэвхгүй
+        чагталсан тохиолдолд "Нэмэлт сонголт" идэвхтэй болно. Эсрэг тохиолдолд
+        идэвхгүй болно. Чагтлах товчлуур дарснаар сонголтыг идэвхтэй/идэвхгүй
         болгоно.         
       </li>
       <li>
-        Your app should use the original photo view unless "Advanced Features"
-        has been enabled by the checkbox. If enabled, viewing the photos of a
-        user should use the single photo with stepper functionality.
+        Таны апп "Нэмэлт сонголт"-ыг идэвхжүүлээгүй бол зураг үздэг ердийн харагдацаа
+        ашигладаг байх юм. Хэрэв идэвхжсэн бол зургуудыг нэг нэгээр нь алхамт байдлаар
+        харуулдаг байна.
       </li>
       <li>
-        The user interface for stepping should be something obvious and the
-        mechanism should indicate (e.g., a disabled button) if stepping is not
-        possible in a direction because the user is at the first (for backward
-        stepping) or last photo (for forward stepping).
+        Алхамаар харуулах хэрэглэгчийн интерфэйс нь хэрэглэгч зургуудын хамгийн эхнийхийг 
+        үзэж байвал бол өмнөх зурагруу, хамгийн сүүлд очсон бол дараах зурагруу 
+        шилжих боломжгүй учир үүнийг маш ойлгомжтой (жишээ нь, товчлуурыг идэвхгүй болгох) 
+        харуулдаг байна. 
       </li>
       <li>
-        Your app should allow individual photos to be bookmarked and shared by
-        copying the URL from the browser location bar. The browser's forward and
-        back buttons should do what would be expected. When entering the app
-        using a deep linked URL to individual photos the stepper functionality
-        should operate as expected.
+        Таны апп тухайн нэг зургийн URL хаягийг веб хөтчийн хаягийн мөрөөс
+        хуулж шэйрлэх болон тэмдэглэж авах (bookmark) боломжийг олгодог байна.
+        Веб хөтчийн өмнөх болон дараах шилжих товч нь өмнөхрүү буцах, эргэж буцах
+        гээд хийдэг үйлдлээ хийдэг байна. Тухайн зургийг заах гүн холбоосоор 
+        аппруу орох үед алхамт байдлаар харуулах үүргээрээ ажилладаг байна.
       </li>
     </ul>
     </p>
     <p>
-      <b>Warning:</b> Doing this extra credit involves touching various pieces
-      used in the non-extra credit part of the assignment. Adding new
-      functionality guarded by a <i>feature flag</i> is common practice in web
-      applications but has a risk in that if you break the non-extra credit part
-      of the assignment you can lose more points than you could get from the
-      extra credit. Take care.
+      <b>Санамж:</b> Энэ нэмэлт онооны даалгаврыг хийх нь төслөөр хийсэн
+      нэмэлт онооны бус бусад даалгавруудын хэд хэдэн хэсэгт өөрчлөх шаардлага
+      гарна. <i>Онцлог чагтлах (feature flag)</i> товчлуураар ийм боломжийг
+      хийх нь веб аппликейшнд нийтлэг практик байдаг. Гэхдээ нэмэлт онооны бус 
+      бусад даалгавруудаа эвдэж нэмэлт оноо авах гэж байгад илүү их оноо алдах
+      эрсдэл бий. Болгоомжтой байгаарай.
     </p>
   </section>
 
   <!-- Deliverables -->
   <section>
-    <h3 class="left-border">Deliverables</h3>
+    <h3 class="left-border">Хүлээлгэн өгөх үр дүн</h3>
     <p>
-      Use the standard class <a href="submit.html">submission mechanism</a>
-      to submit the entire application (everything in the <code>project5</code>
-      directory). Please clean up your project directory before submitting, as
-      described in the instructions. In particular, the
-      <code>node_modules/</code> directory is 180MB in size so you won't want to
-      upload it to Canvas. Remember to delete your <code>compiled/</code>
-      directory as well.
+      Ердийн <a href="submit.html">Даалгавар илгээх</a> 
+      зааврын дагуу аппаа бүхэлд нь (<code>project4</code>
+      хавтас доторх бүгд) илгээнэ. Илгээхээсээ өмнө зааврын дагуу
+      төслийн хавтасаа цэвэрлээрэй. Ялангуяа, 180MB хэмжээтэй 
+      <code>node_modules/</code> хавтсыг дэмий хадгалахыг хүсэхгүй байна.
+      <code>compiled/</code> хавтсаа ч бас устгахаа мартуузай.
     </p>
   </section>
 
