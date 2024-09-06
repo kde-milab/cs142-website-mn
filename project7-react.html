@@ -83,73 +83,69 @@
 
         <main><div class="container">
 
-  <h1>CS142 Project 7: Sessions and Input</h1>
+  <h1>CS142 Төсөл 7: Хурал ба оролт</h1>
 
   <h4 class="text-muted">
-    Due: Thursday, June 1, 2023 at 11:59 PM
+    Хугацаа: 2023 оны 6-р сарын 1-ний Пүрэв гарагийн 23:59 цагт
   </h4>
 
   <p>
-    In this project, you will extend your work on Project 6 by adding the
-    ability for users to login, comment on photos, and upload new photos. Note
-    that these new feature additions are <strong>full stack</strong> in that you
-    will need to modify both the front end (React app) and the back end (Node
-    web server and MongoDB database).
+    Энэ төсөлд та хэрэглэгчдэд нэвтрэх, зураг дээр сэтгэгдэл бичих, шинэ зураг байршуулан нэмснээр Төсөл 6 дээрх ажлаа өргөтгөх болно. 
+    Эдгээр шинэ функцийн нэмэлтүүд нь бүрэн стек  <strong>full stack</strong> тул та front end (React програм) болон backend (Node вэб 
+    сервер болон MongoDB мэдээллийн сан) 
+    хоёуланг нь өөрчлөх шаардлагатай гэдгийг анхаарна уу.
   </p>
 
   <section>
-    <h3 class="left-border">Setup</h3>
+    <h3 class="left-border">Тохиргоо</h3>
     <p>
-      You should have MongoDB and Node.js installed on your system. If not,
-      follow the <a href="install.html">installation instructions</a> now.
+      Та өөрийн системд MongoDB болон Node.js суулгасан байх ёстой. 
+      Хэрвээ байхгүй бол <a href="install.html">суулгах заавар </a> дагана уу.
     </p>
     <p>
-      Like in Project 6, you start by copying the files of your previous
-      project's directory (<code>project6</code>) into a new directory named
-      <code>project7</code> (<b>make sure that any hidden files are transferred
-        as well, including the <code>.babelrc</code> and
-        <code>.eslintrc.json</code> files</b>). Extract the
-      contents of <a href="downloads/project7.zip">this zip file</a> into the
-      <code>project7</code>
-      directory. This zip file will add several new files. Do all of your work
-      for this project in the <code>project7</code> directory.
+      Төсөл 6-н нэгэн адил та өмнөх төслийн директорын (<code>project6</code>) файлуудыг
+      <code>project7</code> нэртэй шинэ хэсэг рүү нь хуулж эхэлнэ (<b> <code>.babelrc</code> болон
+        <code>.eslintrc.json</code> files</b> оруулаад ямар ч далд байгаа файлуудыг шилжүүлсэн эсэхийг шалгаарай). Энэ <a href="downloads/project7.zip"> zip file</a>-ийн агуулгуудыг
+      <code>project7</code> файл руу задлана. Энэ зип файл нь хэд хэдэн шинэ файл нэмэх болно. <code>project7</code> файл дээр энэ төслийн бүх ажлаа хийгээрэй.
+      
     </p>
     <p>
-      In order to do this assignment, you will need to fetch some new
-      <code>node_modules</code> and add them to your web server and React
-      application. For each module, use the command
-    <pre>npm install --save &lt;module&gt;</pre> which will fetch the module
-    named <code>&lt;module&gt;</code> into your <code>node_modules</code>
-    directory and add the dependency to your <code>package.json</code> file.
-    Use a <code>require</code> function to add the module to your web server.
+      Энэ даалгаврыг хийхийн тулд та хэдэн шинэ
+      <code>node_modules</code> авчирч, тэдгээрийг вэб сервер
+      болон React програмдаа нэмэх хэрэгтэй болно. Модуль бүрд дараах командыг ашиглана уу
+    <pre>npm install --save &lt;module&gt;</pre> 
+    Энэ нь <code>&lt;module&gt;</code> нэртэй модулийг таны <code>node_modules</code>
+    лавлах(directory) руу татаж, <code>package.json</code> файлд хамаарлыг нэмнэ.
+    Модулийг вэб сервертээ нэмэхийн тулд <code>require</code> функцийг ашиглана уу.
     </p>
-    You will need to fetch the following Express middleware modules into your
-    node modules:
+    Та node модулиуддаа дараах Express дундын(middleware)
+    модулиудыг татах шаардлагатай болно
     <ul>
       <li><a href="https://github.com/expressjs/session"><code>express-session</code></a>
-        - Express session is an Express middleware layer than handles session
-        management for you. It was described in lecture.
+        - Экспресс сесс нь танд зориулж сессийн удирдлагыг зохицуулахаас илүү Express дундын давхарга
+        (middleware) болдог юм. Үүнийг лекц дээр тайлбарласан.
       </li>
 
       <li><a href="https://github.com/expressjs/body-parser"><code>body-parser</code></a>
         -
-        <code>body-parser</code> is an Express middleware layer for parsing the
-        body of HTTP requests. You can use it to parse the JSON encoded POST
-        request bodies we use in our server API. For example, if you pass a
-        request with a body consisting of JSON object with a property
-        <code>parameter_name</code>
-        it will show up in the Express request handler as
-        <code>request.body.parameter_name</code>.
+        <code>body-parser</code> нь HTTP хүсэлтийн биетийг задлан шинжлэхэд 
+        зориулагдсан Express дундын давхарга юм. Та үүнийг манай серверийн API-д ашигладаг JSON кодлогдсон POST 
+        хүсэлтийн биетүүдийг задлан шинжлэхэд ашиглаж болно. Жишээлбэл, хэрэв 
+        та <code>parameter_name</code> бүхий JSON объектоос бүрдэх 
+        биеттэй хүсэлтийг дамжуулбал энэ нь Экспресс хүсэлт зохицуулагч дээр
+        <code>request.body.parameter_name</code> хэлбэрээр харагдана.
       </li>
 
       <li><a href="https://www.npmjs.com/package/multer#readme"><code>multer</code></a>
         -
-        <code>multer</code> is another Express middleware body parser that is
-        capable of handling the multi part forms we need to upload photos.
+        <code>multer</code> нь бидний зураг байршуулахад 
+        шаардлагатай олон хэсэгтэй маягтуудыг боловсруулах чадвартай өөр нэг Express дунд програмын бие задлагч юм.
+
       </li>
     </ul>
     <p>
-      On most systems, the following commands should fetch the above modules:
+      Ихэнх систем дээр дараах тушаалууд дээрх модулиудыг татах ёстой:
+
     <pre>
 npm install --save express-session
 npm install --save body-parser
@@ -157,7 +153,7 @@ npm install --save multer
 </pre>
     </p>
     <p>
-      Add these to your <code>webServer.js</code> using require statements like:
+      Эдгээр шаардлагатай мэдэгдлүүдийг ашиглан <code>webServer.js</code> -д нэмнэ үү:
     <pre>
 const session = require("express-session");
 const bodyParser = require("body-parser");
@@ -165,266 +161,243 @@ const multer = require("multer");
 </pre>
     </p>
     <p>
-      Finally you need to add the <code>express-session</code> and
+      Эцэст нь та дараах байдлаар Экспресс <code>use</code> илэрхийлэхийн тулд <code>express-session</code> болон
       <code>body-parser</code>
-      middleware to express with the Express <code>use</code> like so:
+      дунд программыг нэмэх хэрэгтэй:
     <pre>
 app.use(session({secret: "secretKey", resave: false, saveUninitialized: false}));
 app.use(bodyParser.json());
 </pre>
-    where <code>"secretKey"</code> is the secret you use to cryptographically
-    protect the session cookie. We will use the <code>multer</code> middleware
-    in the photo upload code.
+    Энд <code>"secretKey"</code> нь сесс күүкийг криптографийн аргаар хамгаалахад 
+    ашигладаг нууц юм. Бид зураг байршуулах кодонд <code>multer</code> дунд 
+    програмыг(middleware) ашиглах болно.
     </p>
     <p>
-      If you did Problem 2 of Project 6, you should be using <code>axios</code>
-      to fetch models. See the <code>axios</code> <a href="https://github.com/axios/axios">documentation</a>
-      for more details if you didn't implement it for Project 6.
+      Хэрэв та 6-р төслийн 2-р асуудлыг шийдвэрлэсэн бол загваруудыг татахын тулд  <code>axios</code>
+      -ийг ашиглах хэрэгтэй. Хэрэв та Төсөл 6-д хэрэгжүүлээгүй бол илүү дэлгэрэнгүй мэдээллийг  <code>axios</code> <a href="https://github.com/axios/axios">documentation</a>
+      -ээс харна уу.
     </p>
     <p>
-      Like in the previous assignment we provide a Mocha test of the server API
-      so you can have confidence in your backend before you implement the front
-      end code. <strong>In exchange for this nicety, you are limited to
-        implementing the server API we specify. This means making sure that your
-        code passes our provided tests before submitting. See the Testing section
-        further below for details.</strong> If you extended your API while doing
-      the Project 6 Extra Credit, you will need to patch the tests to handle
-      your extended API. If you decide to do the extra credit for this project,
-      you will need to pass additional provided tests as well.
+      Өмнөх даалгаврын нэгэн адил бид серверийн API-ийн Mocha тестийг өгдөг бөгөөд ингэснээр та урд талын кодыг 
+      хэрэгжүүлэхээсээ өмнө арын хэсэгтээ итгэлтэй байх болно. <strong>Энэ сайхан байдлын хариуд та бидний 
+      тодорхойлсон серверийн API-г хэрэгжүүлэхээр хязгаарлагдах болно. Энэ нь 
+      таны кодыг илгээхээсээ өмнө бидний өгсөн тестийг давсан эсэхийг шалгана гэсэн үг юм. 
+      Дэлгэрэнгүй мэдээллийг доорх Туршилтын хэсгээс үзнэ үү.</strong> Хэрэв та Төслийн 6 
+      Нэмэлт Кредитийг хийж байхдаа API-ээ сунгасан бол 
+      өргөтгөсөн API-ээ зохицуулах тестүүдийг нөхөх шаардлагатай болно. Хэрэв та энэ 
+      төсөлд нэмэлт зээл олгохоор шийдсэн бол нэмэлт шалгалтыг давах шаардлагатай болно.
     </p>
     <p>
-      As in the previous project you will need to start your MongoDB instance.
-      Start MongoDB by running command:
+      Өмнөх төслийн нэгэн адил та MongoDB instance-ээ эхлүүлэх хэрэгтэй болно. 
+      MongoDB-г дараах тушаалыг ажиллуулж эхлүүлнэ үү:
     <pre>
-mongod (the exact arguments depend on where you placed the database)
+mongod (яг аргументууд нь мэдээллийн санг хаана байршуулснаас хамаарна)
 </pre>
-    and load the photo app data set by running the command:
+тушаалыг ажиллуулж зургийн програмын өгөгдлийг харна уу:
     <pre>node loadDatabase.js</pre>
-    Note that the version of this command we distribute with Project 7 loads the
-    user object with a <code>login_name</code> (lowercase version of their
-    <code>last_name</code>) and password of <code>"weak"</code>. These
-    properties will only appear when you run <code>loadDatabase.js</code> after
-    you added the fields to the schema (in Problem 1).
+    Төслийн 7-д түгээдэг энэхүү тушаалын хувилбар нь 
+    хэрэглэгчийн объектыг <code>login_name</code> (тэдний овгийн нэрний <code>last_name</code> жижиг хувилбар
+    ) болон <code>"weak"</code> нууц үгээр ачаалдаг болохыг анхаарна уу. Эдгээр 
+    шинж чанарууд нь зөвхөн схемд талбаруудыг нэмсний дараа <code>loadDatabase.js</code> -г ажиллуулах үед 
+    гарч ирнэ (1-р асуудалд).
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Start the Node.js web server</h3>
+    <h3 class="left-border">Node.js вэб серверийг эхлүүлэх нь
+    </h3>
     <p>
-      Once you have the database up and running you will need to start the web
-      server. Although this can be done with the same command as the previous
-      assignments (e.g., <code>node webServer.js</code>), it is more convenient
-      to start the web server using a program that will automatically restart it
-      when you change the <code>webServer.js</code>. Otherwise, you will spend
-      time restarting the web server after each change you make or wondering why
-      your change didn't work when you forget to restart it.
+      Мэдээллийн санг ажиллуулсны дараа вэб серверээ эхлүүлэх хэрэгтэй болно. 
+      Хэдийгээр үүнийг өмнөх даалгавруудтай ижил тушаалаар (жишээ нь, <code>node webServer.js</code>), хийж болох боловч 
+      <code>webServer.js</code> -г өөрчлөх үед автоматаар дахин эхлүүлэх програм ашиглан вэб 
+      серверийг эхлүүлэх нь илүү тохиромжтой. Үгүй бол та хийсэн өөрчлөлт бүрийн дараа вэб серверээ 
+      дахин эхлүүлэх эсвэл дахин эхлүүлэхээ мартсан үед таны өөрчлөлт яагаад ажиллахгүй болсныг 
+      гайхан цаг хугацаа зарцуулах болно.
     </p>
-    The command
+    Нөгөө тушаал
     <pre>npm install -g nodemon</pre>
-    will install a program named <a href="http://nodemon.io">nodemon</a> that
-    does this automatic restarting (you may need to run the command with
-    <code>sudo</code>). Note that the
-    <code>-g</code> flag installs the program globally so that you can run it
-    anywhere. Start your web server with the command from your
-    <code>project7</code> directory:
+    автоматаар дахин ачаалдаг <a href="http://nodemon.io">nodemon</a> нэртэй 
+    программыг суулгах болно (та <code>sudo</code> командыг ашиглан ажиллуулах хэрэгтэй байж магадгүй). Note that the
+    <code>-g</code> туг нь програмыг global байдлаар суулгадаг тул та хаана ч 
+    ажиллуулах боломжтой гэдгийг анхаарна уу. <code>project7</code> лавлахын тушаалаар вэб серверээ эхлүүлнэ үү :
     <div class="code">
       <pre>nodemon webServer.js</pre>
     </div>
-    The command will run the web server and restart it every time the
-    <code>webServer.js</code> file changes. If you have an error (e.g., a
-    JavaScript syntax error) that causes the Node to exit, nodemon will wait
-    until you change the <code>webServer.js</code> file and then try to restart
-    it. If you want to restart the web server without changing the file you can
-    restart it manually by typing the two character command <code>rs</code> at
-    the nodemon command. You will probably want to run this in its own window so
-    you can see the logging messages from your Node.js code.
+    Энэ тушаал нь вэб серверийг ажиллуулж, <code>webServer.js</code> файл өөрчлөгдөх 
+    бүрт дахин эхлүүлэх болно. Хэрэв танд Node-ийг гарахад хүргэдэг алдаа (жишээ нь, 
+    JavaScript синтакс алдаа) гарж байвал nodemon таныг <code>webServer.js</code> файлыг өөрчлөх 
+    хүртэл хүлээж, дараа нь дахин эхлүүлэхийг оролдоно. Хэрэв та файлыг өөрчлөхгүйгээр вэб 
+    серверийг дахин эхлүүлэхийг хүсвэл nodemon командын  <code>rs</code> гэсэн хоёр тэмдэгт командыг 
+    бичиж гараар дахин эхлүүлж болно. Та Node.js кодоос бүртгэлийн мессежүүдийг (logging messages) харахын тулд үүнийг өөрийн цонхонд ажиллуулах гэж байх болно.
+
     </p>
     <p>
-      After updating your Photo Share App with the new files from Project 7 and
-      starting the database and web server, make sure the app is still working
-      before continuing on to the assignment.
+      Төсөл 7-ын шинэ файлуудаар Photo Share програмаа 
+      шинэчилж, мэдээллийн сан болон вэб серверийг ажиллуулсны дараа 
+      даалгавраа үргэлжлүүлэхийн өмнө програм ажиллаж байгаа эсэхийг шалгаарай.
     </p>
   </section>
 
 
   <section>
-    <h3 class="left-border">Problem 1: Simple Login (15 points)</h3>
+    <h3 class="left-border">Асуудал 1: Энгийн нэвтрэлт (15 оноо)
+    </h3>
     <p>
-      Extend your photo app to have the notion of a user being logged in. If a
-      user is logged in, the toolbar should include a small message "Hi
-      &lt;firstname&gt;" where &lt;firstname&gt; is the first name of the
-      logged-in user. The toolbar should also contain a button displaying
-      "Logout" that will log the user out.
+      Хэрэглэгч нэвтэрч байгаа гэсэн ойлголттой болохын тулд зургийн аппликейшнээ өргөтгөнө үү. 
+      Хэрэв хэрэглэгч нэвтэрсэн бол хэрэгслийн самбарт "Hi &lt;firstname&gt;" гэсэн жижиг мессеж байх ёстой бөгөөд &lt;firstname&gt;
+      нь нэвтэрсэн хэрэглэгчийн нэр юм. Хэрэгслийн самбар нь хэрэглэгчийг гаргах "Logout" товчийг агуулсан байх ёстой.
     </p>
     <p>
-      If there is no user logged in, the toolbar should display "Please Login"
-      and the main view of your application should display a new view component
-      named <code>LoginRegister</code>. The
-      <code>LoginRegister</code> view should provide a way for a user to login
-      and, as part of Problem 4 below, register as a new user. All attempts to
-      navigate to a different view (e.g., deep links) should result in the
-      display being redirected to the <code>LoginRegister</code>
-      view if no user is logged in. (See the hints section if you are unsure how
-      to implement this.) In addition, the user list on the left should not be
-      populated if the current user is not logged in. (See the section below
-      about modifying the server endpoints to return a status of 401
-      (Unauthorized).)
+      Хэрэв нэвтэрсэн хэрэглэгч байхгүй бол хэрэглүүрийн (toolbar) мөрөнд "Please Login" 
+      гарч ирэх бөгөөд таны програмын үндсэн хэсэгт <code>LoginRegister</code> нэртэй шинэ 
+      харагдац (view) гарч ирнэ. <code>LoginRegister</code>  харагдац нь хэрэглэгчийг нэвтрэх арга замыг зааж өгөх ёстой бөгөөд доорх 4-р 
+      асуудлын нэг хэсэг болгон шинэ хэрэглэгчээр бүртгүүлнэ үү. Өөр харагдац руу шилжих бүх оролдлого (жишээ нь, гүнзгий холбоосууд) нь 
+      хэрэглэгч нэвтэрч ороогүй тохиолдолд дэлгэцийг <code>LoginRegister</code>
+      харагдац руу шилжүүлэхэд хүргэнэ . (Хэрэв та үүнийг хэрхэн хэрэгжүүлэхээ 
+      мэдэхгүй байгаа бол зөвлөмж хэсгийг үзнэ үү.) Үүнээс гадна, Хэрэв одоогийн хэрэглэгч нэвтрээгүй бол зүүн 
+      талд байгаа хэрэглэгчийн жагсаалтыг бөглөх ёсгүй. (401 (Unauthorized) статусыг 
+      буцаахын тулд серверийн төгсгөлийн цэгүүдийг өөрчлөх тухай доорх хэсгийг үзнэ үү).
+
     </p>
     <p>
-      When a user logs in successfully, the view should switch to displaying the
-      user's details. If the user login fails (e.g., no user with the
-      <code>login_name</code>) the view should report an appropriate error
-      message and let the user try again.
+      Хэрэглэгч амжилттай нэвтэрсэн үед харагдах байдал нь хэрэглэгчийн дэлгэрэнгүй 
+      мэдээллийг харуулах руу шилжих ёстой. Хэрэв хэрэглэгчийн нэвтрэлт амжилтгүй болвол (жишээ нь,
+      <code>login_name</code>-тэй хэрэглэгч байхгүй) харагдац нь зохих алдааны мэдэгдлийг мэдээлэх 
+      бөгөөд хэрэглэгч дахин оролдох боломжийг олгох юм.
     </p>
     <p>
-      Extend your backend implementation to support the photo app's notion of
-      logged in users. In making this change you will need to change both the
-      database schema and the web server API.
+      Нэвтэрсэн хэрэглэгчдийн фото апп-ийн үйл ажиллагааг дэмжихийн тулд арын хэсгийн хэрэгжүүлэлтээ 
+      өргөтгөх хэрэгтэй. Энэ өөрчлөлтийг хийхдээ та өгөгдлийн сангийн схем болон вэб серверийн API-г хоёуланг 
+      нь өөрчлөх шаардлагатай болно.
     </p>
     <p>
-      Extend the Mongoose schema for <code>User</code> to add a new property
-      <code>login_name</code>. This property is a string containing the
-      identifier the user will type when logging in (their "login name").
-    </p>
-    <p>Modify the web server API to support 2 new REST API calls for logging a
-      user in and out. Like in the previous assignment we will use HTTP requests
-      with JSON-encoded bodies to transmit model data. The API uses POST
-      requests to:</p>
+      <code>User</code> дээр шинэ хэсэг (property) <code>login_name</code> нэмэхийн 
+      тулд Mongoose схемийг өргөтгөнө үү.Энэ хэсэг нь хэрэглэгчийн нэвтрэх үед бичих 
+      үед танигчийг (тэдний "нэвтрэх нэр") агуулсан тэмдэгт мөр юм.
+
+    <p>Вэб серверийн API-г өөрчлөн хэрэглэгчийг нэвтрэх, гаргахын тулд 2 шинэ 
+      REST API дуудлагыг хийх хэрэгтэй. Өмнөх даалгаврын нэгэн адил бид загварөн өгөгдлийг 
+      дамжуулахын тулд JSON кодлогдсон биетэй HTTP хүсэлтийг ашиглах болно. API нь POST хүсэлтийг 
+      дараах зорилгоор ашигладаг:</p>
     <ul>
-      <li><code>/admin/login</code> - Provides a way for the photo app's
-        <code>LoginRegister</code>
-        view to login in a user. The POST request JSON-encoded body should
-        include a property <code>login_name</code>
-        (no passwords for now) and reply with information needed by your app for
-        logged in user. An HTTP status of 400 (Bad request) should be returned
-        if the login failed (e.g., <code>login_name</code> is not a valid
-        account). A parameter in the request body is accessed using
-        <code>request.body.parameter_name</code>. Note the login register
-        handler should ensure that there exists a user with the given
-        <code>login_name</code>. If so, it stores some information in the
-        Express session where it can be checked by other request handlers that
-        need to know whether a user is logged in. The return body of 
-        <code>POST /admin/login</code> should be the properties of the logged in user 
-        your web app needs.  Our tests require the <code>_id</code> property 
-        but you can include any other user object properties. Returning the entire 
-        user object is discouraged because of what is added in Problem 4.
+      <li><code>/admin/login</code> - Зургийн програмын <code>LoginRegister</code> харагдац нь 
+        хэрэглэгч рүү нэвтрэх боломжийг олгодог. POST хүсэлттэй JSON-кодлогдсон хэсэг нь property 
+        <code>login_name</code>
+        (одоохондоо нууц үг байхгүй) агуулсан байх ёстой бөгөөд таны апп-д нэвтэрсэн хэрэглэгчдэд шаардлагатай 
+        мэдээллийг агуулсан байх ёстой. Нэвтрэх амжилтгүй болсон тохиолдолд (жишээ нь , <code>login_name</code> хүчинтэй бүртгэл биш) 400 (муу хүсэлт) 
+        HTTP статусыг буцаана. Хүсэлтийн бие дэх параметрт
+        <code>request.body.parameter_name</code> ашиглан ханддаг.Нэвтрэх бүртгэлийн зохицуулагч нь өгөгдсөн
+        <code>login_name</code>-тэй хэрэглэгч байгаа эсэхийг шалгах ёстой гэдгийг анхаарна уу.  Хэрэв тийм бол энэ нь хэрэглэгч нэвтэрсэн 
+        эсэхийг мэдэх шаардлагатай бусад хүсэлт боловсруулагчаар шалгах боломжтой зарим мэдээллийг Экспресс сессэд хадгалдаг.
+        <code>POST /admin/login</code> -ийн буцаах хэсэг нь таны нэвтэрсэн хэрэглэгчийн шинж чанар буюу 
+        вэб програмын хэрэгцээ байх ёстой.  Манай шалгах хэсгүүдэд <code>_id</code> property шаарддаг боловч та бусад 
+        хэрэглэгчийн объектын шинж чанаруудыг оруулж болно. 4-р асуудалд нэмсэн зүйлээс болж хэрэглэгчийн объектыг бүхэлд нь буцаах нь дэмий болдог.
       </li>
-      <li><code>/admin/logout</code> - A POST request with an empty body to this
-        URL will logout the user by clearing the information stored in the
-        session. An HTTP status of 400 (Bad request) should be returned in the
-        user is not currently logged in.</li>
+      <li><code>/admin/logout</code> -Энэ URL руу хоосон биетэй POST хүсэлт нь сессэд (session) хадгалагдсан мэдээллийг устгаснаар 
+        хэрэглэгч оролтоос гарах болно. Хэрэглэгч одоогоор нэвтрээгүй байгаа үед HTTP статус 400 (муу хүсэлт) буцаж ирэх ёстой.</li>
     </ul>
     <p>
-      As part of updating the web server to handle login/logout, you need to
-      update all requests (except to <code>/admin/login</code> and
-      <code>/admin/logout</code>) to reject the request with a status of 401
-      (Unauthorized) if the session state does not report a user is logged in.
-    </p>
+      Нэвтрэх/гаралтыг зохицуулахын тулд вэб серверийг шинэчлэх нэг хэсэг болгон 
+      хэрэв сессийн төлөв нь хэрэглэгч нэвтрээгүй гэвэл чи бүх хүсэлтүүдээ (<code>/admin/login</code> болон
+      <code>/admin/logout</code>-аас бусад) 401
+      (Unauthorized) статусыг арилгахын тулд дахин шинэчлэх хэрэгтэй.
   </section>
 
   <section>
-    <h3 class="left-border">Problem 2: New Comments (15 points)</h3>
+    <h3 class="left-border">Асуудал 2: Шинэ сэтгэгдэл (15 оноо) </h3>
     <p>
-      Once you have implemented user login, the next step is to implement the
-      ability to add comments to photos. In the photo detail view where you
-      display the comments of a photo, add the ability for the currently logged
-      in user to add a comment to the photo. You get to design the user
-      interface (e.g., popup dialog, input field, etc.) for this feature. It
-      should be obvious how to use it and what photo the comment is about. The
-      display of the photo and its comments should be updated immediately to
-      reflect the newly added comment.
+      Хэрэглэгчийн нэвтрэлтийг хэрэгжүүлсний дараа дараагийн алхам бол зураг дээр 
+      сэтгэгдэл нэмэх боломжийг хэрэгжүүлэх явдал юм. Зургийн тайлбарыг харуулах 
+      зургийн дэлгэрэнгүй харагдац дээр одоо нэвтэрсэн хэрэглэгчид зурган дээрээ 
+      сэтгэгдэл нэмэх боломжийг нэмнэ үү. Та энэ функцийн хэрэглэгчийн интерфэйсийг 
+      (жишээ нь, попап харилцах цонх, оруулах талбар гэх мэт) зохион бүтээх хэрэгтэй. 
+      Үүнийг хэрхэн ашиглах, ямар зургийн тухай сэтгэгдэл бичих нь тодорхой байх ёстой. 
+      Зургийн дэлгэц болон түүний тайлбарыг шинээр нэмсэн сэтгэгдлийг тусгахын тулд нэн 
+      даруй шинэчлэх шаардлагатай.
+
     </p>
     <p>
-      For the backend support extend the web server API with the following HTTP
-      POST API:
+      Арын талын дэмжлэгийн хувьд вэб серверийн API-г дараах 
+      HTTP POST API-аар өргөтгөнө үү:
     <ul>
-      <li><code>/commentsOfPhoto/:photo_id</code> - Add a comment to the photo
-        whose id is <code>photo_id</code>. The body of the POST requests should be
-        a JSON-encoded body with a single property <code>comment</code> that
-        contains the comment's text. The comment object created on the photo must
-        include the identifier of the logged in user and the time when the comment
-        was created. Your implementation should reject any empty comments with a
-        status of 400 (Bad request).</li>
+      <li><code>/commentsOfPhoto/:photo_id</code> - ID нь <code>photo_id</code> гэсэн зурган 
+        дээр сэтгэгдэл нэмнэ. POST хүсэлтийн үндсэн хэсэг нь тайлбарын текстийг агуулсан нэг property
+        тайлбар бүхий <code>comment</code>-ийг JSON кодлогдсон бие байлгах ёстой.  Зураг дээр 
+        үүсгэсэн сэтгэгдэл бичих объект нь нэвтэрсэн хэрэглэгчийн таниулбар болон сэтгэгдэл 
+        үүсгэсэн цагийг агуулсан байх ёстой. Таны хэрэгжилт 400 статустай (Bad request) хоосон сэтгэгдэл бичих боломжгүй байлгах ёстой.
+        </li>
     </ul>
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Problem 3: Photo Uploading (15 points)</h3>
+    <h3 class="left-border">Aсуудал 3: Зураг байршуулах (15 оноо)</h3>
     <p>
-      Allow users to add new photos. When a user is logged in, the main toolbar
-      should have a button labeled "Add Photo" that allows the current logged in
-      user to upload a photo to the app. When a photo is successfully posted, it
-      should show up automatically on the user photos page, or at the very least
-      it should have some indication that the photo was added. We will provide you
-      with an example of how to upload files using HTML in the Hint section below.
+      Хэрэглэгчдэд шинэ зураг нэмэх боломжийг бий болгоно. 
+      Хэрэглэгч нэвтэрсэн үед үндсэн хэрэгслийн (toolbar) мөрөнд 
+      "Зураг нэмэх" гэсэн товчлуур байх ёстой бөгөөд энэ нь одоогийн нэвтэрсэн 
+      хэрэглэгчийг апп руу зураг оруулах боломжийг олгодог. Зургийг амжилттай 
+      байршуулсны дараа энэ нь хэрэглэгчийн зургийн хуудсан дээр автоматаар гарч ирэх эсвэл 
+      хамгийн багадаа зургийг нэмсэн гэсэн тэмдэгтэй байх ёстой. Бид танд HTML ашиглан 
+      файл байршуулах жишээг доорх зөвлөмж(hint) хэсэгт өгөх болно.
+
     </p>
     <p>
-      Extend the web server to support POST requests to the URL:
+      URL дэх POST хүсэлтийг дэмжихийн тулд вэб серверийг өргөтгөх нь:
     <ul>
-      <li><code>/photos/new</code> - Upload a photo for the current user. The
-        body of the POST request should be the file (see hint below). The uploaded
-        files should be placed in the <code>images</code> directory under an
-        unique name you generated. The unique name, along with the creation data
-        and logged in user id, should be placed in the new Photo object you
-        create. A response status of 400 should be returned if there is no file in
-        the POST request. See the Hint section for help with this.
+      <li><code>/photos/new</code> - Одоо байгаа хэрэглэгчийн зургийг байршуулна уу. 
+        POST хүсэлтийн үндсэн хэсэг нь файл байх ёстой (доорх зөвлөмжийг (hints) үзнэ үү). Байршуулсан файлуудыг <code>images</code> ргийн санд өөрийн 
+        үүсгэсэн өвөрмөц нэрээр байршуулах ёстой. Өвөрмөц нэрийг үүсгэсэн өгөгдөл болон нэвтэрсэн хэрэглэгчийн 
+        ID-ийн хамт таны шинээр үүсгэсэн Фото объектод оруулах ёстой. Хэрэв POST хүсэлтэд файл байхгүй бол 400 
+        гэсэн хариултын статусыг буцаана. Энэ талаар тусламж авахыг хүсвэл зөвлөмж (hints) хэсгээс үзнэ үү.
       </li>
     </ul>
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Problem 4: Registration and Passwords (15
-      points)</h3>
+    <h3 class="left-border">Асуудал 4: Бүртгэл ба нууц үг (15 оноо)
+    </h3>
     <p>
-      Enhance the <code>LoginRegister</code> view component to support new-user
-      registration and passwords. Extend the login portion to add a password
-      field. Add a registration section that allows all the fields of the User
-      object to be filled in. To reduce the chance that the user typos that
-      password the view should contain a an additional copy of the password
-      field and the view should only allow the user to be created if the two
-      password fields are identical. Good security practice requires that the
-      passwords typed by the user shouldn't be visible in the view. Registration
-      should be triggered by a button at the bottom of the page labeled
-      "Register Me". When the button is pushed either an error should be
-      reported explaining <b>specifically</b> why it didn't work or a success
-      message should be reported and the register form input fields should be
-      cleared.
+      Шинэ хэрэглэгчийн бүртгэл болон нууц үгийг дэмжихийн тулд <code>LoginRegister</code> харах бүрэлдэхүүн 
+      (view component) хэсгийг сайжруулна уу. Шинэ хэрэглэгчийн бүртгэл болон нууц үгийг дэмжихийн 
+      тулд LoginRegister харах бүрэлдэхүүн (view component) хэсгийг сайжруулна уу. Нууц үг 
+      оруулах хэсэг нэмэхийн тулд нэвтрэх хэсгийг сунгана уу. Хэрэглэгчийн объектын бүх 
+      хэсгийг дүүргэх боломжийг олгодог бүртгэлийн хэсгийг нэмнэ үү. Хэрэглэгч нууц үгээ бичдэг 
+      гэсэн магадлалыг багасгахын тулд харагдац нь нууц үгийн хэсгийг дахин хуулбарлан агуулсан байх ёстой бөгөөд харагдац нь зөвхөн хэрэглэгчийн оруулсан нууц үгийн болон хуулбар хоёр талбар ижил байвал үүсгэнэ. Аюулгүй байдлын практик нь хэрэглэгчийн оруулсан нууц үг нь харагдах байдалд харагдахгүй байхыг шаарддаг. Бүртгэлийг хуудасны доод хэсэгт байрлах
+      "Register Me" гэсэн товчлуураар идэвхжүүлнэ. Товчлуур дээр дарахад <b>specifically</b> яагаад ажиллахгүй байгааг тайлбарласан алдааг харуулах эсвэл амжилттай болсон тухай мэдээлэл ба бүртгэлийн 
+      маягтын оруулах талбаруудыг арилгах шаардлагатай.
     </p>
     <p>
-      For the backend, extend the <code>User</code> object schema with a string
-      field <code>password</code> that will store the password. This is horribly
-      insecure. See the Extra Credit below if you can't bring yourself to
-      implement something so insecure.
+      Backend-ийн хувьд <code>User</code> ийн объектын схемийг нууц үг хадгалах <code>password</code> бүхий мөрийн талбарыг өргөтгө. 
+      Энэ бол үнэхээр найдваргүй зүйл. Хэрэв та маш их найдваргүй зүйлийг хэрэгжүүлмээргүй бол доорх Нэмэлт кредитийг харна уу.
     </p>
-    Extend the web server to support POST requests to the URL:
+    URL руу POST хүсэлтийг дэмжихийн тулд вэб серверийг өргөтгөх нь :
     <ul>
       <li>
-        <code>/user</code> - Allows a user to register. The registration POST
-        takes a JSON-encoded body with the following properties:
+        <code>/user</code> - Хэрэглэгч бүртгүүлэх боломжийг олгоно. Бүртгэлийн POST нь 
+        дараах шинж чанаруудтай JSON кодлогдсон биеийг авдаг:
         (<code>login_name, password, first_name, last_name, location,
-        description, occupation</code>). The post request handler must make sure
-        that the new <code>login_name</code> is specified and doesn't already
-        exist. The <code>first_name</code>, <code>last_name</code>, and
-        <code>password</code> must be non-empty strings as well (the other
-        fields may be empty). If the information is valid, then a new user is
-        created in the database. The response body should be the properties your web 
-        app needs. Our tests require the <code>login_name</code> property be present. 
-        If there is an error, the response should
-        return status 400 and a string indicating the error.
+        description, occupation</code>). Нийтлэлийн хүсэлтийг зохицуулагч 
+        нь шинэ <code>login_name</code> зааж өгсөн бөгөөд аль хэдийн байхгүй эсэхийг шалгах ёстой.
+        <code>first_name</code>, <code>last_name</code>, болон
+        <code>password</code> нь хоосон биш мөр байх ёстой (бусад талбарууд хоосон байж болно). 
+        Хэрэв мэдээлэл хүчинтэй бол мэдээллийн санд шинэ хэрэглэгч бий болно. Хариултын хэсэг 
+        нь таны вэб програмд ​​хэрэгтэй шинж чанарууд байх ёстой. Манай тестүүд <code>login_name</code> 
+        шинж чанарыг агуулсан байхыг шаарддаг.
+        Хэрэв алдаа гарсан бол хариу нь 400 статус 
+        болон алдааг харуулсан мөрийг буцаана.
       </li>
     </ul>
     </p>
     <p>
-      Enhance the <code>LoginRegister</code> view to support logging in with a
-      password and check it as part of the post request to
-      <code>/admin/login</code>.
+      Нууц үгээр нэвтрэхийг дэмжихийн тулд <code>LoginRegister</code> харагдацыг сайжруулж, 
+      <code>/admin/login</code> руу илгээх хүсэлтийн нэг хэсэг болгон шалгана уу.
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Extra Credit #1: Salted Passwords (5 points)</h3>
+    <h3 class="left-border">Нэмэлт оноо №1: Давсалсан нууц үг (5 оноо)</h3>
     <p>
       Enhance the security of your password mechanism by implementing
       <i>salting</i>. The salting mechanism is described in the next few
@@ -558,86 +531,83 @@ function doesPasswordMatch(hash, salt, clearTextPassword) {
   </section>
 
   <section>
-    <h3 class="left-border">Style Points (5 points)</h3>
+    <h3 class="left-border">Загварчлалын оноо (5 оноо)</h3>
     <p>
-      These points will be awarded if your problem solutions have proper MVC
-      decomposition, follow the software stack conventions, and ESLINT
-      warning-free JavaScript. In addition, your code and templates must be
-      clean and readable, and your Web pages must be at least "reasonably nice"
-      in appearance and convenience.
+      Хэрэв таны асуудлын шийдэл нь MVC задаргаатай, 
+      програм хангамжийн стекийн дүрмийг дагаж мөрддөг, ESLINT-ийн анхааруулгагүй 
+      JavaScript-тэй байвал эдгээр оноог олгоно. Нэмж дурдахад, таны код, загварууд нь 
+      цэвэрхэн, уншихад хялбар байх ёстой бөгөөд таны вэб хуудаснууд гадаад төрх, тав тухтай байдлын 
+      хувьд дор хаяж "боломжийн сайхан" байх ёстой.
     </p>
   </section>
 
   <section>
-    <h3 class="left-border">Testing</h3>
+    <h3 class="left-border">Шалгах(Testing)</h3>
     <p>
-      For testing, we:
+      testing-ийн хувьд бид:
     <ul>
-      <li>provide new test file named <code>test/sessionInputApiTest.js</code>
-        that provides some test coverage of the new API calls.</li>
-      <li>update the existing <code>test/serverApiTest.js</code> to login a user
-        and provide the session information on each API call.</li>
+      <li>Шинэ API дуудлагын зарим тестийн хамрах хүрээг хангадаг <code>test/sessionInputApiTest.js</code>
+        нэртэй шинэ тест файлыг өгөх.</li>
+      <li>Одоо байгаа <code>test/serverApiTest.js</code> шинэчилж хэрэглэгч рүү нэвтэрч, API дуудлага бүр 
+        дээр сессийн мэдээллийг өгнө.</li>
     </ul>
-    Our update overwrites the file <code>serverApiTest.js</code> so any changes
-    you added in Project 6 as part of the extra credit will need to be
-    backported. To help with the backporting (or if you're just curious), note
-    that we we added a Cookie header key-value pair to the request options of
-    each HTTP request call. See the test file for details.
+    Бидний шинэчлэлт нь <code>serverApiTest.js</code> файлыг дарж бичих тул нэмэлт зээлийн нэг хэсэг 
+    болгон Төсөл 6-д нэмсэн аливаа өөрчлөлтийг буцааж мэдээлэх шаардлагатай болно. Нөөц дамжуулахад 
+    туслахын тулд (эсвэл та зүгээр л сонирхож байгаа бол) бид HTTP хүсэлтийн дуудлага бүрийн хүсэлтийн сонголтуудад 
+    күүки толгойн түлхүүр-утгийн хосыг нэмсэн гэдгийг анхаарна уу. Дэлгэрэнгүйг тестийн файлаас үзнэ үү.
     </p>
 
     <p>
-      <strong>Just like in Project 6, please make sure to pass the provided
-        tests before submitting, as a portion of your grade will depend on how
-        many of these tests you pass.</strong>
+      <strong>Төсөл 6-д байгаа шиг, шалгалт өгөхөөсөө өмнө өгсөн шалгалтуудыг заавал давах 
+        хэрэгтэй, учир нь таны үнэлгээний тодорхой хэсэг нь эдгээр шалгалтын хэд нь тэнцсэнээс 
+        хамаарна.</strong>
     </p>
 
     <p>
-      Note the tests assume that the database has only the objects from
-      <code>loadDatabase.js</code>. You should run <code>loadDatabase.js</code>
-      before running the test.
+      Туршилтууд нь мэдээллийн санд зөвхөн
+      <code>loadDatabase.js</code> бъектуудыг агуулж байгааг анхаарна уу. Та тестийг эхлүүлэхийн өмнө <code>loadDatabase.js</code>
+      ажиллуулах хэрэгтэй.
     </p>
     <p>
-      Before running any tests you should make sure your
-      <code>test/node_modules</code> is up to date by typing the command:
-      <code>npm install</code> in the <code>project7/test</code> directory. You
-      may get some warning about 2 packages being deprecated (namely
-      <code>request</code> and <code>har-validator</code>). You can safely
-      ignore those as these are warnings caused by the fact that one of the
-      libraries we use for testing is currently in maintenance. As before you
-      can run the tests with the command <code>npm run test</code>.
+      Ямар нэгэн тест хийхээсээ өмнө <code>project7/test</code> directory-д
+      <code>npm install</code> командыг бичиж <code>test/node_modules</code> шинэчлэгдсэн эсэхийг шалгах хэрэгтэй. 
+      <div class=""></div>You
+      Та 2 багцыг хуучирсан тухай анхааруулга авч магадгүй (жишээ нь
+      <code>request</code> болон <code>har-validator</code>). Эдгээр нь бидний 
+      туршилтад ашигладаг номын сангийн аль нэг нь засвар үйлчилгээ хийж байгаатай холбоотой 
+      сэрэмжлүүлэг тул та эдгээрийг үл тоомсорлож болно. Та өмнөх шигээ <code>npm run test</code> командыг ашиглан 
+      тестүүдийг ажиллуулж болно.
     </p>
   </section>
 
   <section>
     <h3 class="left-border">Hints</h3>
-    Now that you are writing code that updates the MongoDB database, bugs in
-    your code can corrupt the database contents. Rerunning the
-    <code>loadDatabase.js</code> program will reset your database to a clean
-    state. The tests assume you have done this before each run.
-    <h4>Problem 1</h4>
+    Та одоо MongoDB мэдээллийн санг шинэчлэх код бичиж байгаа тул таны кодын алдаа 
+    нь мэдээллийн сангийн агуулгыг гэмтээж болзошгүй юм. 
+    <code>loadDatabase.js</code>  програмыг дахин ажиллуулснаар таны мэдээллийн санг цэвэр төлөвт(clean state) дахин 
+    тохируулна. Туршилтууд таныг run бүрийн өмнө үүнийг хийсэн гэж үздэг.
+    <h4>Асуудал 1    </h4>
     <p>
-      This problem requires you to get the notion of a logged in user in both
-      the React application and in the web server. You will need to get your
-      pattern down for generating POST requests from your app to the web server
-      and setup up the session state. The server-side functionality has tests
-      you can run against it.
+      Энэ асуудал нь таныг React програм болон вэб 
+      серверт нэвтэрсэн хэрэглэгчийн тухай ойлголтыг авахыг шаарддаг. 
+      Та өөрийн апп-аас вэб сервер рүү POST хүсэлт үүсгэхийн тулд загвараа 
+      буулгаж, сессийн төлөвийг тохируулах хэрэгтэй. Сервер талын функцэд та үүний 
+      эсрэг ажиллуулж болох тестүүд байдаг.
     </p>
     <p>
-      Assuming you got your <code>LoginRegister</code> component written, added
-      to your photo app, and routed to using the path "/login-register", we need
-      to make that view be the one displayed if the user is not logged in. React
-      Router provides a useful way of handeling redirects: <a
+      Хэрэв та өөрийн <code>LoginRegister</code> cбүрэлдэхүүн хэсгийг бичиж, зургийн програмдаа нэмээд "/login-register" зам руу 
+      чиглүүлсэн гэж үзвэл бид хэрэглэгч нэвтэрч ороогүй тохиолдолд тухайн харагдацыг харуулах хэрэгтэй. React
+      React Router нь ашигтай үйлчилгээ үзүүлдэг. Дахин чиглүүлэлттэй ажиллах арга: <a
         href="https://v5.reactrouter.com/web/api/Redirect">React
-        Router Redirect</a>. You can modify your Route so that if the user is not
-      logged in, it redirects to /login-register. For example, if you have a
-      Route like:
+        Router Redirect</a>. Хэрэв хэрэглэгч нэвтэрч ороогүй бол /login-register руу дахин чиглүүлэхийн тулд та маршрутаа өөрчилж болно. Жишээлбэл, хэрэв танд дараах маршрут байгаа бол:
+
     <div class="code">
       <pre>
 &lt;Route path="/users/:id" component={UserDetail} /&gt;
 </pre>
     </div>
-    and a component property <code>this.userIsLoggedIn</code>, you can have it
-    go to /login-register by wrapping it in a conditional like:
+    болон<code>this.userIsLoggedIn</code>, бүрэлдэхүүн хэсгийн өмчийг та дараах нөхцөлөөр багцалж
+    /login-register руу шилжүүлж болно:
     <div class="code">
       <pre>
 {
@@ -650,52 +620,53 @@ function doesPasswordMatch(hash, salt, clearTextPassword) {
     </div>
     </p>
     <p>
-      Since Problem 4 enhances the code you write for Problem 1 you might want
-      to understand its needs before building your Problem 1 solution.
+      Асуудал 4 нь таны 1-р асуудалд зориулж бичсэн кодыг сайжруулдаг тул та Асуудлын 1-ийн шийдлийг бүтээхээсээ өмнө түүний хэрэгцээг ойлгохыг хүсч болно.
     </p>
-    <h4>Problem 2</h4>
+    <h4>Асуудал 2 </h4>
     <p>
-      This problem will reuse most of what you needed to figure out for Problem
-      1. One difference is comments are not standalone objects in our schema.
-      They are embedded inside the photo object so you are required to perform
-      an object update rather than an object creation.
+      Энэ асуудал нь 1-р асуудлыг шийдэхэд шаардлагатай 
+      ихэнх зүйлийг дахин ашиглах болно. Нэг ялгаа нь comment 
+      нь манай схемийн бие даасан объект биш юм. Тэдгээрийг 
+      фото объект дотор суулгасан тул та объект үүсгэхийн оронд объектын 
+      шинэчлэлт хийх шаардлагатай болно.
     </p>
-    <h4>Problem 3</h4>
+    <h4>Асуудал 3 </h4>
     <p>
-      Uploading files is hard in JavaScript frameworks since the browsers don't
-      want JavaScript code to be able to read arbitrary files. Browsers do
-      provide an interface to allow the user to select a file and then submit
-      its contents to a web server. We can leverage that mechanism to allow our
-      photo app to upload photos.
+      Хөтөчүүд JavaScript кодыг дурын файлуудыг уншихыг 
+      хүсэхгүй байгаа тул JavaScript фреймворкуудад файл 
+      байршуулах нь хэцүү байдаг. Хөтөчүүд нь хэрэглэгчдэд 
+      файлаа сонгоод агуулгыг нь вэб серверт илгээх 
+      боломжийг олгодог интерфейсээр хангадаг. Бид энэ 
+      механизмыг ашиглан манай зургийн аппликейшнд зураг 
+      байршуулах боломжтой.
+
     </p>
     <p>
-      React supports using HTML's <a <a href="https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag">
+      React нь HTML-ийн <a <a href="https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag">
         input with type="file"
       </a>
-      to have the user select files. The following line added to your photo app
+      ашиглан хэрэглэгчдэд файл сонгох боломжийг бий болгоно. Дараах мөрийг таны зургийн аппликейшн дээр нэмсэн
     <pre>
 &lt;input type="file" accept="image/*" ref={(domFileRef) => { this.uploadInput = domFileRef; }} />
 </pre>
-    will get the browser to add an ugly button labeled "Choose File" that the
-    user can push to select a local file. When the user selects a file
-    <code>this.uploadInput</code> will contain the
+    нь хөтөчийг(Browser) "Choose File" гэсэн хэсэгтэй товчлуурыг нэмж оруулах бөгөөд хэрэглэгч дотоод файлаа сонгох боломжтой. Хэрэглэгч файлыг сонгох үед 
+    <code>this.uploadInput</code> нь DOM файлыг авч вэб сервер рүү илгээх боломжтой оролтын элементээс
     <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileList">
       DOM FileList
     </a>
-    from the input element from which the DOM File can be taken and sent to the
-    web server.
+    агуулна.
 
-    You will need to also have a button that the user presses to actually submit
-    the photo file to the server as decribed below.
+    Та мөн доор тайлбарласны дагуу фото файлыг серверт 
+    илгээхийн тулд хэрэглэгч дарах товчлууртай байх шаардлагатай.
+
     </p>
     <p>
-      Once we have the selected file in the DOM we can add it to a
+      Сонгосон файлыг DOM-д оруулсны дараа бид үүнийг
       <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">
         DOM form
       </a>
-      and send it in a POST request to the web server. The following code
-      provides an example of doing this. It assumes that the DOM fileList from
-      the input element was put in <code>this.uploadInput</code>.
+      нэмж, вэб сервер рүү POST хүсэлтээр илгээх боломжтой. Дараах код нь үүнийг хийх жишээг өгдөг. 
+      Энэ нь оролтын элементийн DOM файлын жагсаалтыг <code>this.uploadInput</code>-д оруулсан гэж үздэг.
     <pre>
 /**
  * Called when user presses the update button.
@@ -716,20 +687,18 @@ handleUploadButtonClicked = (e) => {
 </pre>
     </p>
     <p>
-      Express using body-parser can not handle a POST request with form
-      containing a file but can with a middleware named <a
-        href="https://www.npmjs.com/package/multer#readme"><code>multer</code></a>.
-      Insert the following line after the require of multer:
+      Body-parser ашиглан экспресс нь файл агуулсан маягттай POST хүсэлтийг зохицуулах боломжгүй боловч 
+      <a
+        href="https://www.npmjs.com/package/multer#readme"><code>multer</code></a>  нэртэй дунд программаар хийх боломжтой.
+        Мультерийн  require-ийн дараа дараах мөрийг оруулна уу:
     <pre>
 const processFormBody = multer({storage: multer.memoryStorage()}).single('uploadedphoto');
 </pre>
-    <code>processFormBody</code> is a function we can use in our post request
-    handler for
-    <code>/photos/new</code>. <code>processFormBody</code> will look at the form
-    for a field named "uploadedphoto" and pull the file out of it and place the
-    information is a property named <code>file</code> on the request object. The
-    following code gives you an idea of how to call it in your post request
-    handler:
+    <code>processFormBody</code> нь бидний
+    <code>/photos/new</code> -д зориулсан шуудангийн хүсэлтийг зохицуулагчдаа ашиглаж болох функц юм.
+    <code>processFormBody</code> нь "uploadedphoto" нэртэй талбарын маягтыг харж, тэндээс файлыг татаж аваад хүсэлтийн объект дээр
+    <code>file</code> нэртэй өмчийн мэдээллийг байрлуулна. Дараах код нь таны шуудангийн хүсэлтийн 
+    зохицуулагч дээр үүнийг хэрхэн дуудах талаар санааг өгнө:
     <pre>
 processFormBody(request, response, function (err) {
   if (err || !request.file) {
@@ -761,28 +730,24 @@ processFormBody(request, response, function (err) {
 </pre>
     </p>
     <p>
-      The above code fragment uses the Node.js package
-      <a href="https://nodejs.org/api/fs.html"><code>fs</code></a> so you will
-      need to bring it into your webServer.js with:
+      Дээрх кодын фрагмент нь Node.js багц 
+      <a href="https://nodejs.org/api/fs.html"><code>fs</code></a>-г ашигладаг тул та үүнийг webServer.js-дээ оруулах хэрэгтэй болно:
     <pre>const fs = require("fs");</pre>
     </p>
-    <h4>Problem 4</h4>
+    <h4>Асуудал 4
+    </h4>
     <p>
-      This problem combines the techniques you needed for the previous problems.
+      Энэ асуудал нь өмнөх асуудлуудад шаардлагатай арга техникийг нэгтгэсэн болно.
     </p>
   </section>
 
   <section>
 
-    <h3 class="left-border">Deliverables</h3>
+    <h3 class="left-border">Хүлээлгэн өгөх үр дүн</h3>
     <p>
-      Use the standard class <a href="submit.html">submission mechanism</a>
-      to submit <code>project7</code>. Please clean up your project directory
-      before submitting, as described in the submission instructions. In
-      addition delete any images you uploaded into your images directory. If you
-      kept the same naming convention for uploaded images that we had in the
-      hints section, you can delete them running the command
-      <code>rm -f images/U*</code> from your <code>project7</code> directory.
+      <code>project7</code> илгээхдээ стандарт <a href="submit.html">submission mechanism</a>-ийг ашиглана. Please clean up your project directory
+      Илгээх зааварт заасны дагуу илгээхээсээ өмнө төслийн лавлахаа (directory) цэвэрлэнэ үү. Нэмж дурдахад, зургийн лавлахдаа байршуулсан бүх зургийг устгана уу. Хэрэв та "Зөвлөгөө (Hint)" хэсэгт байршуулсан зургуудыг нэрлэх дүрмийг баримталсан бол
+      <code>rm -f images/U*</code> командыг ашиглан <code>project7</code>-аас устгаж болно.
     </p>
 
   </section>
