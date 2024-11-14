@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>CS142 Төсөл 5: Нэг хуудаст апп</title>
+    <title>ICSI301 Төсөл 5: Нэг хуудаст апп</title>
     <meta name="description" content="Web Applications course at Stanford University">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -35,7 +35,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">CS142 (2023 оны Өвөл)</a>
+        <a class="navbar-brand" href="projects.html">ICSI301 Веб аппликейшн - 2024 оны Намар</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -43,7 +43,7 @@
           
             
             
-            <li class="">
+            <!-- <li class="">
               <a href="index.html">Home</a> 
             </li>
           
@@ -57,19 +57,19 @@
             
             <li class="">
               <a href="lectures.html">Lectures</a> 
-            </li>
+            </li> -->
           
             
             
             <li class="nav-active">
-              <a href="projects.html">Projects</a> 
+              <a href="projects.html">Төсөл</a> 
             </li>
           
             
             
-            <li class="">
+            <!-- <li class="">
               <a href="staff.html">Staff</a> 
-            </li>
+            </li> -->
           
         </ul>
       </div>
@@ -83,10 +83,10 @@
 
         <main><div class="container">
 
-  <h1>CS142 Төсөл 5: Нэг хуудаст апп</h1>
-  <h4 class="text-muted">
+  <h1>ICSI301 Төсөл 5: Нэг хуудаст апп</h1>
+  <!-- <h4 class="text-muted">
     Сүүлийн хугацаа: 2023-04-11-ний 11:59PM
-  </h4>
+  </h4> -->
 
   <p>
     Энэ төслөөр фото зураг хуваалцдаг вэб аппыг эхлэлийг хийхэд <a href="https://reactjs.org/">ReactJS</a> фрэймвөркийг
@@ -207,9 +207,9 @@
     </p>
     <p>
       Энэ даалгаврын хувьд би өөрсдийн шидэт
-      <code>cs142models</code> моделийг ашиглана. Энэ нь урьдаас бэлдсэн мэдээллийг дэлгэцлэхэд 
+      <code>ICSI301models</code> моделийг ашиглана. Энэ нь урьдаас бэлдсэн мэдээллийг дэлгэцлэхэд 
       модель өгөгдөл болох юм. Өмнө нь ийм модельд 
-      <code>window.cs142Models</code> ашиглан хандаж байсныг санаж байгаа байх. Моделийн схемийг доор тайлбарласан болно.
+      <code>window.ICSI301Models</code> ашиглан хандаж байсныг санаж байгаа байх. Моделийн схемийг доор тайлбарласан болно.
     </p>
     <p>
       Таны даалгавар бол өгсөн хоосон-програмыг (skeleton) хуурмаг модель өгөгдөл дээр ажилладаг болгох юм.
@@ -311,9 +311,9 @@
             <td>Хэрэглэгчийн ажил мэргэжил.</td>
           </tr>
         </table>
-        <code>window.cs142models.userModel(user_id)</code> DOM функц нь
+        <code>window.ICSI301models.userModel(user_id)</code> DOM функц нь
         хэрэглэгчийн <code>user_id</code> ID-аар <code>user</code> объектыг буцаадаг. 
-        Харин <code>window.cs142models.userListModel()</code> DOM функц нь 
+        Харин <code>window.ICSI301models.userListModel()</code> DOM функц нь 
         аппын бүх хэрэглэгчийн <code>user</code> объекыг буцаадаг.
       </li>
       <li>
@@ -350,7 +350,7 @@
             </td>
           </tr>
         </table>
-        <code>window.cs142models.photoOfUserModel(user_id)</code> DOM функц нь
+        <code>window.ICSI301models.photoOfUserModel(user_id)</code> DOM функц нь
         хэрэглэгчийн <code>user_id</code>-д холбогдох <code>photo</code> объектуудыг 
         агуулсан хүснэгтэн хувьсагчийг буцаадаг.
       </li>
@@ -413,24 +413,24 @@
     </p>
     <p>
       Энэ төслөөр өгсөн <code>webServer.js</code> нь Даалгавар 1-д DOM-д ачаалж 
-      ашигласан <code>cs142Models</code>-ийг <a href="http://expressjs.com">ExpressJS</a>
+      ашигласан <code>ICSI301Models</code>-ийг <a href="http://expressjs.com">ExpressJS</a>
       чиглүүлэгч (route) ашиглан серверээс өгөгдөл авах боломжийг олгож байгаа.
       Энэ API-ыг <code>webServer.js</code>-ээр гаргаж байгаа ба харгалзах URL хаягаар 
-      HTTP GET хүсэлт явуулахад <code>cs142Models</code> моделиудаас өгөгдлийг буцааж өгдөг.
+      HTTP GET хүсэлт явуулахад <code>ICSI301Models</code> моделиудаас өгөгдлийг буцааж өгдөг.
       
       Эдгээр GET хүсэлтэд хариулах HTTP хариулт нь JSON форматтай байна. Энэ API бол:
     <ul>
-      <li><code>/test/info</code> - <code>cs142models.schemaInfo()</code> объектыг буцаана. 
+      <li><code>/test/info</code> - <code>ICSI301models.schemaInfo()</code> объектыг буцаана. 
         Энэ нь URL нь модель дуудаж турших зориулалттай.
       </li>
       <li><code>/user/list</code> - 
-        <code>cs142models.userListModel() функцийг дуудаж буцаана.</code>.
+        <code>ICSI301models.userListModel() функцийг дуудаж буцаана.</code>.
       </li>
       <li><code>/user/:id</code> - 
-        <code>cs142models.userModel(id) функцийг дуудаж буцаана</code>.
+        <code>ICSI301models.userModel(id) функцийг дуудаж буцаана</code>.
       </li>
       <li><code>/photosOfUser/:id</code> - 
-        <code>cs142models.photoOfUserModel(id) функцийг дуудаж буцаана.</code>.
+        <code>ICSI301models.photoOfUserModel(id) функцийг дуудаж буцаана.</code>.
       </li>
     </ul>
     <p>
@@ -481,7 +481,7 @@
         <li><code>components/userPhotos/UserPhotos.jsx</code></li>
       </ul>
       Дээрх  <code>fetchModel</code> функц нь серверээс өгөгдлийг авах хүсэлт тавьдаг.
-      Таны кодод <code>window.cs142models</code> хувьсагчийг шууд дуудаж
+      Таны кодод <code>window.ICSI301models</code> хувьсагчийг шууд дуудаж
       ашиглах код байх ёсгүй бөгөөд таны аппын  
       <code>photo-share.html</code> файлд дараах мөр байх ёсгүй:<div class="code">
       <pre>&lt;script src="modelData/photoApp.js"&gt;&lt;script&gt;</pre>
@@ -587,7 +587,7 @@
 <footer>
     <div class="container text-center">
         <small class="text-muted">
-            Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+            Энэ гарын авлага нь Стэнфордын их сургуулийн <a href="cs142.stanford.edu">CS142 Web Applications </a>хичээлийн орчуулга бөгөөд заадаг профессор Мэндел Розенблумаас &copy; албан ёсны зөвшөөрлийг авсан болно. <br>Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
             <br>
             <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com" target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
         </small>
