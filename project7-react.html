@@ -140,25 +140,24 @@
         -
         <code>multer</code> нь бидний зураг байршуулахад 
         шаардлагатай олон хэсэгтэй маягтуудыг боловсруулах чадвартай өөр нэг Express дунд програмын бие задлагч юм.
-
       </li>
     </ul>
     <p>
       Ихэнх систем дээр дараах тушаалууд дээрх модулиудыг татах ёстой:
 
     <pre>
-npm install --save express-session
-npm install --save body-parser
-npm install --save multer
-</pre>
+      npm install --save express-session
+      npm install --save body-parser
+      npm install --save multer
+    </pre>
     </p>
     <p>
       Эдгээр шаардлагатай мэдэгдлүүдийг ашиглан <code>webServer.js</code> -д нэмнэ үү:
     <pre>
-const session = require("express-session");
-const bodyParser = require("body-parser");
-const multer = require("multer");
-</pre>
+      const session = require("express-session");
+      const bodyParser = require("body-parser");
+      const multer = require("multer");
+    </pre>
     </p>
     <p>
       Эцэст нь та дараах байдлаар Экспресс <code>use</code> илэрхийлэхийн тулд <code>express-session</code> болон
