@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>CS142 Төсөл 2: ЖаваСкрипт дасгал</title>
+    <title>ICSI301 Төсөл 2: ЖаваСкрипт дасгал</title>
     <meta name="description" content="Web Applications course at Stanford University">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -35,7 +35,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">CS142 (2023 оны Өвөл)</a>
+        <a class="navbar-brand" href="projects.html">ICSI301 Веб аппликейшн - 2024 оны Намар</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -43,7 +43,7 @@
           
             
             
-            <li class="">
+            <!-- <li class="">
               <a href="index.html">Home</a> 
             </li>
           
@@ -57,19 +57,19 @@
             
             <li class="">
               <a href="lectures.html">Lectures</a> 
-            </li>
+            </li> -->
           
             
             
             <li class="nav-active">
-              <a href="projects.html">Projects</a> 
-            </li>
-          
-            
-            
-            <li class="">
-              <a href="staff.html">Staff</a> 
-            </li>
+				<a href="projects.html">Төсөл</a> 
+			  </li>
+			
+			  
+			  
+			  <!-- <li class="">
+				<a href="staff.html">Staff</a> 
+			  </li> -->
           
         </ul>
       </div>
@@ -82,8 +82,8 @@
     
 
         <main><div class="container">
-	<h1>CS142 Төсөл 2: ЖаваСкрипт дасгал</h1>
-	<h4 class="text-muted">Сүүлийн хугацаа: 2023-03-07-ны 11:59PM</h4>
+	<h1>ICSI301 Төсөл 2: ЖаваСкрипт дасгал</h1>
+	<!-- <h4 class="text-muted">Сүүлийн хугацаа: 2023-03-07-ны 11:59PM</h4> -->
 
 	<section>
 		<h3 class="left-border">Тохиргоо</h3>
@@ -223,11 +223,11 @@ console.log(arrayFilterer4(filterThrees)()); // [4, 5, 6] дэлгэцлэнэ</
 		<p><code>project2</code> хавтас дотроо <code>cs142-template-processor.js</code> нэрээр нэг файл үүсгэнэ. Загвар процессорын код энэ файлд байх ёстой.</p>
 
 		<p>
-		Нэг Загвар процессор класс үүсгэнэ (<code>Cs142TemplateProcessor</code>).
+		Нэг Загвар процессор класс үүсгэнэ (<code>cs142TemplateProcessor</code>).
 		Энэ нь нэг string (тэмдэгт мөр) төрлийн <code>template</code> параметр авдаг байгуулагчтай, <code>fillIn</code> нэртэй нэг методтой байна. 
         Энэ <code>fillIn</code> методыг <code>dictionary</code> объект өгч дуудахад тэмдэгт мөр буцаах бөгөөд энэ утгыг dictionary объектын утгуудаар 
         загварыг (template) дүүргэсэн байна.
-		<code>Cs142TemplateProcessor</code> классыг ЖаваСкриптын стандарт байгуулагч болон prototype бүтцийг ашиглан бичнэ.
+		<code>cs142TemplateProcessor</code> классыг ЖаваСкриптын стандарт байгуулагч болон prototype бүтцийг ашиглан бичнэ.
 
 		</p>
 		<p>
@@ -255,7 +255,7 @@ console.log(arrayFilterer4(filterThrees)()); // [4, 5, 6] дэлгэцлэнэ</
 		<p>
 		 Дараах кодоор энэ даалгавраар тодорхойлж буй функцүүдийг хэрхэн ашиглаж болохыг харууллаа:
 		<div><pre>var template = 'My favorite month is &#123;&#123;month&#125;&#125; but not the day &#123;&#123;day&#125;&#125; or the year &#123;&#123;year&#125;&#125;';
-var dateTemplate = new Cs142TemplateProcessor(template);
+var dateTemplate = new cs142TemplateProcessor(template);
 
 var dictionary = {month: 'July', day: '1', year: '2016'};
 var str = dateTemplate.fillIn(dictionary);
@@ -301,7 +301,26 @@ assert(str === 'My favorite month is  but not the day 1 or the year 2016');</pre
 			<li>Даалгавар 1-д үзүүлсэн шаардлага <code>cs142MakeMultiFilter</code> функцийг нэгэн зэрэг олон удаа ашиглах тул <code>currentArray</code> хувьсагчийг гадаад орчинд хадгалахгүй байх ёстой.</li>
 			<li>Даалгавар 3-т, зөвхөн тест файлд байгаа хувьсагчуудтай л ажилла. Бас <code>cs142Project2Results</code> хувьсагчийг гадаад орчинд нь (жишээ нь, <code>window</code> объектын шинжээр) үлдээх ёстой. 
                  Ийм байж <code>run-tests-using-node.js</code> скриптыг ажиллуулж болно.</li>
-		</ul>
+		
+				 <li>Даалгавар 1-ийн хувьд:<br>
+				 - ЖаваСкрипт функц, closure, callback функц, function prototype, this хувьсагч зэргийг онцгойлон судлах<br>
+				 - Бичих функцыг чинь яаж ашиглаж байгаа кодыг сайтар ойлгох, console.log ашиглан debug хийж үзэх
+				 </li>
+				 <li>Даалгавар 2-ийн хувьд:
+				 объект, класс, класс тодорхойлох функцийн арга, прототайп, string, regular expression зэргийг зайлшгүй судлах
+				 бичвэр дотор өгөгдөх паттерн, жишээ нь, {{month}} нь дурын паттерн байж болохоор хийх
+				 </li>
+				 <li>Даалгавар 3-ийн хувьд:<br>
+				 - global болон local хувьсагчийн үйчлэх хүрээ, anonymous function, immediately invoked function expression (IIFE) бичиглэл зэргийг тусгайлан үзэх<br>
+				 - ЖаваСкрипт програмын модуль хэрхэн бичдэгийг ойлгох
+				 </li>
+				 
+				 <li>Нийтлэг зөвлөмж:<br>
+				 - Зөвхөн өөрөө бодож, шийдэл боловсруулж, хичээл зүтгэлээр хийх <br>
+				 - Интернэтээс эсвэл бусдаас бэлэн шийдэл, энэ даалгаварыг хийсэн код харахгүй байх (ингэвэл өөрөө сэтгэхээ больдог шүү)<br>
+				 - Өөрийн хэрэгжүүлсэн код бүрийг тайлбарладаг байх нь чухал<br>
+				 </li>	 
+				</ul>
 	</section>
 
 	<section>
@@ -322,7 +341,7 @@ assert(str === 'My favorite month is  but not the day 1 or the year 2016');</pre
     <footer>
         <div class="container text-center">
             <small class="text-muted">
-                Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+                Энэ гарын авлага нь Стэнфордын их сургуулийн <a href="cs142.stanford.edu">CS142 Web Applications </a>хичээлийн орчуулга бөгөөд заадаг профессор Мэндел Розенблумаас &copy; албан ёсны зөвшөөрлийг авсан болно. <br>Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
                 <br>
                 <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com" target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
             </small>

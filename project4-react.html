@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>CS142 Төсөл 4: ReactJS хуудас үүсгэх</title>
+    <title>CS142 Төсөл 2: ReactJS хуудас үүсгэх</title>
     <meta name="description" content="Web Applications course at Stanford University">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -35,7 +35,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">CS142 (2023 оны Өвөл)</a>
+        <a class="navbar-brand" href="projects.html">ICSI301 Веб аппликейшн - 2024 оны Намар</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -43,7 +43,7 @@
           
             
             
-            <li class="">
+            <!-- <li class="">
               <a href="index.html">Home</a> 
             </li>
           
@@ -57,19 +57,19 @@
             
             <li class="">
               <a href="lectures.html">Lectures</a> 
-            </li>
+            </li> -->
           
             
             
             <li class="nav-active">
-              <a href="projects.html">Projects</a> 
+              <a href="projects.html">Төсөл</a> 
             </li>
           
             
             
-            <li class="">
+            <!-- <li class="">
               <a href="staff.html">Staff</a> 
-            </li>
+            </li> -->
           
         </ul>
       </div>
@@ -83,10 +83,10 @@
 
         <main><div class="container">
 
-  <h1>CS142 Төсөл 4: ReactJS хуудас үүсгэх</h1>
-  <h4 class="text-muted">
+  <h1>ICSI301 Төсөл 4: ReactJS хуудас үүсгэх</h1>
+  <!-- <h4 class="text-muted">
     Сүүлийн хугацаа: 2023-03-28-ны 11:59PM
-  </h4>
+  </h4> -->
 
   <section>
     <h3 class="left-border">Тохиргоо</h3>
@@ -97,20 +97,22 @@
     <p>
       <code>project4</code> нэрээр хавтас үүсгэж <a
       href="downloads/project4.zip">
-        энэ файлыг</a> дотор нь задалж хуулаарай. Энэ zip файл энэ даалгаварт ашиглах гарааны файлуудыг агуулж байгаа.
+        энэ файлыг</a> дотор нь задалж хуулаарай. Энэ zip файл энэ даалгаварт ашиглах 
+        гарааны файлуудыг агуулж байгаа.
     </p>
     <p>
-      Энэ даалгаварт нэлээд олон node модулийг ашиглана. Жишээ нь, <a
+      Энэ даалгаварт нэлээдгүй node модулиуд (жишээ нь, <a
       href="https://webpack.js.org/">Webpack</a>,
       <a href="https://babeljs.io/">Babel</a>,
-      <a href="https://eslint.org/">ESLint</a>. Эдгээр багаж 
-      <a href="https://reactjs.org/">ReactJS</a> веб апп босгох (build), мөн веб аппыг веб хөтчид өгч үйчлэх 
-      энгийн Node.js веб сервер (<a href="http://expressjs.com/">ExpressJS</a>)
-      үүсгэхэд хэрэг болно. Эдгээр модулийг <code>project4</code> хавтас дотроос дараах командыг
-      ажиллуулж суулгана:
+      <a href="https://eslint.org/">ESLint</a>) шаардлагатай. Эдгээр багаж 
+      <a href="https://reactjs.org/">ReactJS</a> веб апп босгох (build), мөн веб аппыг 
+      веб хөтчид өгч үйчлэх энгийн Node.js веб сервер 
+      (<a href="http://expressjs.com/">ExpressJS</a>)
+      үүсгэхэд хэрэг болно. Эдгээр модулийг <code>project4</code> хавтас дотроос дараах 
+      командыг ажиллуулж суулгана:
     <pre>npm install</pre>
-    Энэ команд ойролцоогоор 100 мегабайт хэмжээтэй 600 node модуль <code>node_modules</code>
-    хавтас дотор татаж авна.
+    Энэ команд ойролцоогоор 100 мегабайт хэмжээтэй 600 node модуль 
+    <code>node_modules</code> гэсэн дэд хавтас дотор татаж авна.
     </p>
     <p>
       Бид npm командыг янз бүрийн багажууд татаж авахад хэрэглэдэг.
@@ -141,7 +143,7 @@
     </p>
     <p>
       Энэ төсөлд веб аппыг хөгжүүлэхэд түгээмэл болсон <a href="https://reactjs.org/">ReactJS</a> фрэймвөркийг ашиглана. 
-      Энэ төслийн зорилго бол таныг ReactJS-д хурдан суралцаж CS142 хичээлийн дараагийн төслүүдээр хийх веб аппыг хөгжүүлэхэд бэлэн болгох юм.
+      Энэ төслийн зорилго бол таныг ReactJS-д хурдан суралцаж ICSI301 хичээлийн дараагийн төслүүдээр хийх веб аппыг хөгжүүлэхэд бэлэн болгох юм.
     </p>
     <p>
       Бид веб аппдаа HTTP протоколоор хандахын тулд энгийн Node.js сервер ашиглана.
@@ -212,8 +214,8 @@
       Моделийн өгөгдөлийг ихэвчлэн веб серверээс авдаг. Веб сервер нь өгөгдлийн сангаас авдаг.
       Энэ төслөөр өгөгдлийн санг тохируулж хэрэглэхээс зайлсхийж дотоод файл системээс веб хөтчийн
       DOM-д шууд өгөгдлийг ачаалах HTML script тагийг бэлдэж өгсөн байгаа.
-      Модел нь DOM-ийн <code>cs142models</code> нэртэй шинжид хадгалагдана.
-      ReactJS компонент дотроос <code>window.cs142models</code> гэж шууд чөлөөтэй хандах боломжтой.
+      Модел нь DOM-ийн <code>ICSI301models</code> нэртэй шинжид хадгалагдана.
+      ReactJS компонент дотроос <code>window.ICSI301models</code> гэж шууд чөлөөтэй хандах боломжтой.
     </p>
   </section>
 
@@ -258,7 +260,7 @@
     </p>
     <p>
       Даалгавар #1-д өгсөн шиг муж улсын нэрийг модель өгөгдөл болгож өгсөн байгаа. Үүнд 
-      дараах script тагаар холбож өгсөний дараа <code>window.cs142models.states</code> гэж хандаж болно:
+      дараах script тагаар холбож өгсөний дараа <code>window.ICSI301models.states</code> гэж хандаж болно:
     </p>
     <pre>&lt;script src="modelData/states.js"&gt;&lt;/script&gt;</pre>
     <p>
@@ -433,7 +435,7 @@
 <footer>
   <div class="container text-center">
       <small class="text-muted">
-          Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+          Энэ гарын авлага нь Стэнфордын их сургуулийн <a href="cs142.stanford.edu">CS142 Web Applications </a>хичээлийн орчуулга бөгөөд заадаг профессор Мэндел Розенблумаас &copy; албан ёсны зөвшөөрлийг авсан болно. <br>Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
           <br>
           <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com" target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
       </small>

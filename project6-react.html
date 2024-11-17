@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>CS142 Төсөл 6: Appserver and Database</title>
+    <title>CS142 Project 6: Appserver and Database</title>
     <meta name="description" content="Web Applications course at Stanford University">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -35,7 +35,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">CS142 (2023 оны Өвөл)</a>
+        <a class="navbar-brand" href="projects.html">ICSI301 Веб аппликейшн - 2024 оны Намар</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -43,7 +43,7 @@
           
             
             
-            <li class="">
+            <!-- <li class="">
               <a href="index.html">Home</a> 
             </li>
           
@@ -57,19 +57,19 @@
             
             <li class="">
               <a href="lectures.html">Lectures</a> 
-            </li>
+            </li> -->
           
             
             
             <li class="nav-active">
-              <a href="projects.html">Projects</a> 
+              <a href="projects.html">Төсөл</a> 
             </li>
           
             
             
-            <li class="">
+            <!-- <li class="">
               <a href="staff.html">Staff</a> 
-            </li>
+            </li> -->
           
         </ul>
       </div>
@@ -83,34 +83,42 @@
 
         <main><div class="container">
 
-  <h1>CS142 Төсөл 6: Аппсервер болон өгөгдлийн сан</h1>
+  <h1>ICSI301 Төсөл 6: Аппсервер ба өгөгдлийн сан</h1>
 
-  <h4 class="text-muted">
+  <!-- <h4 class="text-muted">
     Cүүлийн хугацаа: 2023-05-15-ний 11:59 PM
-  </h4>
+  </h4> -->
 
   <p>
-    Энэ төсөлд та өгөгдлийн сангийн системийг эхлүүлж, 5-р төсөлд хийсэн фото зураг хуваалцдаг веб аппыг үзэлтүүдийн (view) загваруудыг 
-    татан хувиргах болно. Бид Project 5 дээр ашигласан интерфэйсийг шинэ <code>webServer.js</code>-д ашиглан дэмжих ч гэсэн энэ 
-    нь өгөгдлийн сантай холбогдох юм. Энэ нь таньд өөрийн аппыг <em>full stack</em> программ болгох боломжийг бий болгоно .
+    Энэ төсөлд та өгөгдлийн сангийн системийг эхлүүлж, 5-р төсөлд хийсэн өөрийн фото зураг 
+    хуваалцдаг веб аппыг харагдацад (view) моделийг өгөгдлийн сангаас авдаг байхаар хөгжүүлнэ. 
+    Бид Project 5 дээр ашигласантай ижил, гэхдээ шинэ вэб сервер <code>webServer.js</code> интефэйсийг
+    өгсөн байгаа. Энэ нь өгөгдлийн сантай холбогддог юм. Энэ нь танд өөрийн аппыг албан ёсоор
+    <em>full stack</em> программ болгох боломжийг олгоно.
   </p>
 
   <section>
     <h3 class="left-border">Тохиргоо</h3>
     <p>
-      Та өөрийн систем дээр Mongo.DB болон Node.js татсан байх шаардлагатай. Хэрвээ татаагүй бол <a href="install.html">суулгах</a> зааврыг дагаж одоо суулгаарай.
+      Та өөрийн систем дээр Mongo.DB болон Node.js татсан байх шаардлагатай. 
+      Хэрвээ татаагүй бол <a href="install.html">суулгах</a> зааврыг дагаж одоо суулгаарай.
     </p>
-    <strong>*ЧУХАЛ!*</strong>
+    <strong>*САНАМЖ!*</strong>
     <p>
-      Төсөл 6-ийн тохиргоо нь бусад төслүүдээс ялгаатай. Та <code>project6</code> гэсэн хавтаст (directory) файлыг <code>project5</code>-аас хуулан хийх болно. <code>project6</code> хавтаст <a href="downloads/project6.zip">zip file</a> файлыг дотор нь задалж хуулаарай. 
+      Төсөл 6-ийн тохиргоо нь бусад төслүүдээс ялгаатай. Та <code>project6</code> нэртэй хавтас үүсгээд 
+      <code>project5</code>-ын файлуудаа хуулаарай. <code>project6</code> хавтаст 
+      энэ <a href="downloads/project6.zip">zip file</a> файлыг дотор нь задлаарай. 
       Энэхүү zip файл нь 
       <code>package.json</code>, <code>webServer.js</code>,
       <code>.eslintrc.json</code>, болон
-      <code>index.html</code> гэх мэт файлуудыг дахин бичих бөгөөд хэд хэдэн шинэ файл, хавтсуудыг нэмэх болно. Хэрэв та өөрийн
-      <code>project5</code> хавтас дээр файлуудын аль нэгэнд шаардлагатай өөрчлөлтийг хийсэн байх магадлал багатай тохиолдолд задлах үйлдлийг хийсний дараа өөрчлөлтийг дахин ашиглах шаардлагатай болно. 
+      <code>index.html</code> гэх мэт файлуудыг дарж хуулах бөгөөд хэд хэдэн шинэ файл, хавтсуудыг нэмэх болно. 
+      Хэрэв та өөрийн <code>project5</code> хавтас доторх эдгээр файлуудын аль нэгэнд шаардлагатай 
+      өөрчлөлтийг хийсэн, гэхдээ магадлал бага байх, тохиолдолд задлах үйлдлийг хийсний дараа 
+      өөрийн хийсэн өөрчлөлтийг дахин хийх шаардлагатай болно. 
     </p>
     <p>
-      Төсөл 6 файлтай болсны дараа дараах командыг ашиглан хамааралтай(dependent) программ хангамжийг татаж авна уу :
+      Төсөл 6 файлуудтай болсны дараа дараах командыг ашиглан шаардлагатай программыг 
+      татаж авна уу:
     <pre>npm install</pre>
     </p>
     <p>
@@ -163,7 +171,7 @@ npm WARN library_A requires a peer of library_B but none is installed. You must 
     хандахад ашигладаг
     <code>webServer.js</code> хоёуланг нь ачаалдаг. Тайлбар:
     Өгөгдлийн санд хадгалагдсан объектын схем нь өмнөх даалгаварт ашигласан
-    <code>cs142models</code> JavaScript объектуудтай төстэй боловч зайлшгүй ялгаатай.
+    <code>ICSI301models</code> JavaScript объектуудтай төстэй боловч зайлшгүй ялгаатай.
     </p>
   </section>
 
@@ -211,10 +219,10 @@ npm WARN library_A requires a peer of library_B but none is installed. You must 
     <p>
       Энэ төсөлд бидний танд өгөх <code>webServer.js</code> Төслийн 5 <code>webServer.js</code> 
       -тэй адил бөгөөд програмын загвар татах маршрутууд нь мэдээллийн сангаас 
-      илүү шидэт  <code>cs142models</code> загваруудыг ашигладаг. Таны даалгавар бол MongoDB мэдээллийн
-      санг ашиглан бүх маршрутыг хөрвүүлэх явдал юм. Таны кодод <code>cs142models</code>-д хандах эрх байх 
+      илүү шидэт  <code>ICSI301models</code> загваруудыг ашигладаг. Таны даалгавар бол MongoDB мэдээллийн
+      санг ашиглан бүх маршрутыг хөрвүүлэх явдал юм. Таны кодод <code>ICSI301models</code>-д хандах эрх байх 
       ёсгүй бөгөөд таны програм дараах мөргүйгээр ажиллах ёстой:
-    <pre>const cs142models = require('./modelData/photoApp.js').cs142models;</pre>
+    <pre>const ICSI301models = require('./modelData/photoApp.js').ICSI301models;</pre>
     <code>webServer.js</code> дээр <code>webServer.js</code> доторх <code>console.log</code> нь 
     Browser дээр биш терминал дээр хэвлэгдэх болно гэдгийг анхаарна уу.
     </p>
@@ -231,12 +239,12 @@ npm WARN library_A requires a peer of library_B but none is installed. You must 
       </li>
       <li><code>/user/list</code> - Навигацийн хажуугийн жагсаалтад тохирох хэрэглэгчдийн загваруудын жагсаалтыг буцаана. Бид олон тооны хэрэглэгчдийг хүлээж байгаа тул энэ API нь зөвхөн навигацийн хажуугийн самбарт шаардлагатай 
         хэрэглэгчийн шинж чанаруудын массивыг буцаана (<code>_id, first_name, last_name</code>). 
-        Энэ нь өгсөн код дахь <code>cs142models.userListModel()</code>  дуудлагыг орлоно.
+        Энэ нь өгсөн код дахь <code>ICSI301models.userListModel()</code>  дуудлагыг орлоно.
       </li>
       <li><code>/user/:id</code> - id-ийн _id-тэй хэрэглэгчийн дэлгэрэнгүй мэдээллийг буцаана. 
         Энэ нь хэрэглэгчийн талаарх дэлгэрэнгүй мэдээллийг  (<code>_id, first_name, last_name, location, description,
       occupation</code>) буцааж өгөх ба
-        <code>cs142models.userModel()</code> дуудлагыг солих ёстой. Хэрэв хэрэглэгчийн id-ээс өөр зүйл өгсөн бол хариу нь HTTP 
+        <code>ICSI301models.userModel()</code> дуудлагыг солих ёстой. Хэрэв хэрэглэгчийн id-ээс өөр зүйл өгсөн бол хариу нь HTTP 
         статус 400 ба мэдээллийн мессеж байх ёстой.
       </li>
       <li><code>/photosOfUser/:id</code> - :id - id-ийн _id-тэй хэрэглэгчийн зургийг буцаана. Энэ дуудлага нь хэрэглэгчийн 
@@ -246,7 +254,7 @@ npm WARN library_A requires a peer of library_B but none is installed. You must 
         (<code>comment, date_time, _id, user</code>) байх ёстой бөгөөд зөвхөн хамгийн бага 
         <code>хэрэглэгч</code>-ийн объектын мэдээлэл (<code>_id, first_name,
       last_name</code>) байх ёстой. Энэ нь 
-        <code>cs142models.photoOfUserModel()</code> дуудлагыг орлоно. Хэрэв хэрэглэгчийн id-ээс өөр зүйл өгсөн бол хариу нь 
+        <code>ICSI301models.photoOfUserModel()</code> дуудлагыг орлоно. Хэрэв хэрэглэгчийн id-ээс өөр зүйл өгсөн бол хариу нь 
         HTTP статус 400 ба мэдээллийн мессеж байх ёстой. Энэ API-д мэдээллийн сан дахь олон өөр объектоос угсрах шаардлагатай 
         болохыг анхаарна уу. Mongoose-ээс өгсөн мэдээллийн баазын асинхрон 
         интерфэйс нь эдгээр олон объект татах үйлдлийг нэгэн зэрэг хийх боломжтой гэсэн үг юм. Таны код татан авалтыг шаардлагагүй цуваа болгох ёсгүй. 
@@ -264,7 +272,7 @@ npm WARN library_A requires a peer of library_B but none is installed. You must 
     </p>
     <p>
       Таны GET хүсэлтүүд нь
-      <code>cs142models</code> функцүүдийн буцаадаг зүйлтэй яг ижил зүйлийг 
+      <code>ICSI301models</code> функцүүдийн буцаадаг зүйлтэй яг ижил зүйлийг 
       буцаадаггүй боловч харагдац бүрийн загварын өгөгдлийг нэг <code>fetchModel</code> дуудлагаар харуулахын тулд 
       таны апп-д шаардлагатай мэдээллийг буцаах шаардлагатай. 
       Та UI-ийн хэрэгцээг хангахын тулд өөрийн хариултыг бий болгохын 
@@ -451,7 +459,7 @@ npm WARN library_A requires a peer of library_B but none is installed. You must 
 <footer>
     <div class="container text-center">
         <small class="text-muted">
-            Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+            Энэ гарын авлага нь Стэнфордын их сургуулийн <a href="cs142.stanford.edu">CS142 Web Applications </a>хичээлийн орчуулга бөгөөд заадаг профессор Мэндел Розенблумаас &copy; албан ёсны зөвшөөрлийг авсан болно. <br>Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
             <br>
             <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com" target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
         </small>
