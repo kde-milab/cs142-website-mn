@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>CS142 Төсөл 2: ReactJS хуудас үүсгэх</title>
+    <title>ICSI301 Төсөл 4: React хуудас үүсгэх</title>
     <meta name="description" content="Web Applications course at Stanford University">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -83,7 +83,7 @@
 
         <main><div class="container">
 
-  <h1>ICSI301 Төсөл 4: ReactJS хуудас үүсгэх нь</h1>
+  <h1>ICSI301 Төсөл 4: React хуудас үүсгэх нь</h1>
   <!-- <h4 class="text-muted">
     Сүүлийн хугацаа: 2023-03-28-ны 11:59PM
   </h4> -->
@@ -101,39 +101,37 @@
         гарааны файлуудыг агуулж байгаа.
     </p>
     <p>
-      Энэ даалгаварт нэлээдгүй node модулиуд (жишээ нь, <a
-      href="https://webpack.js.org/">Webpack</a>,
-      <a href="https://babeljs.io/">Babel</a>,
-      <a href="https://eslint.org/">ESLint</a>) шаардлагатай. Эдгээр багаж 
-      <a href="https://reactjs.org/">ReactJS</a> веб апп босгох (build), мөн веб аппыг 
-      веб хөтчид өгч үйчлэх энгийн Node.js веб сервер 
-      (<a href="http://expressjs.com/">ExpressJS</a>)
-      үүсгэхэд хэрэг болно. Эдгээр модулийг <code>project4</code> хавтас дотроос дараах 
+      Энэ даалгаварт Node.js-ийн 20.19, 22.13 эсвэл 24-өөс дээш хувилбар шаардлагатай.
+      Мөн хэд хэдэн node модуль (жишээ нь, <a href="https://vite.dev/">Vite</a>,
+      <a href="https://eslint.org/">ESLint</a>) хэрэгтэй. Vite нь
+      <a href="https://react.dev/">React</a> веб аппыг хөгжүүлэх үед JSX файлуудыг ЖаваСкрипт болгон
+      хөрвүүлж веб хөтчид өгч үйлчилдэг хөгжүүлэлтийн сервер, мөн веб аппыг босгох (build) багаж юм.
+      Эдгээр модулийг <code>project4</code> хавтас дотроос дараах
       командыг ажиллуулж суулгана:
     <pre>npm install</pre>
-    Энэ команд ойролцоогоор 100 мегабайт хэмжээтэй 600 node модуль 
-    <code>node_modules</code> гэсэн дэд хавтас дотор татаж авна.
+    Энэ команд шаардлагатай node модулиудыг <code>node_modules</code> гэсэн дэд хавтас дотор татаж авна.
+    </p>
+    <p>
+      Төслийн бүтэц нь <code>npm create vite@latest -- --template react</code> командаар үүсгэдэг
+      Vite-ийн стандарт бүтэц дээр суурилсан. Аппын бүх эх код <code>src</code> хавтаст,
+      HTML хуудсууд төслийн үндсэн хавтаст байрлана.
     </p>
     <p>
       Бид npm командыг янз бүрийн багажууд татаж авахад хэрэглэдэг.
       <code>package.json</code> файлын <code>"scripts"</code> шинжид харагдаж байгаа шиг
       дараах командуудыг ажиллуулах боломжтой:
     <ul>
-      <li><code>npm run build</code> - 
-        <a href="https://webpack.js.org/">Webpack</a> багажийг <code>webpack.config.js</code> файлд байгаа тохиргоогоор ажиллуулж 
-        төсөлд байгаа бүх JSX файлуудыг багцалж <code>compiled</code> хавтас дотор нэг ширхэг ЖаваСкрипт багц (bundle) файл үүсгэнэ.
+      <li><code>npm run dev</code> -
+        Vite хөгжүүлэлтийн серверийг асаана. Та файлаа өөрчилж хадгалах бүрт
+        веб хөтөч дээрх хуудас автоматаар шинэчлэгдэнэ. Хөгжүүлэлтийн явцад үүнийг үргэлж ажиллуулж байна.
       </li>
-      <li><code>npm run build:w</code> - 
-        <code>npm run build</code> командтай адил, гэхдээ <a href="https://webpack.js.org/api/cli/#watch">--watch</a> горимоор 
-        <a href="https://webpack.js.org/">Webpack</a> багажийг ажиллуулна. 
-        Ингэснээр React компонентийг хянах, хэрэв тэдгээрийн аль нэгийг нь өөрчилбөл дахин шинэчилж үүсгэдэг.
-        Энэ нь хөгжүүлэлтийн үед хэрэгтэй байдаг бөгөөд өөрчлөгдсөн компонентоор шинээр багц үүсгэж 
-        веб хөтчийг дахин ачаалдаг (refresh). Үгүй бол та өөрчлөлт бүрийн дараа
-        <code>npm run build</code> командыг үргэлж дуудаж ажиллуулж байх шаардлагатай болно. 
-        Ямар нэг юм хуучирсан тухай санамж <code>[DEP_WEBPACK_WATCH_WITHOUT_CALLBACK]</code>
-        гарч болзошгүй, үүнийг алгасахад аюулгүй.
+      <li><code>npm run build</code> -
+        <code>vite.config.js</code> файлд байгаа тохиргоогоор аппын бүх JSX файлуудыг багцалж
+        <code>dist</code> хавтас дотор ЖаваСкрипт багц (bundle) файлууд үүсгэнэ.
+        <code>npm run preview</code> командаар үүсгэсэн багцыг веб хөтөч дээр шалгаж болно.
+        Энэ даалгаварт заавал биш.
       </li>
-      <li><code>npm run lint</code> - ESLint багажийг төслийн бүх ЖаваСкрипт файлд ажиллуулна. 
+      <li><code>npm run lint</code> - ESLint багажийг төслийн бүх ЖаваСкрипт файлд ажиллуулна.
         Даалгавраар илгээх таны код чинь ESLint програмыг ямар нэг санамжгүйгээр (warnings) давсан байх ёстой.
       </li>
     </ul>
@@ -142,37 +140,22 @@
       Бүх даалгаварыг гүйцэтгэсэн кодууд <code>project4</code> хавтас дотор байх ёстой.
     </p>
     <p>
-      Энэ төсөлд веб аппыг хөгжүүлэхэд түгээмэл болсон <a href="https://reactjs.org/">ReactJS</a> фрэймвөркийг ашиглана. 
-      Энэ төслийн зорилго бол таныг ReactJS-д хурдан суралцаж ICSI301 хичээлийн дараагийн төслүүдээр хийх веб аппыг хөгжүүлэхэд бэлэн болгох юм.
+      Энэ төсөлд веб аппыг хөгжүүлэхэд түгээмэл болсон <a href="https://react.dev/">React</a> санг ашиглана.
+      Энэ төслийн зорилго бол таныг React-д хурдан суралцаж ICSI301 хичээлийн дараагийн төслүүдээр хийх веб аппыг хөгжүүлэхэд бэлэн болгох юм.
     </p>
     <p>
-      Бид веб аппдаа HTTP протоколоор хандахын тулд энгийн Node.js сервер ашиглана.
-      Үүнийг <code>project4</code> хавтас дотроос дараах командаар асаана:
-    <pre>node webServer.js</pre>
+      Хөгжүүлэлтийн серверийг <code>project4</code> хавтас дотроос дараах командаар асаана:
+    <pre>npm run dev</pre>
     </p>
     <p>
-      <code>project4</code> хавтас доторх бүх файлуудад <a href="http://localhost:3000">http://localhost:3000</a>
-      гэж эхлэх URL хаягаар хандана. <a href="http://localhost:3000">http://localhost:3000</a> линк дээр давхарлагдахгүй
+      <code>project4</code> хавтас доторх бүх хуудсуудад <a href="http://localhost:5173">http://localhost:5173</a>
+      гэж эхлэх URL хаягаар хандана. <a href="http://localhost:5173">http://localhost:5173</a> линк дээр дарж
       өөрийнхөө серверийг ажиллаж байгаа эсэхийг шалгаж болно. Энэ нь <code>index.html</code> файлыг таны веб хөтчид өгөх болно.
     </p>
     <p>
-      Та хөгжүүлэлтийн орчноо webpack багажийг watch горимоор тохируулахыг зөвлөж байна.
-      Энэ нь та node веб сервер (<code>node webServer.js</code>) болон webpack (<code>npm run
-      build:w</code>) програмыг төслөө босгох болон туршихдаа ашиглаарай. 
-      Та тус тусад командын мөрөөр ажиллуулж болно. Ингэвэл Babel багажаар илрүүлсэн алдаа, түүний мэдэгдэл зэргийг
-      webpack програмын гаралтад харуулдаг учраас хэрэгтэй байх болно.
-    </p>
-    <p>
-      Хэрэв та MacOS зэрэг юникс-төст үйлдлийн системд ажиллаж байгаа бол команд нь:
-      <pre>node webServer.js & npm run build:w</pre>
-      Энэ нь нэг цонх дээр веб серверийг ард нь (background), webpack-ийг наана нь (foreground) харуулж ажиллуулдаг.
-    </p>
-    <p>
-      Виндоус үйлдлийн систем дээр веб серверийг ард нь, webpack-ийг наана нь ажиллуулахад
-      Виндоусын хоёр команд нь:
-    <pre>start /B node webServer.js<br/>npm run build:w</pre>
-    Ард нь ажиллаж байгаа веб серверийг зогсоохын тулд дараах командыг ажиллуулна:
-    <pre>taskkill /IM node.exe /F</pre>
+      Энэ ганц команд веб сервер болон JSX-ийг хөрвүүлэх багажийг хамт ажиллуулдаг тул
+      өөр команд ажиллуулах шаардлагагүй. JSX-ийн синтакс алдааг Vite командын мөрөнд болон веб хөтөч дээр шууд харуулна.
+      Серверийг зогсоохдоо командын мөрөн дээр <code>Ctrl+C</code> дарна.
     </p>
   </section>
 
@@ -181,41 +164,45 @@
     <p>
       Энэ төслөөр таныг хичээлээр танилцсан model, view, controller (модель, харагдац, удирдлага) үлгэр загварыг ашиглах хэрэгтэй.
       Энэ загварын дагуу кодыг зохион байгуулах олон янзын арга бий. Бид нэгийг нь жишээ болгож
-      ReactJS-ийн зарим үндсэн онцлог, мөн файл системд дэх байршлын зохиомж, модуль загвар зэргийг харуулж байна.
+      React-ийн зарим үндсэн онцлог, мөн файл системд дэх байршлын зохиомж, модуль загвар зэргийг харуулж байна.
       Энэ үлгэр загварыг та дараагийн төслөөр хэрэгжүүлж яваарай.
     </p>
     <p>
       Та энэ жишээг веб хөтөч дээрээ <a
-      href="http://localhost:3000/getting-started.html">http://localhost:3000/getting-started.html</a> URL хаягаар эхлүүлэн харж болно.
-      Энэ хуудас нь ReactJS-ийг бодитоор ажиллуулж буй жишээ юм. <code>getting-started.html</code> 
-      хуудсанд байгаа HTML нь ReactJS аппыг зурж харуулахад зориулж нэг <code>&lt;div&gt;</code> элементийг
-      , аппын ЖаваСкрипт багцыг
-      <code>compiled/gettingStarted.bundle.js</code> холбож ажиллуулахад хэрэгтэй нэг script элементийг агуулж байгаа. 
-      webpack тохиргооны файлд 
-      <code><a
-      href="http://localhost:3000/webpack.config.js">webpack.config.js</a></code>
-      <code>gettingStarted.jsx</code> ReactJS файлаас үүсэх багцыг чиглүүлэн зааж өгсөн болно. <code>gettingStarted.jsx</code> бол 
-      нэг JSX програм бөгөөд ReactJS-ийн 
-      <code>Example</code> нэртэй компонентийг <code>getting-started.html</code> дотор байгаа нөгөө <code>&lt;div&gt;</code> рендерлэж харагдана.
+      href="http://localhost:5173/getting-started.html">http://localhost:5173/getting-started.html</a> URL хаягаар эхлүүлэн харж болно.
+      Энэ хуудас нь React-ийг бодитоор ажиллуулж буй жишээ юм. <code>getting-started.html</code>
+      хуудсанд байгаа HTML нь React аппыг зурж харуулахад зориулж нэг <code>&lt;div&gt;</code> элементийг
+      , аппын JSX файлыг холбож ажиллуулахад хэрэгтэй нэг script элементийг агуулж байгаа:
+    <pre>&lt;script type="module" src="/src/gettingStarted.jsx"&gt;&lt;/script&gt;</pre>
+      Vite нь <code>src/gettingStarted.jsx</code> файлыг веб хөтчид өгөхийн өмнө ЖаваСкрипт болгон хөрвүүлдэг тул
+      тусад нь багц үүсгэх шаардлагагүй. <code>src/gettingStarted.jsx</code> бол
+      нэг JSX програм бөгөөд <code>createRoot</code> функцээр <code>getting-started.html</code> дотор байгаа нөгөө <code>&lt;div&gt;</code> дээр
+      React-ийн root үүсгэж, <code>Example</code> нэртэй компонентийг <code>&lt;StrictMode&gt;</code> дотор рендерлэж харуулна.
     </p>
     <p>
-      Дахин ашиглах компонентийг хөгжүүлэхэд ReactJS компонент болон түүнд холбоотой
-      CSS файлуудыг <code>components</code> дэд хавтас дотор зохион байгуулсан.
-      Жишээ нь, <code>Example</code> компонентийг <code>components/example/{Example.jsx,Example.css}</code> файлуудад хөгжүүлсэн.
+      Дахин ашиглах компонентийг хөгжүүлэхэд React компонент болон түүнд холбоотой
+      CSS файлуудыг <code>src/components</code> дэд хавтас дотор зохион байгуулсан.
+      Жишээ нь, <code>Example</code> компонентийг <code>src/components/Example/{Example.jsx,Example.css}</code> файлуудад хөгжүүлсэн.
     </p>
     Та
     <code>getting-started.html</code> хуудсыг дуудахад хэрэг болж байгаа файлуудыг (<code>getting-started.html</code>,
-    <code>gettingStarted.jsx</code>,
-    <code>components/example/Example.jsx</code>) үзээрэй. Эдгээр нь ReactJS веб аппыг ажиллуулахад шаардлагатай 
+    <code>src/gettingStarted.jsx</code>,
+    <code>src/components/Example/Example.jsx</code>) үзээрэй. Эдгээр нь React веб аппыг ажиллуулахад шаардлагатай
     ЖаваСкрипт болон JSX командуудыг тайлбар комментын хамт харуулж байгаа.
     Та хичээлээр босгох бусад компонентоо хөгжүүлэхэд энэ үлгэр загварыг нэрийн зохицолтойгоор (naming conventions) хэрэглэх ёстой.
     </p>
     <p>
       Моделийн өгөгдөлийг ихэвчлэн веб серверээс авдаг. Веб сервер нь өгөгдлийн сангаас авдаг.
-      Энэ төслөөр өгөгдлийн санг тохируулж хэрэглэхээс зайлсхийж дотоод файл системээс веб хөтчийн
-      DOM-д шууд өгөгдлийг ачаалах HTML script тагийг бэлдэж өгсөн байгаа.
-      Модел нь DOM-ийн <code>ICSI301models</code> нэртэй шинжид хадгалагдана.
-      ReactJS компонент дотроос <code>window.ICSI301models</code> гэж шууд чөлөөтэй хандах боломжтой.
+      Энэ төслөөр өгөгдлийн санг тохируулж хэрэглэхээс зайлсхийж модель өгөгдлийг
+      <code>src/modelData</code> хавтаст ЖаваСкрипт модуль (ES module) болгон бэлдэж өгсөн байгаа.
+      Модель нь <code>icsi301models</code> нэртэй объектын шинжүүдэд хадгалагдана.
+      React компонент дотроос үүнийг импортлож хандана:
+    <pre>import icsi301models from '../../modelData';</pre>
+    </p>
+    <p>
+      Санамж: <code>&lt;StrictMode&gt;</code> нь хөгжүүлэлтийн горимд алдааг эрт илрүүлэхийн тулд
+      компонентын функц болон <code>useEffect</code>-ийг хоёр удаа ажиллуулдаг. Тиймээс
+      <code>console.log</code>-ийн мэдэгдэл хоёр удаа хэвлэгдвэл энэ нь алдаа биш.
     </p>
   </section>
 
@@ -228,8 +215,8 @@
     </p>
     <ol>
       <li>
-        Example компонентийн модель өгөгдлийг "Unknown name" гэсний оронд өөрийн нэрээр шинэчлэнэ. 
-        "Unknown name" гэж хаана байгааг хайж болоод үүнийг солино.
+        Example компонентийн модель өгөгдлийг "Unknown name" гэсний оронд өөрийн нэрээр шинэчлэнэ.
+        "Unknown name" гэж хаана байгааг хайж болоод үүнийг солино (<code>src/modelData/example.js</code>).
       </li>
       <li>
         Example компонентод байгаа <code>motto-update</code> гэсэн класстай <code>div</code> элементийн агуулгыг
@@ -239,47 +226,57 @@
       </li>
       <li>
         Өмнөх алхамаар хийсэн дэлгэцлэх хэсгийг хэрэглэгч өөрөө уриа үгийг шинэчилж болдог байхаар өргөтгөнө.
-        Гарааны утга нь моделийн өгөгдлөөс гарч ирдэг байх ёстой.
+        Гарааны утга нь моделийн өгөгдлөөс гарч ирдэг байх ёстой. Уриа үгийг
+        <a href="https://react.dev/reference/react/useState"><code>useState</code></a> Hook-ээр төлөв болгон хадгална.
       </li>
     </ol>
   </section>
 
   <section>
-    <h3 class="left-border">Даалгавар 2: Шинэ компонент үүсгэх - муж улсын харагдац (10
+    <h3 class="left-border">Даалгавар 2: Шинэ компонент үүсгэх - хот, аймгийн харагдац (10
     оноо)</h3>
     <p>
-      Өгөгдсөн тэмдэгт мөрийг агуулж байгаа муж улсын бүх нэрсийг дэлгэцлэх шинэ компонент үүсгэнэ.
-      Таны харагдац тэмдэгт мөр авдаг оролтын талбартай байх ёстой. Харагдац нь тухайн тэмдэгт мөрийг 
-      агуулж байгаа (том жижиг үсгийн ялгаагүй) муж улсын нэрсийг нэг <strong>жагсаалтад</strong> цагаан толгойн үсгийн 
-      дарааллаар дэлгэцлэнэ. Жишээ нь, тэмдэгт мөр нь "al" гэсэн утгатай байвал
-      Alabama, Alaska, and California нэрс гарч ирнэ.
-      Энэ хуудас муж улсын нэрсийг шүүхэд хэрэглэсэн тэмдэгт мөр утгыг бас дэлгэцлэдэг байна.
-      Хэрэв тохирох муж улсын нэр олдохгүй бол веб хуудас нь холбогдох зурвасыг 
+      Өгөгдсөн тэмдэгт мөрийг агуулж байгаа Монгол улсын хот, аймгийн бүх нэрсийг дэлгэцлэх шинэ компонент үүсгэнэ.
+      Таны харагдац тэмдэгт мөр авдаг оролтын талбартай байх ёстой. Харагдац нь тухайн тэмдэгт мөрийг
+      агуулж байгаа (том жижиг үсгийн ялгаагүй) хот, аймгийн нэрсийг нэг <strong>жагсаалтад</strong> цагаан толгойн үсгийн
+      дарааллаар дэлгэцлэнэ. Жишээ нь, тэмдэгт мөр нь "ан" гэсэн утгатай байвал
+      Архангай, Булган, Дархан, Дархан-Уул, Завхан, Өвөрхангай, Улаанбаатар нэрс гарч ирнэ.
+      Энэ хуудас хот, аймгийн нэрсийг шүүхэд хэрэглэсэн тэмдэгт мөр утгыг бас дэлгэцлэдэг байна.
+      Хэрэв тохирох хот, аймгийн нэр олдохгүй бол веб хуудас нь холбогдох зурвасыг
       (юу ч харуулахгүй байхын оронд) харуулдаг байна.
-      Тэмдэгт мөрийн утга хоосон бол бүх муж улсын нэрийг харуулдаг байна.
+      Тэмдэгт мөрийн утга хоосон бол бүх хот, аймгийн нэрийг харуулдаг байна.
     </p>
     <p>
-      Даалгавар #1-д өгсөн шиг муж улсын нэрийг модель өгөгдөл болгож өгсөн байгаа. Үүнд 
-      дараах script тагаар холбож өгсөний дараа <code>window.ICSI301models.states</code> гэж хандаж болно:
+      Санамж: Unicode-д "Ө", "Ү" үсгүүд "Я"-гийн дараа байрладаг тул массивын энгийн
+      <code>sort()</code> функц Өвөрхангай, Өмнөговь-ийг жагсаалтын хамгийн сүүлд гаргана.
+      Монгол цагаан толгойн дарааллаар эрэмбэлэхдээ
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare"><code>localeCompare</code></a>
+      функцийг ашиглана:
+    <pre>names.sort((a, b) =&gt; a.localeCompare(b, 'mn'))</pre>
+      Шүүсэн жагсаалтыг тусад нь төлөвт хадгалах шаардлагагүй. Оролтын утгаас компонентыг рендерлэх үед тооцоолж болно.
+      Жагсаалтын элемент бүрт <code>key</code> шинж өгөхөө мартаарай.
     </p>
-    <pre>&lt;script src="modelData/states.js"&gt;&lt;/script&gt;</pre>
     <p>
-      <code>states.js</code> файлаас муж улсын нэрний өгөгдлийн форматын тайлбартай танилцаарай.
+      Даалгавар #1-д өгсөн шиг хот, аймгийн нэрийг модель өгөгдөл болгож өгсөн байгаа. Үүнийг
+      импортлосны дараа <code>icsi301models.citiesProvincesModel()</code> гэж хандаж болно:
+    </p>
+    <pre>import icsi301models from '../../modelData';</pre>
+    <p>
+      <code>src/modelData/citiesProvinces.js</code> файлаас хот, аймгийн нэрний өгөгдлийн форматын тайлбартай танилцаарай.
     </p>
     <p>
-      Энэ даалгаврыг эхлүүлэхэд туслах, чиглүүлэх зорилгоор <code>compiled/p2.bundle.js</code>
+      Энэ даалгаврыг эхлүүлэхэд туслах, чиглүүлэх зорилгоор <code>src/p2.jsx</code>
       файлыг холбож дуудсан <code>p2.html</code> файлыг нэрийн зохицолтойгоор бэлдэж өгсөн байгаа.
-      Энэ ЖаваСкрипт багц файлыг <code>p2.jsx</code> файлаас webpack багажаар үүсгэсэн бөгөөд
-      энэ нь <code>States</code> ReactJS компонентийг дэлгэцлэнэ. Энэ хуудсыг веб хөтөч дээр <a
-      href="http://localhost:3000/p2.html">http://localhost:3000/p2.html</a> URL хаягаар дуудаж үзээрэй.
+      <code>src/p2.jsx</code> нь <code>CitiesProvinces</code> React компонентийг дэлгэцлэнэ. Энэ хуудсыг веб хөтөч дээр <a
+      href="http://localhost:5173/p2.html">http://localhost:5173/p2.html</a> URL хаягаар дуудаж үзээрэй.
     </p>
     <p>
       Таны хөгжүүлэх файлууд бол:
     <ul>
-      <li><code>components/states/States.jsx</code> - Муж улсын компонентийг хөгжүүлэх ReactJS компонент.
+      <li><code>src/components/CitiesProvinces/CitiesProvinces.jsx</code> - Хот, аймгийн харагдацыг хөгжүүлэх React компонент.
       </li>
       <li>
-        <code>components/states/States.css</code> - Компонентод шаардлагатай дурын CSS загварууд. <strong>Муж улсын нэрийн жагсаалтыг
+        <code>src/components/CitiesProvinces/CitiesProvinces.css</code> - Компонентод шаардлагатай дурын CSS загварууд. <strong>Хот, аймгийн нэрийн жагсаалтыг
           харуулахад зарим загваар хэрэгжүүлэх ёстой.
         </strong>
       </li>
@@ -290,25 +287,25 @@
   <section>
     <h3 class="left-border">Даалгавар 3: Байршлыг өөрчлөх (5 оноо)</h3>
     <p>
-      <code>Header</code> нэртэй ReactJS компонент үүсгэнэ. Энэ нь харагдацын дээд хэсэгт
+      <code>Header</code> нэртэй React компонент үүсгэнэ. Энэ нь харагдацын дээд хэсэгт
       веб аппын толгойг (header) дэлгэцлэдэг. Толгойг энэ даалгаварт байгаа
-      ReactJS-ийн бүх компонентод (<code>gettingStarted.jsx</code>,
-      <code>p2.jsx</code>,
-      <code>p4.jsx</code>, <code>p5.jsx</code>) нэмж өгнө.
+      React-ийн бүх компонентод (<code>src/gettingStarted.jsx</code>,
+      <code>src/p2.jsx</code>,
+      <code>src/p4.jsx</code>, <code>src/p5.jsx</code>) нэмж өгнө.
       Өмнөх даалгаврын эхний хэсгийг (таны нэр ба уриа үгтэй) <b>өөрчлөхгүй</b>. Тэр хэсэг нь толгойгоос тусдаа 
       байх ёстой. Өөрийн төсөөлөл, бүтээлч байдлаараа "зөвхөн чинийх" гэж харагдах толгойг үүсгээрэй. Энэ нь
       нэмэлт зураг, график, юунд таалагдана, тэр бүгдийг агуулж болно. Та компонентууд дахь JSX/ЖаваСкриптийг өргөтгөх бөгөөд
-      гаднын ReactJS компонент, ЖаваСкрипт санг, жишээ нь, JQuery, ашиглаж болохгүй. Бүтээлч байгаарай!
+      гаднын React компонент, ЖаваСкрипт санг, жишээ нь, JQuery, ашиглаж болохгүй. Бүтээлч байгаарай!
     </p>
     <p>
       Таны хөгжүүлэх файлууд бол:
     <ul>
-      <li><code>components/header/Header.jsx</code> - Толгойг хөгжүүлэх ReactJS компонент. 
-        Энэ нь <a
-        href="https://reactjs.org/docs/react-component.html">React.Component</a> төрлийн Header классаар
-        тодорхойлогдоно.
+      <li><code>src/components/Header/Header.jsx</code> - Толгойг хөгжүүлэх React компонент.
+        Энэ нь JSX буцаадаг <code>Header</code> нэртэй <a
+        href="https://react.dev/learn/your-first-component">function компонентоор</a>
+        тодорхойлогдоно (класс компонент биш).
       </li>
-      <li><code>components/header/Header.css</code> - Өөрийн компонентод хэрэгтэй ямар нэг CSS загварууд. 
+      <li><code>src/components/Header/Header.css</code> - Өөрийн компонентод хэрэгтэй ямар нэг CSS загварууд.
         <strong>Толгой компонентод заавал загвар тодорхойлж өгнө.</strong></li>
     </ul>
     Санамж: <code>getting-started.html</code> нь хуудасны дээд талдаа Даалгавар 3-аар хийсэн толгойг агуулж байх ёстой. 
@@ -322,20 +319,21 @@
     оноо)</h3>
     <p>
       <code>p4.html</code> болон холбогдох JSX файлыг
-      <code>p4.jsx</code> үүсгэнэ.
+      <code>src/p4.jsx</code> үүсгэнэ.
       Энэ нь хоёр харагдац компонентийг (<code>Example</code> болон
-      <code>States</code> components) агуулна. 
-      <code>p4.jsx</code> нь энэ хоёр компонентийг хооронд нь сольж харуулдаг байх хэрэгтэй.
-      Нэг харагдац нь дэлгэцлэгдсэн байхад нөгөөг нь сольж дэлгэцлэх нэг товч (button) байна. 
-      Жишээ нь, <code>States</code> дэлгэцлэгдсэн байхад үүний дээд талд байрлах товч нь 
-      "Switch to Example" гэж харагдах, <code>States</code> гэж дарахад өөрөө алга болоод <code>Example</code>
-      дэлгэцлэгддэг байна.
+      <code>CitiesProvinces</code> компонент) агуулна.
+      <code>src/p4.jsx</code> нь энэ хоёр компонентийг хооронд нь сольж харуулдаг байх хэрэгтэй.
+      Нэг харагдац нь дэлгэцлэгдсэн байхад нөгөөг нь сольж дэлгэцлэх нэг товч (button) байна.
+      Жишээ нь, <code>CitiesProvinces</code> дэлгэцлэгдсэн байхад үүний дээд талд байрлах товч нь
+      "Example руу шилжих" гэж харагдах, товчийг дарахад <code>CitiesProvinces</code> алга болоод <code>Example</code>
+      дэлгэцлэгддэг байна. Аль харагдац дэлгэцлэгдэж байгааг <code>useState</code> Hook-ээр хадгална.
     </p>
     <p>
-      Энэ даалгаврын хувьд дээрх файлуудыг үүсгэх хэрэгтэй. Мөн webpack тохиргооны
-      <code>webpack.config.js</code> файлд <code>p4.html</code> хуудсанд ашиглах <code>compiled/p4.bundle.js</code> файлыг босгох тухай зааж өгөх хэрэгтэй болно. 
-      Хэрэв webpack багажийг <code>--watch</code> горимоор (i.e. <code>npm run build:w</code>) ажиллуулж байгаа бол та 
-      <code>webpack.config.js</code> файлаа өөрчилсний дараа дахин ажиллуулах шаардлагатай.
+      Энэ даалгаврын хувьд дээрх файлуудыг үүсгэх хэрэгтэй. <code>p4.html</code> нь <code>getting-started.html</code>-тэй адилаар
+      <code>&lt;script type="module" src="/src/p4.jsx"&gt;</code> гэж JSX файлаа холбоно.
+      Хөгжүүлэлтийн горимд (<code>npm run dev</code>) шинэ хуудас нэмэлт тохиргоогүйгээр шууд ажиллана.
+      Харин <code>npm run build</code> командаар багц үүсгэхэд <code>vite.config.js</code> файлын
+      <code>input</code> жагсаалтад <code>p4.html</code>-ийг нэмж өгөх хэрэгтэй (комментоор бэлдсэн мөр бий).
     </p>
   </section>
 
@@ -348,63 +346,74 @@
     </p>
     <p>
       Бид энэ дутагдлыг URL-д харагдацын мэдээллийг хадгалснаар шийдвэрлэх боломжтой.
-      <a href="https://v5.reactrouter.com/">React Router</a> нь ReactJS-д ийм функцээр хангаж өгдөг.
+      <a href="https://reactrouter.com/7.18.4/start/declarative/installation">React Router</a> нь React-д ийм функцээр хангаж өгдөг.
       Энэ даалгаврын хувьд <code>p4.html</code> файлаа <code>p5.html</code>,
-      <code>p4.jsx</code> файлаа <code>p5.jsx</code> нэртэйгээр хуулбарлаж аваарай.
-      Кодоо <a href="https://v5.reactrouter.com/">React
+      <code>src/p4.jsx</code> файлаа <code>src/p5.jsx</code> нэртэйгээр хуулбарлаж аваарай.
+      Кодоо <a href="https://reactrouter.com/7.18.4/start/declarative/routing">React
       Router</a> модулийг ашиглан хоёр харагдацын хооронд нь сольж харуулдаг болгоно.
-      Та 
-      <strong>тодорхой загвартай хэрэгслийн-мөр маягийн удирдлагатай (styled toolbar-like control)</strong> (энгийн бичвэр линк байх нь хангалтгүй) байх ёстой ба энэ нь хэрэглэгчид example болон states компонент харагдацыг сольж шилжих боломжийг олгодог байна.
+      Та
+      <strong>тодорхой загвартай хэрэгслийн-мөр маягийн удирдлагатай (styled toolbar-like control)</strong> (энгийн бичвэр линк байх нь хангалтгүй) байх ёстой ба энэ нь хэрэглэгчид Example болон CitiesProvinces компонент харагдацыг сольж шилжих боломжийг олгодог байна.
     </p>
     <p>
-      Энэ бол бидний импортлож байгаа үндсэн ReactJS модулиас гаднах эхний өргөтгөл учир бид танд алхам нэг бүрийг нь тайлбарлаж өгье.
+      Энэ бол бидний импортлож байгаа үндсэн React модулиас гаднах эхний өргөтгөл учир бид танд алхам нэг бүрийг нь тайлбарлаж өгье.
     </p>
     <ol>
-      <li>Төслийн <code>package.json</code> файлд react-router модулийг тодорхойлсон учир 
-      npm install командаар аль хэдийнэ татаад авчихсан байгаа. Бид үүнийг <code>p5.jsx</code> файл дотроо импортлож оруулах ёстой. 
+      <li>Төслийн <code>package.json</code> файлд <code>react-router</code> (7-р хувилбар) модулийг тодорхойлсон учир
+      npm install командаар аль хэдийнэ татаад авчихсан байгаа. Бид үүнийг <code>src/p5.jsx</code> файл дотроо импортлож оруулах ёстой.
       Дараах мөрүүдийг нэмнэ:
-        <pre>import { HashRouter, Route, Link } from "react-router-dom";</pre>
-        Энэ мөр нь ЖаваСкрипт 
+        <pre>import { HashRouter, Routes, Route, Link } from "react-router";</pre>
+        Энэ мөр нь ЖаваСкрипт
         <a
         href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">
           import
         </a>
-        командаар React Router-аас ReactJS компонентуудыг:
+        командаар React Router-аас React компонентуудыг:
         <code><a
-        href="https://v5.reactrouter.com/web/api/HashRouter">HashRouter</a></code>,
+        href="https://reactrouter.com/7.18.4/api/declarative-routers/HashRouter">HashRouter</a></code>,
         <code><a
-        href="https://v5.reactrouter.com/web/api/Route">Route</a></code>, болон
-        <code><a href="https://v5.reactrouter.com/web/api/Link">Link</a></code> авч ирнэ.
-        React Router-ийн <code>HashRouter</code> модуль URL-ийн ногдол хэсгийг (fragment portion) мэдээллийг хадгалах зорилгоор ашигладаг. 
-        Иймд бид States харагдацыг илэрхийлэх <code>p5.html#/states</code>, 
+        href="https://reactrouter.com/7.18.4/api/components/Routes">Routes</a></code>,
+        <code><a
+        href="https://reactrouter.com/7.18.4/api/components/Route">Route</a></code>, болон
+        <code><a href="https://reactrouter.com/7.18.4/api/components/Link">Link</a></code> авч ирнэ.
+        React Router-ийн <code>HashRouter</code> модуль URL-ийн ногдол хэсгийг (fragment portion) мэдээллийг хадгалах зорилгоор ашигладаг.
+        Иймд бид CitiesProvinces харагдацыг илэрхийлэх <code>p5.html#/cities-provinces</code>,
         Example компонент харагдацыг тодорхойлох <code>p5.html#/example</code> тэмдгийг үүсгэж болно.
       </li>
       <li>
         React Router-ийг ашигладаг хамгийн түгээмэл арга нь одоогийн URL дээр нь түшиглээд
         үзүүлэх гэж байгаа харагдацаа нөхцөлтэй рендерлэх юм.
         <code><a
-        href="https://v5.reactrouter.com/web/api/Route">Route</a></code>
-        компонентийг <code>HashRouter</code> дотор оруулж ийм нөхцөлт рендерлэлтийг хэрэгжүүлж болдог:
+        href="https://reactrouter.com/7.18.4/api/components/Route">Route</a></code>
+        компонентуудыг <code>Routes</code> дотор, <code>Routes</code>-ийг <code>HashRouter</code> дотор оруулж ийм нөхцөлт рендерлэлтийг хэрэгжүүлж болдог:
 <pre>
 &lt;HashRouter>
   ...
-  &lt;Route path="/states" component={States} />
-  &lt;Route path="/example" component={Example} />
+  &lt;Routes>
+    &lt;Route path="/cities-provinces" element={&lt;CitiesProvinces />} />
+    &lt;Route path="/example" element={&lt;Example />} />
+  &lt;/Routes>
   ...
 &lt;/HashRouter>
 </pre>
-      Хэрэв URL-д <code>#/states</code> агуулж байвал States, <code>#/example</code> гэж байвал Example компонентийг рендерлэнэ.
+      Хэрэв URL-д <code>#/cities-provinces</code> агуулж байвал CitiesProvinces, <code>#/example</code> гэж байвал Example компонентийг рендерлэнэ.
       </li>
       <li>
         Хэдийгээр бид хайперлинк (жишээ нь, <code>&lt;a></code> tags) ашиглаад
         харагдацыг сольж болох боловч react-router <code>Link</code>
         компонентоор хайперлинк үүсгэн ашиглахыг зөвлөдөг. Жишээ нь:
 <pre>
-&lt;Link to="/states">States&lt;/Link>
+&lt;Link to="/cities-provinces">Хот, аймаг&lt;/Link>
 </pre>
-        Дээрх код <code>href="#/states"</code> утгатай, "States" бичвэртэй хайперлинк үүсгэж өгнө.
+        Дээрх код <code>href="#/cities-provinces"</code> утгатай, "Хот, аймаг" бичвэртэй хайперлинк үүсгэж өгнө.
+        Идэвхтэй холбоосыг ялгаж загварчлах бол <code><a href="https://reactrouter.com/7.18.4/api/components/NavLink">NavLink</a></code>
+        компонентийг ашиглаж болно.
       </li>
     </ol>
+    <p>
+      Даалгавар 4-тэй харьцуулж үзээрэй: <code>useState</code>-ээр харагдац сольход URL өөрчлөгддөггүй тул
+      веб хөтчийн "Буцах" (Back) товч ажиллахгүй, хуудсыг дахин ачаалахад эхний харагдац руу буцна.
+      React Router-ийн тусламжтайгаар харагдац бүр өөрийн URL-тэй болж, тэмдэглэх, хуваалцах, "Буцах" товч бүгд ажиллана.
+    </p>
   </section>
 
   <section>
@@ -412,7 +421,9 @@
     <p>
       Энэ оноог лекц дээр хэлэлцсэн MVC загварын зөвлөмжийг дагаж зөв зохион байгуулсан тохиолдолд өгнө.
       <strong>Таны код DOM-д шууд хандаж удирдсан байж болохгүй.</strong>
-      Нэмж хэлэхэд, таны код болон загвар цэвэрхэн, уншууртай байх ёстой. Илгээхээсээ өмнө ESLint багажийг ажиллуулсан байх хэрэгтэй. ESLint ямар нэг алдаа өгөөгүй байна.
+      Нэмж хэлэхэд, таны код болон загвар цэвэрхэн, уншууртай байх ёстой. Илгээхээсээ өмнө ESLint багажийг ажиллуулсан байх хэрэгтэй. ESLint ямар нэг алдаа, санамж өгөөгүй байна.
+      ESLint нь Hooks-ийн дүрмүүдийг (жишээ нь, Hook-ийг зөвхөн компонентын дээд түвшинд дуудах,
+      <code>useEffect</code>-ийн dependency жагсаалтыг бүрэн бичих) мөн шалгадаг.
     </p>
   </section>
 
@@ -424,7 +435,7 @@
     <p>
       <a href="submit.html">Даалгавар илгээх</a>
       зааврын дагуу аппаа бүхэлд нь (<code>project4</code>
-      хавтас доторх бүгд) илгээнэ.
+      хавтас доторх бүгд) илгээнэ. <code>node_modules</code> болон <code>dist</code> хавтсыг илгээх шаардлагагүй.
     </p>
   </section>
 
