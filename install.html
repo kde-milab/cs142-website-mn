@@ -8,14 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>MERN програм суулгах заавар</title>
-    <meta name="description" content="Web Applications course at Stanford University">
+    <meta name="description" content="ICSI301 Веб аппликейшн хичээлийн хөгжүүлэлтийн орчин бэлтгэх заавар">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-    <script src="js/jquery.min.js"></script> 
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
 </head>
@@ -35,45 +35,26 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="projects.html">ICSI301 Веб аппликейшн</a>
+        <a class="navbar-brand" href="index.html">ICSI301 (2026 оны Намар)</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          
-            
-            
-            <!-- <li class="">
-              <a href="index.html">Home</a> 
-            </li>
-          
-            
-            
             <li class="">
-              <a href="info.html">Class Info</a> 
+              <a href="index.html">Нүүр</a>
             </li>
-          
-            
-            
             <li class="">
-              <a href="lectures.html">Lectures</a> 
+              <a href="lectures.html">Лекц</a>
             </li>
-          
-            
-             -->
             <li class="nav-active">
-              <a href="projects.html">Төсөл</a> 
+              <a href="projects.html">Төсөл</a>
             </li>
-          
-            
-            
-            <!-- <li class="">
-              <a href="staff.html">Staff</a> 
-            </li> -->
-          
+            <li class="">
+              <a href="staff.html">Багш нар</a>
+            </li>
         </ul>
       </div>
-      
+
     </div>
   </nav>
 </header>
@@ -82,40 +63,79 @@
         <main><div class="container">
   <h1>MERN програм суулгах заавар</h1>
   <p>
-  Энэ хичээлээр хийх програмын төслүүдэд Node.js болон MongoDB суулгаж ашиглах хэрэгтэй.
-  Хэрэв таны компьютер, нөтбүүк дээр эдгээр програмууд суугаагүй бол дараах зааврын дагуу суулгаарай.
+  Энэ хичээлийн төслүүдийг хийхэд дараах програмууд хэрэгтэй. Эхний төслүүдэд (1–4) вэб хөтөч, код засварлагч,
+  Node.js хангалттай. MongoDB-г 6-р төслөөс эхлэн ашиглах тул улирлын эхэнд бүгдийг нь суулгаж бэлтгэхийг зөвлөж байна.
+  Linux, macOS, Windows аль ч үйлдлийн систем дээр ажиллана.
   </p>
-  <h3 class="left-border">Node.js суулгах</h3>
+
+  <h3 class="left-border">1. Вэб хөтөч ба код засварлагч</h3>
+  <ul>
+    <li><a href="https://www.google.com/chrome/" target="_blank">Google Chrome</a> — хичээлд Chrome-г зөвлөж байна. Хөгжүүлэгчийн хэрэгслийг (DevTools) <code>F12</code> эсвэл <code>Ctrl+Shift+I</code> (macOS дээр <code>Cmd+Option+I</code>) товчоор нээнэ.</li>
+    <li><a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> — зөвлөж буй код засварлагч. Өөр засварлагч (Sublime Text г.м.) ашиглаж болно.</li>
+  </ul>
+
+  <h3 class="left-border">2. Node.js суулгах</h3>
   <p>
-  Node.js програмын хамгийн сүүлийн "Урт хугацаанд дэмжих - Long Term Support (LTS)" хувилбарыг (одоогоор 18.14.0) суулгана.
-  Үүнийг <a href="https://nodejs.org/en/download">https://nodejs.org/en/download</a> URL хаягаар татаж авах боломжтой.
-  Node.js болон модуль меженер (npm) програмыг суусан эсэхийг шалгахдаа доорх командыг ажиллуулна:
+  Node.js-ийн хамгийн сүүлийн <strong>LTS (Long Term Support — урт хугацаанд дэмжих)</strong> хувилбарыг суулгана.
+  Үүнийг <a href="https://nodejs.org/en/download" target="_blank">https://nodejs.org/en/download</a> хаягаас татаж авна.
+  Node.js-тэй хамт модуль менежер <strong>npm</strong> суудаг бөгөөд үүгээр төслийн эхлэл файлууд болон хамаарлын сангуудыг татна.
+  </p>
+  <p>
+  Суусан эсэхийг шалгахдаа терминал (Windows дээр PowerShell) нээгээд дараах командуудыг ажиллуулна:
+  </p>
   <div class="code">
-    <pre>node -v</pre>
+    <pre>node -v
+npm -v</pre>
   </div>
-  болон:
+  <p>
+  Хоёр програмын хувилбарын дугаар гарч ирвэл амжилттай суусан байна.
+  Командыг танихгүй байвал терминалаа хаагаад дахин нээж үзээрэй.
+  </p>
+
+  <h3 class="left-border">3. MongoDB суулгах</h3>
+  <p>
+  <a href="https://www.mongodb.com/try/download/community" target="_blank">MongoDB Community Server</a>-ийг үйлдлийн системдээ тохирох
+  <a href="https://www.mongodb.com/docs/manual/administration/install-community/" target="_blank">суулгах зааврын</a> дагуу суулгана.
+  </p>
+  <p>
+  MongoDB-тэй командын мөрөөр ажиллах <strong>mongosh</strong> (MongoDB Shell) нь серверээс тусдаа суудаг тул
+  <a href="https://www.mongodb.com/try/download/shell" target="_blank">https://www.mongodb.com/try/download/shell</a> хаягаас татаж суулгана.
+  Өгөгдлөө график интерфейсээр харах бол <a href="https://www.mongodb.com/products/tools/compass" target="_blank">MongoDB Compass</a>-ийг нэмж суулгаж болно (заавал биш).
+  </p>
+
+  <h4>Серверийг асаах</h4>
+  <p>
+  Windows дээр суулгагч MongoDB-г ихэнхдээ <em>Windows Service</em> болгон суулгаж, компьютер асахад автоматаар ажиллуулдаг.
+  Service болгоогүй, эсвэл Linux/macOS дээр гараар асаах бол өгөгдлийн сангийн хавтсаа зааж ажиллуулна:
+  </p>
   <div class="code">
-    <pre>npm -v</pre>
+    <pre>mongod --dbpath &lt;өгөгдлийн_сангийн_хавтас&gt;</pre>
   </div>
-  энэ нь дээрх хоёр програмын хувилбарыг дэлгэцлэж харуулна.
-  </p>
-  <h3 class="left-border">MongoDB суулгах</h3>
   <p>
-  <a href="https://www.mongodb.com/what-is-mongodb">MongoDB Community Edition</a> хувилбарыг
-  <a href="https://docs.mongodb.com/manual/administration/install-community/">https://docs.mongodb.com/manual/administration/install-community/</a> хаягаар татаж суулгана.
+  Сервер ажиллаж байгаа эсэхийг шалгахдаа өөр терминалаас дараах командыг ажиллуулна:
   </p>
-  <p>
-  Дараах командыг ашиглан MongoDB серверийг асаана.
-  <pre>mongod (the exact arguments depend on where you placed the database)</pre>
-  Мөн доор командаар MongoDB өгөгдлийн санг шууд удирдан ажиллах боломжтой:
   <div class="code">
     <pre>mongosh</pre>
   </div>
-  Команд промт дээр help гэж бичээд боломжит командуудыг харж болно.
-  </p>
   <p>
-    Виндоус системийн хэрэглэгчдийн хувьд MongoDB суусан замыг үйлдлийн системийнхээ environment path хувьсагчид нэмж өгнө. 
-    Ихэнхдээ <pre>C:\Program Files\MongoDB\Server\&lt;version_number&gt;\bin</pre> зам дээр суусан байдаг.
+  Холбогдсоны дараа <code>help</code> гэж бичээд боломжит командуудыг, <code>show dbs</code> гэж бичээд өгөгдлийн сангуудыг харна. <code>exit</code> командаар гарна.
+  </p>
+
+  <h4>Windows хэрэглэгчдэд</h4>
+  <p>
+  <code>mongod</code> командыг танихгүй бол MongoDB суусан хавтсыг Windows-ийн <strong>Path</strong> орчны хувьсагчид нэмнэ.
+  Ихэнхдээ дараах зам дээр суусан байдаг:
+  </p>
+  <div class="code">
+    <pre>C:\Program Files\MongoDB\Server\&lt;хувилбар&gt;\bin</pre>
+  </div>
+  <p>
+  (Эхлэх цэс → "Edit the system environment variables" → Environment Variables → Path → New.) Дараа нь терминалаа дахин нээнэ.
+  </p>
+
+  <h3 class="left-border">Тусламж</h3>
+  <p>
+  Суулгахад асуудал гарвал алдааны мессежийн хамт Microsoft Teams группийн сувагт пост бичих эсвэл лабораторийн цагаар багшаас асуугаарай.
   </p>
 
 </div>
@@ -124,7 +144,7 @@
 <footer>
   <div class="container text-center">
       <small class="text-muted">
-          Энэ гарын авлага нь Стэнфордын их сургуулийн <a href="cs142.stanford.edu">CS142 Web Applications </a>хичээлийн орчуулга бөгөөд заадаг профессор Мэндел Розенблумаас &copy; албан ёсны зөвшөөрлийг авсан болно. <br>Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
+          Энэ гарын авлага нь Стэнфордын их сургуулийн <a href="http://cs142.stanford.edu" target="_blank">CS142 Web Applications </a>хичээлийн орчуулга бөгөөд заадаг профессор Мэндел Розенблумаас &copy; албан ёсны зөвшөөрлийг авсан болно. <br>Загварыг Рэймонд Луонг Стэнфордын их сургуулийн CS142 хичээлд зориулан бүтээв.
           <br>
           <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> болон <a href="https://jekyllrb.com" target="_blank">Jekyll</a> багажаар <a href="website.html"><strong>бүтээгдсэн.</strong></a>
       </small>

@@ -43,21 +43,21 @@
           
             
             
+            <li class="">
+              <a href="index.html">Нүүр</a> 
+            </li>
+          
+            
+            
             <!-- <li class="">
-              <a href="index.html">Home</a> 
-            </li>
-          
-            
-            
-            <li class="">
               <a href="info.html">Class Info</a> 
-            </li>
+            </li> -->
           
             
             
             <li class="">
-              <a href="lectures.html">Lectures</a> 
-            </li> -->
+              <a href="lectures.html">Лекц</a> 
+            </li>
           
             
             
@@ -67,9 +67,9 @@
           
             
             
-            <!-- <li class="">
-              <a href="staff.html">Staff</a> 
-            </li> -->
+            <li class="">
+              <a href="staff.html">Багш нар</a> 
+            </li>
           
         </ul>
       </div>
@@ -89,8 +89,8 @@
   </h4> -->
 
   <p>
-    Энэ төслөөр фото зураг хуваалцдаг вэб аппыг эхлэлийг хийхэд <a href="https://reactjs.org/">ReactJS</a> фрэймвөркийг
-    <a href="https://mui.com/">Material-UI</a> компоненттой хамтад нь ашиглана.
+    Энэ төслөөр фото зураг хуваалцдаг вэб аппыг эхлэлийг хийхэд <a href="https://react.dev/">React</a> сангийн
+    <a href="https://mui.com/material-ui/">Material UI</a> компоненттой хамтад нь ашиглана.
     Төслийн хоёрдахь хэсэгт өгөгдлийг серверээс авах талаар судлах болно.
   </p>
 
@@ -107,53 +107,60 @@
       </p>
       
     <p>
-        Энэ даалгаварт нэлээд олон node модулийг ашиглана. Жишээ нь, 
-        <a href="https://webpack.js.org/">Webpack</a>,
-      <a href="https://babeljs.io/">Babel</a>,
-      <a href="https://eslint.org/">ESLint</a>. Эдгээр багаж 
-      <a href="https://reactjs.org/">ReactJS</a> веб апп босгох (build), мөн веб аппыг веб хөтчид өгч үйчлэх 
-      энгийн Node.js веб сервер (<a href="http://expressjs.com/">ExpressJS</a>)
-      үүсгэхэд хэрэг болно. Энэ нь бас <a href="https://mui.com/">Material-UI</a> модулийг татаж авах бөгөөд энэ модуль 
-      React компонент болон CSS загварыг (stylesheet) агуулна.
+      Энэ даалгаварт Node.js-ийн 20.19, 22.13 эсвэл 24-өөс дээш хувилбар шаардлагатай.
+      Мөн хэд хэдэн node модуль хэрэгтэй. Жишээ нь, <a href="https://vite.dev/">Vite</a> нь
+      <a href="https://react.dev/">React</a> аппын JSX файлуудыг ЖаваСкрипт болгон хөрвүүлж багцалдаг (build) багаж,
+      <a href="https://eslint.org/">ESLint</a> нь кодыг шалгах багаж,
+      <a href="https://expressjs.com/">ExpressJS</a> нь веб аппыг веб хөтчид өгч үйлчлэх энгийн Node.js веб сервер үүсгэхэд хэрэглэгдэнэ.
+      Мөн <a href="https://reactrouter.com/">React Router</a> болон React компонент, CSS загварыг (stylesheet) агуулсан
+      <a href="https://mui.com/material-ui/">Material UI</a> модулийг татаж авна.
       Эдгээр модулийг <code>project5</code> хавтас дотроос дараах командыг
       ажиллуулж суулгана:
     <pre>npm install</pre>
-    <a href="https://reactjs.org/">ReactJS</a> болон
-    <a href="https://mui.com/">Material-UI</a>
-    компонентууд <code>node_modules</code> дэд хавтас дотор суух ч гэсэн үүнийг бид Node.js-ээр биш, веб хөтчид
-    дуудаж ашиглах болно.
+    React болон Material UI компонентууд <code>node_modules</code> дэд хавтас дотор суух ч гэсэн
+    тэдгээрийг бид Node.js-ээр биш, веб хөтчид дуудаж ашиглах болно.
     </p>
     <p>
-      Өмнөх төслийн адил npm командыг татаж авсан эдгээр багажийг ажиллуулахад хэрэглэнэ. 
-      <code>package.json</code> файлд байгаа дараах npm скриптийг ажиллуулах боломжтой:
+      Төслийн бүтэц нь Төсөл 4-ийн адил Vite-ийн стандарт бүтэц дээр суурилсан. Аппын бүх эх код
+      <code>src</code> хавтаст, аппыг ачаалах <code>index.html</code> хуудас төслийн үндсэн хавтаст,
+      зургууд <code>public/images</code> хавтаст байрлана.
+    </p>
+    <p>
+      <code>package.json</code> файлын <code>"scripts"</code> шинжид байгаа дараах npm скриптүүдийг ажиллуулах боломжтой:
     <ul>
-      <li><code>npm run lint</code> - ESLint багажийг төслийн бүх ЖаваСкрипт файлд ажиллуулна. 
+      <li><code>npm run lint</code> - ESLint багажийг төслийн бүх ЖаваСкрипт файлд ажиллуулна.
         Даалгавраар илгээх таны код чинь ESLint програмыг ямар нэг санамжгүйгээр (warnings) давсан байх ёстой.
       </li>
-      <li><code>npm run build</code> - <a href="https://webpack.js.org/">Webpack</a> багажийг <code>webpack.config.js</code> файлд байгаа тохиргоогоор ажиллуулж 
-        төсөлд байгаа бүх JSX файлуудыг багцалж <code>compiled</code> хавтас дотор нэг ширхэг ЖаваСкрипт багц (bundle) файл үүсгэнэ.
+      <li><code>npm run build</code> - <code>vite.config.js</code> файлд байгаа тохиргоогоор
+        аппын бүх JSX файлуудыг багцалж <code>dist</code> хавтас дотор ЖаваСкрипт багц (bundle) файлууд үүсгэнэ.
       </li>
-      <li><code>npm run build:w</code> - <code>npm run build</code> командтай адил, гэхдээ <a href="https://webpack.js.org/api/cli/#watch">--watch</a> горимоор 
-        <a href="https://webpack.js.org/">Webpack</a> багажийг ажиллуулна. 
-        Ингэснээр React компонентийг хянах, хэрэв тэдгээрийн аль нэгийг нь өөрчилбөл дахин шинэчилж үүсгэдэг.
+      <li><code>npm run build:w</code> - <code>npm run build</code> командтай адил, гэхдээ
+        <a href="https://vite.dev/guide/build#rebuild-on-files-changes">--watch</a> горимоор ажиллана.
+        Ингэснээр эх кодын файлуудыг хянаж, аль нэгийг нь өөрчилж хадгалах бүрт багцыг дахин үүсгэнэ.
+        Шинэ багцыг харахын тулд веб хөтчийн хуудсаа сэргээнэ (refresh).
+      </li>
+      <li><code>npm start</code> - <code>webServer.js</code> веб серверийг асаана.
       </li>
     </ul>
+    </p>
     <p>
       Бүх даалгаварыг гүйцэтгэсэн кодууд <code>project5</code> хавтас дотор байх ёстой.
-
-      Өмнөх төслөөр гүйцэтгэсэнтэй адил бидний өгч буй веб серверийг <code>project5</code> хавтас дотроос
-      дараах командыг ажиллуулж асаана.
-    <div class="code">
-      <pre>node webServer.js</pre>
-    </div>
     </p>
-
     <p>
-      Мөн өмнөхтэй адил дараах командаар:
+      Энэ төсөлд Төсөл 4-ийн Vite хөгжүүлэлтийн серверийн (<code>npm run dev</code>) оронд бидний өгч буй
+      <code>webServer.js</code> веб серверийг ашиглана. Учир нь Даалгавар 2-т апп өгөгдлөө энэ серверээс авна.
+      Сервер нь <code>dist</code> хавтсыг үйлчилдэг тул эхлээд багцаа үүсгэх хэрэгтэй.
+      <code>project5</code> хавтас дотроос командын мөрийн хоёр цонх нээж, нэгд нь:
     <div class="code">
-      <pre>node webServer.js & npm run build:w</pre>
+      <pre>npm run build:w</pre>
     </div>
-    командын мөрийн нэг цонх дээр веб сервер болон webpack програмыг нэгэн зэрэг ажиллуулж болно.
+    нөгөөд нь:
+    <div class="code">
+      <pre>npm start</pre>
+    </div>
+    командыг ажиллуулна. Ингэснээр та кодоо өөрчлөх бүрт багц автоматаар шинэчлэгдэх бөгөөд
+    апп <a href="http://localhost:3000">http://localhost:3000</a> хаягаар ажиллана.
+    Серверийг зогсоохдоо командын мөрөн дээр <code>Ctrl+C</code> дарна.
     </p>
   </section>
 
@@ -161,55 +168,62 @@
   <section>
     <h3 class="left-border">Даалгавар 1: Фото хуваалцдаг апп үүсгэх (40 оноо)</h3>
     <p>
-      Таны үүсгэх PhotoApp-д зориулж бид суурь бүтцэт (skeleton) 
-      (<code>photoShare.jsx</code>-ийг дууддаг <code>photo-share.html</code>) гарааны кодыг өгсөн байгаа. 
-       Үүнийг
-      <a href="http://localhost:3000/photo-share.html">http://localhost:3000/photo-share.html</a> URL-ээр хандаж ажиллуулна.
+      Таны үүсгэх PhotoApp-д зориулж бид суурь бүтцэт (skeleton) гарааны кодыг өгсөн байгаа:
+      <code>index.html</code> хуудас нь <code>src/main.jsx</code>-ийг ачаалж, тэр нь
+      <code>src/photoShare.jsx</code> доторх <code>PhotoShare</code> компонентыг рендерлэнэ.
+      Үүнийг
+      <a href="http://localhost:3000">http://localhost:3000</a> URL-ээр хандаж ажиллуулна.
       Энэ суурь код:
     <ul>
       <li>
-        Хичээлээр заасан мастер-деталь хэвийг хэрэгжүүлсэн <a href="https://mui.com/">Material-UI</a> ашигладаг 
-        <a href="https://reactjs.org/">ReactJS</a> веб аппыг дууддаг. Энэ апп
+        Хичээлээр заасан мастер-деталь хэвийг хэрэгжүүлсэн <a href="https://mui.com/material-ui/">Material UI</a> ашигладаг
+        <a href="https://react.dev/">React</a> веб аппыг дууддаг. Энэ апп
         дээд хэсэгтээ
-        <a href="https://mui.com/components/app-bar/">Material-UI App Bar</a>
+        <a href="https://mui.com/material-ui/react-app-bar/">Material UI App Bar</a>
         , зүүн хажуудаа <code>UserList</code>, контент талбайдаа
-        <code>UserDetail</code> эсвэл 
+        <code>UserDetail</code> эсвэл
         <code>UserPhotos</code> компонентийг байршуулсан байгаа.
       </li>
       <li>
         Нэг хуудаст аппд гүн холбоосыг (deep linking) бий болгохын тулд
-        <a href="https://v5.reactrouter.com/">React Router</a> компонентоор
+        <a href="https://reactrouter.com/">React Router</a>-ийн declarative горимоор
         дараах гурван компонентийг заах замыг тохируулсан.
         <ol>
           <li>
-            <code>/users</code> нь <code>components/userList/</code> хавтас доторх <code>UserList</code>
+            <code>/users</code> нь <code>src/components/UserList/UserList.jsx</code> доторх <code>UserList</code>
             компонентийг заана.
           </li>
           <li>
-            <code>/users/:userId</code> нь <code>components/userDetail/</code> хавтас доторх
+            <code>/users/:userId</code> нь <code>src/components/UserDetail/UserDetail.jsx</code> доторх
             <code>UserDetail</code> компонентийг заана.
           </li>
           <li>
-            <code>/photos/:userId</code> нь <code>components/userPhotos/</code> хавтас доторх
+            <code>/photos/:userId</code> нь <code>src/components/UserPhotos/UserPhotos.jsx</code> доторх
             <code>UserPhotos</code> компонентийг заана.
           </li>
         </ol>
-        Дэлгэрэнгүйг <code>photoShare.jsx</code> дотор 
-        <a href="https://v5.reactrouter.com/web/api/HashRouter">HashRouter</a>,
-        болон
-        <a href="https://v5.reactrouter.com/web/api/Route">Route</a>
-        компонентийг хэрхэн хэрэглэж байгаагаас харж болно. 
-        
-        <code>components/*</code> хавтас дотор байгаа компонент бүрт хоосон CSS файл болон энгийн
-        render функцийг юу хийх, модель өгөгдлийг хэрхэн хэрэглэх тухай тайлбарын хамт тодорхойлж өгсөн.
+        Дэлгэрэнгүйг <code>src/photoShare.jsx</code> дотор
+        <a href="https://reactrouter.com/start/declarative/routing">BrowserRouter</a>,
+        <code>Routes</code>, <code>Route</code> болон
+        <a href="https://reactrouter.com/start/declarative/routing#nested-routes">Outlet</a>
+        компонентийг хэрхэн хэрэглэж байгаагаас харж болно. Замын бүх компонент нь
+        <code>PhotoShareLayout</code> хүрээний дэд зам (nested route) бөгөөд контент талбай дахь
+        <code>&lt;Outlet /&gt;</code> байрлалд рендерлэгдэнэ.
+      </li>
+      <li>
+        <code>src/components/*</code> хавтас дотор байгаа компонент бүрт хоосон CSS файл болон
+        юу хийх, модель өгөгдлийг хэрхэн хэрэглэх тухай тайлбартай энгийн функц компонентыг тодорхойлж өгсөн.
       </li>
     </ul>
     </p>
     <p>
-      Энэ даалгаврын хувьд би өөрсдийн шидэт
-      <code>ICSI301models</code> моделийг ашиглана. Энэ нь урьдаас бэлдсэн мэдээллийг дэлгэцлэхэд 
-      модель өгөгдөл болох юм. Өмнө нь ийм модельд 
-      <code>window.ICSI301Models</code> ашиглан хандаж байсныг санаж байгаа байх. Моделийн схемийг доор тайлбарласан болно.
+      Энэ даалгаврын хувьд бид өөрсдийн шидэт
+      <code>icsi301models</code> моделийг ашиглана. Энэ нь урьдаас бэлдсэн мэдээллийг дэлгэцлэхэд
+      модель өгөгдөл болох юм. Төсөл 4-ийн адил моделийг ЖаваСкрипт модулиас импортлож хандана:
+    <div class="code">
+      <pre>import icsi301models from '../../modelData/photoApp';</pre>
+    </div>
+    Модель <code>src/modelData/photoApp.js</code> файлд байгаа бөгөөд схемийг доор тайлбарласан болно.
     </p>
     <p>
       Таны даалгавар бол өгсөн хоосон-програмыг (skeleton) хуурмаг модель өгөгдөл дээр ажилладаг болгох юм.
@@ -221,21 +235,21 @@
       Эдгээрийг дараах шаардлагын дагуу хөгжүүлнэ:
     <ul>
       <li>
-        <code>components/userList</code> компонент системд байгаа бүх хэрэглэгчийн
+        <code>UserList</code> компонент системд байгаа бүх хэрэглэгчийн
         дэлгэрэнгүй мэдээллийг харуулахын тулд хэрэглэгчдийг жагсааж харуулдаг байна.
         Компонент нь хажуу хэсэгт (side bar) байрлах ба хэрэглэгчийн  
         нэрсийн жагсаалтыг дэлгэцлэнэ. Хэрэглэгчийн нэр дээр дарахад тухайн хэрэглэгчийн
         дэлгэрэнгүй мэдээллийг үндсэн хэсэгт (content area) дэлгэцэлдэг байна.
       </li>
       <li>
-        <code>components/userDetail</code> компонентод React Router-ийн 
-        <code>props.match</code> шинжээр <code>userId</code>-ийг дамжуулна.
+        <code>UserDetail</code> компонент нь URL-ийн <code>userId</code> параметрийг React Router-ийн
+        <a href="https://reactrouter.com/api/hooks/useParams">useParams()</a> hook-оор авна.
         Энэ харагдац нь хэрэглэгчийн дэлгэрэнгүйг харуулах бөгөөд тухайн хэрэглэгчийн
         оруулсан зургуудыг харуулах <code>UserPhotos</code> компонентруу заах линктэй байна.
       </li>
       <li>
-        <code>components/userPhotos</code> компонентод
-        <code>userId</code>-ийг дамжуулна. Сонгосон хэрэглэгчийн бүх зургийг
+        <code>UserPhotos</code> компонент мөн <code>userId</code>-ийг
+        <code>useParams()</code> hook-оор авна. Сонгосон хэрэглэгчийн бүх зургийг
         харуулна. Тухайн хэрэглэгчтэй холбоотой бүх зургийг дэлгэцлэх ёстой.
         Зураг бүрийн хувьд бичсэн сэтгэгдлүүдийг харуулна. Сэтгэгдэл нэг бүрийн 
         бичсэн огноо, тухайн сэтгэгдлийг бичсэн хэрэглэгч болон сэтгэгдлийн бичвэрийг
@@ -245,18 +259,22 @@
     </ul>
     </p>
     <p>
-      Эдгээр компонентоос гадна <code>components/topBar</code> дотор байгаа 
+      Эдгээр компонентоос гадна <code>src/components/TopBar/TopBar.jsx</code> дотор байгаа
       <code>TopBar</code> компонентийг дараах шаардлагын дагуу шинэчлэнэ:
     <ul>
       <li>
         <code>TopBar</code>-ын зүүн талд таны нэр байна.
-        </l1>
+        </li>
       <li>
         <code>TopBar</code>-ын баруун талд аппын агуулгыг үндсэн хэсэгт
         юу үзүүлж байгаагаас хамаарч гаргана. Жишээ нь, үндсэн хэсэгт
         хэрэглэгчийн дэлгэрэнгүй мэдээллийг харуулж байвал <code>TopBar</code> нь
-        хэрэглэгчийн нэрийг, хэрэв хэрэглэгчийн зургийг үзүүлж байвал "Photos of " гээд 
+        хэрэглэгчийн нэрийг, хэрэв хэрэглэгчийн зургийг үзүүлж байвал "Зургууд: " гээд
         араас нь хэрэглэгчийн нэрийг залгаж харуулдаг байна.
+        <code>TopBar</code> нь <code>&lt;Routes&gt;</code>-ээс гадна рендерлэгддэг тул
+        <code>useParams()</code> ажиллахгүй. Оронд нь
+        <a href="https://reactrouter.com/api/hooks/useLocation">useLocation()</a> эсвэл
+        <a href="https://reactrouter.com/api/hooks/useMatch">useMatch()</a> hook-ийг ашиглаж болно.
       </li>
     </ul>
     </p>
@@ -264,7 +282,9 @@
       Энэ хоосон-програмд React Router ашиглан аппын ялгаатай харагдац бүрт
       гүн-холбоос (deep-linking) үүсгэж өгсөн. Таны үүсгэх компонент энэ боломжийг
       эвдэхгүй байх ёстой. Энэ нь веб хөтчийг сэргээх (refresh) үед өмнө үзэж байснаараа
-      гардаг байх боломжийг олгож байгаа юм. Бидний компонент үүсгэдэг стандарт арга нь
+      гардаг байх боломжийг олгож байгаа юм. <code>BrowserRouter</code> нь <code>/users/:userId</code>
+      гэх мэт жинхэнэ URL ашигладаг тул сэргээх үед ийм хүсэлт серверт ирдэг. Үүнд зориулж
+      <code>webServer.js</code> нь өөр замд тохироогүй бүх хүсэлтэд аппын <code>index.html</code>-ийг буцаадаг. Бидний компонент үүсгэдэг стандарт арга нь
       гүн-холбоосыг автоматаар тохируулдаг. Компонентууд хооронд объектыг дамжуулахад
       үүнийг анхаарч байх ёстой. Хэрэв ямар нэг зүйл эвдсэн байвал харагдац бүр дээр 
       сэргээх туршилт хийгээд үзээрэй.
@@ -276,8 +296,8 @@
     </p>
     <h4 class="left-border model-data">Фото апп модель өгөгдөл</h4>
     <p>
-      Энэ даалгаврын хувьд бид өмнөх даалгавраар ашигласан, нөгөө DOM-д 
-      ачаалсан шидэт модель өгөгдлийг ашиглана. Модель нь дөрвөн төрлийн объекттой.
+      Энэ даалгаврын хувьд бид <code>src/modelData/photoApp.js</code> модулиас
+      импортолдог шидэт модель өгөгдлийг ашиглана. Модель нь дөрвөн төрлийн объекттой.
       Эдгээр нь <code>user</code>, <code>photo</code>, <code>comment</code>, болон
       <code>SchemaInfo</code> төрөл.
     </p>
@@ -311,9 +331,9 @@
             <td>Хэрэглэгчийн ажил мэргэжил.</td>
           </tr>
         </table>
-        <code>window.ICSI301models.userModel(user_id)</code> DOM функц нь
+        <code>icsi301models.userModel(user_id)</code> функц нь
         хэрэглэгчийн <code>user_id</code> ID-аар <code>user</code> объектыг буцаадаг. 
-        Харин <code>window.ICSI301models.userListModel()</code> DOM функц нь 
+        Харин <code>icsi301models.userListModel()</code> функц нь 
         аппын бүх хэрэглэгчийн <code>user</code> объекыг буцаадаг.
       </li>
       <li>
@@ -339,7 +359,7 @@
           <tr>
             <td class="name">file_name:</td>
             <td>
-              Фото зургийг агуулж байгаа файлын нэр (<code>project5/images</code> хавтас доторх).
+              Фото зургийг агуулж байгаа файлын нэр (<code>project5/public/images</code> хавтас доторх; хөтчөөс <code>/images/</code>&lt;file_name&gt; замаар хандана).
             </td>
           </tr>
           <tr>
@@ -350,7 +370,7 @@
             </td>
           </tr>
         </table>
-        <code>window.ICSI301models.photoOfUserModel(user_id)</code> DOM функц нь
+        <code>icsi301models.photoOfUserModel(user_id)</code> функц нь
         хэрэглэгчийн <code>user_id</code>-д холбогдох <code>photo</code> объектуудыг 
         агуулсан хүснэгтэн хувьсагчийг буцаадаг.
       </li>
@@ -407,30 +427,30 @@
       оноо)</h3>
     <p>
       Даалгавар 1-ийг гүйцэтгэсэний дараа манай фото аппын front-end бодит апп 
-      шиг харагдах ёстой. Гол асуудал нь ЖаваСкрипт болон DOM-ыг ашиглаад 
-      хуурмаг модель өгөгдлийг ачаалсан байсан. Даалгавар 2-ын хувьд, бид энэ
+      шиг харагдах ёстой. Гол асуудал нь хуурмаг модель өгөгдлийг аппын ЖаваСкрипт
+      багц дотор шууд импортолж ачаалсан байсан. Даалгавар 2-ын хувьд, бид энэ
       арга залийг хаяад бодит апптай ижил серверээс модель өгөгдөл авдаг болгоно.
     </p>
     <p>
-      Энэ төслөөр өгсөн <code>webServer.js</code> нь Даалгавар 1-д DOM-д ачаалж 
-      ашигласан <code>ICSI301Models</code>-ийг <a href="http://expressjs.com">ExpressJS</a>
+      Энэ төслөөр өгсөн <code>webServer.js</code> нь Даалгавар 1-д импортолж
+      ашигласан <code>icsi301models</code>-ийг <a href="http://expressjs.com">ExpressJS</a>
       чиглүүлэгч (route) ашиглан серверээс өгөгдөл авах боломжийг олгож байгаа.
       Энэ API-ыг <code>webServer.js</code>-ээр гаргаж байгаа ба харгалзах URL хаягаар 
-      HTTP GET хүсэлт явуулахад <code>ICSI301Models</code> моделиудаас өгөгдлийг буцааж өгдөг.
+      HTTP GET хүсэлт явуулахад <code>icsi301models</code> моделиудаас өгөгдлийг буцааж өгдөг.
       
       Эдгээр GET хүсэлтэд хариулах HTTP хариулт нь JSON форматтай байна. Энэ API бол:
     <ul>
-      <li><code>/test/info</code> - <code>ICSI301models.schemaInfo()</code> объектыг буцаана. 
+      <li><code>/test/info</code> - <code>icsi301models.schemaInfo()</code> объектыг буцаана. 
         Энэ нь URL нь модель дуудаж турших зориулалттай.
       </li>
       <li><code>/user/list</code> - 
-        <code>ICSI301models.userListModel() функцийг дуудаж буцаана.</code>.
+        <code>icsi301models.userListModel() функцийг дуудаж буцаана.</code>.
       </li>
       <li><code>/user/:id</code> - 
-        <code>ICSI301models.userModel(id) функцийг дуудаж буцаана</code>.
+        <code>icsi301models.userModel(id) функцийг дуудаж буцаана</code>.
       </li>
       <li><code>/photosOfUser/:id</code> - 
-        <code>ICSI301models.photoOfUserModel(id) функцийг дуудаж буцаана.</code>.
+        <code>icsi301models.photoOfUserModel(id) функцийг дуудаж буцаана.</code>.
       </li>
     </ul>
     <p>
@@ -443,7 +463,7 @@
     </p>
     <p>
       Веб сервер дээрээс моделийг авдаг болгож програмаа хөрвүүлэхийн тулд
-      <code>lib/fetchModelData.js</code> файлд байгаа <code>fetchModel</code> функцийг хөгжүүлэх ёстой. 
+      <code>src/lib/fetchModelData.js</code> файлд байгаа <code>fetchModel</code> функцийг хөгжүүлэх ёстой. 
       Энэ функцийг дараах тодорхойлолтын дагуу хөгжүүлнэ:
     </p>
 <pre>
@@ -467,24 +487,24 @@
     <p>
       Таны код олон <code>fetchModel</code> хүсэлтүүдийг хүлээн авч хариулдаг байх ёстой.
       Өөрийн <code>fetchModel</code> функцийг ажиллаж байгаа эсэхийг харахын тулд
-      <a href="http://localhost:3000/photo-share.html">http://localhost:3000/photo-share.html</a>
+      <a href="http://localhost:3000">http://localhost:3000</a>
       хаягаар орж үзээрэй. Энэ нь <a href="http://localhost:3000/test/info">http://localhost:3000/test/info</a>
       хаягруу хүсэлт явуулаад буцаж ирэх хувилбарын дугаарыг дэлгэцэлдэг юм. Хувилбарын дугаарыг
       өөрийн аппынхаа <code>TopBar</code> компонентод дэлгэцэлдэг байна.
     </p>
     <p>
-      <code>lib/fetchModelData.js</code> файлд <code>fetchModel</code> функцийг амжилттай 
+      <code>src/lib/fetchModelData.js</code> файлд <code>fetchModel</code> функцийг амжилттай 
       кодлосны дараа та дараах файлуудын кодыг өөрчлөөрэй.
       <ul>
-        <li><code>components/userDetail/UserDetail.jsx</code></li>
-        <li><code>components/userList/UserList.jsx</code></li>
-        <li><code>components/userPhotos/UserPhotos.jsx</code></li>
+        <li><code>src/components/UserDetail/UserDetail.jsx</code></li>
+        <li><code>src/components/UserList/UserList.jsx</code></li>
+        <li><code>src/components/UserPhotos/UserPhotos.jsx</code></li>
       </ul>
       Дээрх  <code>fetchModel</code> функц нь серверээс өгөгдлийг авах хүсэлт тавьдаг.
-      Таны кодод <code>window.ICSI301models</code> хувьсагчийг шууд дуудаж
-      ашиглах код байх ёсгүй бөгөөд таны аппын  
-      <code>photo-share.html</code> файлд дараах мөр байх ёсгүй:<div class="code">
-      <pre>&lt;script src="modelData/photoApp.js"&gt;&lt;script&gt;</pre>
+      Таны компонентуудад <code>icsi301models</code>-ийг шууд дуудаж
+      ашиглах код байх ёсгүй. Өөрөөр хэлбэл, <code>src/components</code> доторх аль ч файлд
+      дараах мөр байх ёсгүй (<code>webServer.js</code> үүнийг импортлох нь зөв):<div class="code">
+      <pre>import icsi301models from '../../modelData/photoApp';</pre>
     </div>
     </p>
 
@@ -500,14 +520,14 @@
     </p>
 
     <p>
-      Бид <a href="https://mui.com/">Material-UI</a> гэх Гүүглээс гаргасан 
+      Бид <a href="https://mui.com/material-ui/">Material UI</a> гэх Гүүглээс гаргасан 
       <a href="https://material.io">Material Design</a> зөвлөмжийг хэрэгжүүлсэн
       React компонентийг ашиглана. Хичээл дээр ярьсан Master-Detail загварыг хэрэгжүүлэхэд
-      Material UI-ийн <a href="https://mui.com/components/grid/">Grid component</a>
-      ашиглаж харуулсан. Мөн <a href="https://mui.com/components/app-bar/">App Bar</a>
+      Material UI-ийн <a href="https://mui.com/material-ui/react-grid/">Grid component</a>
+      ашиглаж харуулсан. Мөн <a href="https://mui.com/material-ui/react-app-bar/">App Bar</a>
       компонентоор аппын толгой хэсгийг хийсэн байгаа. Хэдийгээр Material Design загварт
       бүрэн нийцсэн апп хөгжүүлэхийг шаардахгүй ч боломжтой бол 
-      <a href="https://mui.com/">Material-UI</a> элементүүдийг аль болох ашиглаж хийгээрэй.
+      <a href="https://mui.com/material-ui/">Material UI</a> элементүүдийг аль болох ашиглаж хийгээрэй.
     </p>
 
     <p>
@@ -572,11 +592,11 @@
     <h3 class="left-border">Хүлээлгэн өгөх үр дүн</h3>
     <p>
       Ердийн <a href="submit.html">Даалгавар илгээх</a> 
-      зааврын дагуу аппаа бүхэлд нь (<code>project4</code>
+      зааврын дагуу аппаа бүхэлд нь (<code>project5</code>
       хавтас доторх бүгд) илгээнэ. Илгээхээсээ өмнө зааврын дагуу
       төслийн хавтасаа цэвэрлээрэй. Ялангуяа, 180MB хэмжээтэй 
       <code>node_modules/</code> хавтсыг дэмий хадгалахыг хүсэхгүй байна.
-      <code>compiled/</code> хавтсаа ч бас устгахаа мартуузай.
+      <code>dist/</code> хавтсаа ч бас устгахаа мартуузай.
     </p>
   </section>
 
