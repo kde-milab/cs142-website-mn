@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view *)",
+      "Read(//c/Program Files/MongoDB/**)",
+      "Bash(sc query *)",
+      "Bash(powershell -c \"Get-Service MongoDB* | ft -auto\")",
+      "Bash(npm audit *)",
+      "Bash(npm run *)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"name='node.exe'\" | Select-Object ProcessId,@{n='Cmd';e={$_.CommandLine.Substring\\(0,[Math]::Min\\(150,$_.CommandLine.Length\\)\\)}} | Format-Table -AutoSize | Out-String -Width 250; Get-ChildItem \"$env:TEMP\\\\claude\\\\a0922ba66bb426ff\\\\e178a1da-6267-4376-a19a-0aba0b1f64b2\\\\scratchpad\\\\p6\\\\dist\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Date; Get-ChildItem \"$env:TEMP\\\\claude\\\\a0922ba66bb426ff\\\\e178a1da-6267-4376-a19a-0aba0b1f64b2\\\\scratchpad\\\\p6\\\\dist\\\\assets\" | Select Name,Length,LastWriteTime)",
+      "PowerShell(Stop-Process -Id 20812,106880 -Force -ErrorAction SilentlyContinue; Set-Location \"$env:TEMP\\\\claude\\\\a0922ba66bb426ff\\\\e178a1da-6267-4376-a19a-0aba0b1f64b2\\\\scratchpad\\\\p6\"; $sw=[Diagnostics.Stopwatch]::StartNew\\(\\); $p = Start-Process -FilePath node -ArgumentList \"node_modules/vite/bin/vite.js\",\"build\" -NoNewWindow -PassThru -RedirectStandardOutput vb.out -RedirectStandardError vb.err; if \\(-not $p.WaitForExit\\(90000\\)\\) { \"STILL RUNNING after 90s\"; Stop-Process -Id $p.Id -Force } else { \"exit \" + $p.ExitCode + \" in \" + $sw.Elapsed.TotalSeconds }; Get-Content vb.out -Tail 6; Get-Content vb.err -Tail 5)",
+      "Bash(node webServer.js)",
+      "Bash(curl -s localhost:3000/test/counts)",
+      "Bash(break)",
+      "Bash(curl -s localhost:3000/test)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} \" localhost:3000/test/bogus localhost:3000/users/abc localhost:3000/images/kenobi1.jpg)",
+      "Bash(npx mocha *)",
+      "Bash(curl -s -o /dev/null localhost:3000/test/info)",
+      "Bash(npm test *)",
+      "Bash(echo \"exit=$?\")",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"name='node.exe'\" | Where-Object { $_.CommandLine -match 'webServer|vite' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force; \"killed $\\($_.ProcessId\\)\" }; git -C .. status --short project6)"
+    ]
+  }
+}

@@ -1,148 +1,98 @@
 /**
- * This Node.js program loads the CS142 Project 6 model data into Mongoose
- * defined objects in a MongoDB database. It can be run with the command:
+ * Энэ Node.js программ ICSI301 Төсөл 6-ын модель өгөгдлийг Mongoose-оор
+ * тодорхойлсон объект болгон MongoDB өгөгдлийн санд ачаална. Ажиллуулахдаа:
  *     node loadDatabase.js
- * be sure to have an instance of the MongoDB running on the localhost.
+ * Ажиллуулахаас өмнө localhost дээр MongoDB ажиллаж байгаа эсэхийг шалгаарай.
  *
- * This script loads the data into the MongoDB database named 'cs142project6'.
- * In loads into collections named User and Photos. The Comments are added in
- * the Photos of the comments. Any previous objects in those collections is
- * discarded.
+ * Өгөгдлийг 'icsi301project6' нэртэй MongoDB өгөгдлийн сангийн User, Photo,
+ * SchemaInfo цуглуулгуудад ачаална. Сэтгэгдлүүд (Comment) харьяалагдах
+ * зурагныхаа дотор хадгалагдана. Эдгээр цуглуулгад өмнө нь байсан бүх
+ * объектыг устгана. Тиймээс олон удаа ажиллуулахад аюулгүй.
  *
- * NOTE: This scripts uses Promise abstraction for handling the async calls to
- * the database. We are not teaching Promises in CS142 so strongly suggest you
- * don't use them in your solution.
+ * Өгөгдлийн сантай хийх асинхрон дуудлагуудыг async/await болон
+ * Promise.all()-оор зохион байгуулсан.
  */
 
-// We use the Mongoose to define the schema stored in MongoDB.
-const mongoose = require("mongoose");
-mongoose.Promise = require("bluebird");
-mongoose.set("strictQuery", false);
-mongoose.connect("mongodb://127.0.0.1/cs142project6", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Өгөгдлийн санд хадгалах схемийг Mongoose-оор тодорхойлно.
+import mongoose from 'mongoose';
 
-// Get the magic models we used in the previous projects.
-const cs142models = require("./modelData/photoApp.js").cs142models;
+// Өмнөх төслүүдэд ашигласан "шидэт" модель өгөгдөл.
+import icsi301models from './src/modelData/photoApp.js';
 
-// Load the Mongoose schema for Use and Photo
-const User = require("./schema/user.js");
-const Photo = require("./schema/photo.js");
-const SchemaInfo = require("./schema/schemaInfo.js");
+// User, Photo, SchemaInfo-гийн Mongoose схемийг ачаална.
+import User from './schema/user.js';
+import Photo from './schema/photo.js';
+import SchemaInfo from './schema/schemaInfo.js';
 
-const versionString = "1.0";
+const mongoUrl = 'mongodb://127.0.0.1/icsi301project6';
+const versionString = '1.0';
 
-// We start by removing anything that existing in the collections.
-const removePromises = [
-  User.deleteMany({}),
-  Photo.deleteMany({}),
-  SchemaInfo.deleteMany({}),
-];
+async function loadDatabase() {
+  // Эхлээд цуглуулгуудад байгаа бүх зүйлийг устгана.
+  await Promise.all([
+    User.deleteMany({}),
+    Photo.deleteMany({}),
+    SchemaInfo.deleteMany({}),
+  ]);
 
-Promise.all(removePromises)
-  .then(function () {
-    // Load the users into the User. Mongo assigns ids to objects so we record
-    // the assigned '_id' back into the cs142model.userListModels so we have it
-    // later in the script.
-
-    const userModels = cs142models.userListModel();
-    const mapFakeId2RealId = {};
-    const userPromises = userModels.map(function (user) {
-      return User.create({
+  // Хэрэглэгчдийг User цуглуулгад ачаална. MongoDB объект бүрт өөрөө _id
+  // оноодог. Хуурамч модель өгөгдлийн _id-г MongoDB-гийн жинхэнэ _id-тай
+  // холбосон хүснэгтийг (Map) хадгалж, дараа нь зураг, сэтгэгдэлд ашиглана.
+  const userModels = icsi301models.userListModel();
+  const fakeId2RealId = new Map();
+  await Promise.all(
+    userModels.map(async (user) => {
+      const userObj = await User.create({
         first_name: user.first_name,
         last_name: user.last_name,
         location: user.location,
         description: user.description,
         occupation: user.occupation,
-      })
-        .then(function (userObj) {
-          // Set the unique ID of the object. We use the MongoDB generated _id
-          // for now but we keep it distinct from the MongoDB ID so we can go to
-          // something prettier in the future since these show up in URLs, etc.
-          userObj.save();
-          mapFakeId2RealId[user._id] = userObj._id;
-          user.objectID = userObj._id;
-          console.log(
-            "Adding user:",
-            user.first_name + " " + user.last_name,
-            " with ID ",
-            user.objectID
-          );
-        })
-        .catch(function (err) {
-          console.error("Error create user", err);
-        });
-    });
-
-    const allPromises = Promise.all(userPromises).then(function () {
-      // Once we've loaded all the users into the User collection we add all the
-      // photos. Note that the user_id of the photo is the MongoDB assigned id
-      // in the User object.
-      const photoModels = [];
-      const userIDs = Object.keys(mapFakeId2RealId);
-      userIDs.forEach(function (id) {
-        photoModels.push(...cs142models.photoOfUserModel(id));
       });
+      fakeId2RealId.set(user._id, userObj._id);
+      console.log('Хэрэглэгч нэмлээ:', user.first_name + ' ' + user.last_name, 'ID:', userObj._id);
+    })
+  );
 
-      const photoPromises = photoModels.map(function (photo) {
-        return Photo.create({
-          file_name: photo.file_name,
-          date_time: photo.date_time,
-          user_id: mapFakeId2RealId[photo.user_id],
-        })
-          .then(function (photoObj) {
-            photo.objectID = photoObj._id;
-            if (photo.comments) {
-              photo.comments.forEach(function (comment) {
-                photoObj.comments = photoObj.comments.concat([
-                  {
-                    comment: comment.comment,
-                    date_time: comment.date_time,
-                    user_id: comment.user.objectID,
-                  },
-                ]);
-                console.log(
-                  "Adding comment of length %d by user %s to photo %s",
-                  comment.comment.length,
-                  comment.user.objectID,
-                  photo.file_name
-                );
-              });
-            }
-            photoObj.save();
-            console.log(
-              "Adding photo:",
-              photo.file_name,
-              " of user ID ",
-              photoObj.user_id
-            );
-          })
-          .catch(function (err) {
-            console.error("Error create user", err);
-          });
+  // Бүх хэрэглэгчийг ачаалсны дараа зургуудыг нэмнэ. Зургийн user_id болон
+  // сэтгэгдлийн user_id нь User объектын MongoDB-гийн оноосон _id байна.
+  const photoModels = userModels.flatMap((user) => icsi301models.photoOfUserModel(user._id));
+  await Promise.all(
+    photoModels.map(async (photo) => {
+      const comments = (photo.comments ?? []).map((comment) => {
+        console.log(
+          'Урт нь %d сэтгэгдлийг %s хэрэглэгчээс %s зурагт нэмлээ',
+          comment.comment.length,
+          fakeId2RealId.get(comment.user._id),
+          photo.file_name
+        );
+        return {
+          comment: comment.comment,
+          date_time: comment.date_time,
+          user_id: fakeId2RealId.get(comment.user._id),
+        };
       });
-      return Promise.all(photoPromises).then(function () {
-        // Create the SchemaInfo object
-        return SchemaInfo.create({
-          version: versionString,
-        })
-          .then(function (schemaInfo) {
-            console.log(
-              "SchemaInfo object created with version ",
-              schemaInfo.version
-            );
-          })
-          .catch(function (err) {
-            console.error("Error create schemaInfo", err);
-          });
+      const photoObj = await Photo.create({
+        file_name: photo.file_name,
+        date_time: photo.date_time,
+        user_id: fakeId2RealId.get(photo.user_id),
+        comments,
       });
-    });
+      console.log('Зураг нэмлээ:', photo.file_name, 'хэрэглэгчийн ID:', photoObj.user_id);
+    })
+  );
 
-    allPromises.then(function () {
-      mongoose.disconnect();
-    });
-  })
-  .catch(function (err) {
-    console.error("Error create schemaInfo", err);
-  });
+  // SchemaInfo объект үүсгэнэ.
+  const schemaInfo = await SchemaInfo.create({ version: versionString });
+  console.log('SchemaInfo объект үүслээ, хувилбар:', schemaInfo.version);
+}
+
+try {
+  await mongoose.connect(mongoUrl);
+  await loadDatabase();
+} catch (err) {
+  console.error('Өгөгдлийн санг ачаалахад алдаа гарлаа:', err);
+  process.exitCode = 1;
+} finally {
+  await mongoose.disconnect();
+}

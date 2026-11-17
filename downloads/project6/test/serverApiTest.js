@@ -1,429 +1,232 @@
-"use strict";
-
 /**
- * Mocha test of CS142 Project 6 web API.  To run type
- *   node_modules/.bin/mocha serverApiTest.js
+ * ICSI301 Төсөл 6-ын веб API-гийн Mocha тест. Ажиллуулахдаа энэ (test) хавтас
+ * дотроос:
+ *   npm install     (анх удаа)
+ *   npm test
+ *
+ * Тест ажиллуулахаас өмнө MongoDB болон веб сервер (node webServer.js)
+ * ажиллаж байх ёстой бөгөөд өгөгдлийн санг node loadDatabase.js командаар
+ * ачаалсан байх ёстой.
  */
 
-const assert = require("assert");
-const http = require("http");
-const async = require("async");
-const _ = require("lodash");
-const fs = require("fs");
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 
-const cs142models = require("../modelData/photoApp.js").cs142models;
+import icsi301models from '../src/modelData/photoApp.js';
 
-const port = 3000;
-const host = "localhost";
+const baseUrl = 'http://localhost:3000';
 
-// Valid properties of a user list model
-const userListProperties = ["first_name", "last_name", "_id"];
-// Valid properties of a user detail model
+// Хэрэглэгчийн жагсаалтын моделийн зөвшөөрөгдөх шинжүүд
+const userListProperties = ['first_name', 'last_name', '_id'];
+// Хэрэглэгчийн дэлгэрэнгүй моделийн зөвшөөрөгдөх шинжүүд
 const userDetailProperties = [
-  "first_name",
-  "last_name",
-  "_id",
-  "location",
-  "description",
-  "occupation",
+  'first_name',
+  'last_name',
+  '_id',
+  'location',
+  'description',
+  'occupation',
 ];
-// Valid properties of the photo model
-const photoProperties = ["file_name", "date_time", "user_id", "_id", "comments"];
-// Valid comments properties
-const commentProperties = ["comment", "date_time", "_id", "user"];
+// Зургийн моделийн зөвшөөрөгдөх шинжүүд
+const photoProperties = ['file_name', 'date_time', 'user_id', '_id', 'comments'];
+// Сэтгэгдлийн зөвшөөрөгдөх шинжүүд
+const commentProperties = ['comment', 'date_time', '_id', 'user'];
+
+/**
+ * Веб серверт GET хүсэлт явуулж, HTTP төлөв болон хариуг буцаана. Хариу
+ * JSON бол задалж (parse), үгүй бол текстээр нь буцаана.
+ */
+async function get(path) {
+  const response = await fetch(baseUrl + path);
+  const text = await response.text();
+  let body;
+  try {
+    body = JSON.parse(text);
+  } catch {
+    body = text;
+  }
+  return { status: response.status, body };
+}
+
+/**
+ * Объектод зөвшөөрөгдөөгүй (allowed жагсаалтад байхгүй) шинжүүдийг буцаана.
+ */
+function extraProperties(obj, allowed) {
+  return Object.keys(obj).filter((key) => !allowed.includes(key));
+}
 
 function assertEqualDates(d1, d2) {
-  assert(new Date(d1).valueOf() === new Date(d2).valueOf());
+  assert.strictEqual(new Date(d1).valueOf(), new Date(d2).valueOf());
 }
 
 /**
- * MongoDB automatically adds some properties to our models. We allow these to
- * appear by removing them when before checking for invalid properties.  This
- * way the models are permitted but not required to have these properties.
+ * Серверээс авсан хэрэглэгчдийн жагсаалтаас нэрээр нь хэрэглэгч хайна.
  */
-function removeMongoProperties(model) {
-  return model;
+function findUser(userList, realUser) {
+  const user = userList.find(
+    (u) => u.first_name === realUser.first_name && u.last_name === realUser.last_name
+  );
+  assert(user, realUser.first_name + ' ' + realUser.last_name + ' хэрэглэгч олдсонгүй');
+  return user;
 }
 
-describe("CS142 Photo App: Web API Tests", function () {
-  describe("test using model data", function (done) {
-    it("webServer does not use model data", function (done) {
-      fs.readFile("../webServer.js", function (err, data) {
-        if (err) throw err;
-        const regex =
-          /\n\s*const cs142models = require\('\.\/modelData\/photoApp\.js'\)\.cs142models;/g;
-        assert(
-          !data.toString().match(regex),
-          "webServer still contains reference to cs142 models."
+/**
+ * /user/list-ээс хэрэглэгчдийн жагсаалтыг авна.
+ */
+async function getUserList() {
+  const { status, body } = await get('/user/list');
+  assert.strictEqual(status, 200, 'HTTP хариултын төлөв OK биш байна');
+  return body;
+}
+
+describe('ICSI301 фото апп: Веб API тест', function () {
+  describe('модель өгөгдөл ашиглаж байгаа эсэхийг шалгах', function () {
+    it('webServer модель өгөгдөл ашиглахгүй байна', async function () {
+      const source = await readFile(new URL('../webServer.js', import.meta.url), 'utf8');
+      const regex = /^\s*import\s+icsi301models\s+from\s+['"]\.\/src\/modelData\/photoApp(\.js)?['"]/m;
+      assert(!regex.test(source), 'webServer.js icsi301models-ийг ашигласан хэвээр байна.');
+    });
+  });
+
+  describe('/user/list шалгах', function () {
+    let userList;
+    const icsi301Users = icsi301models.userListModel();
+
+    it('хэрэглэгчдийн жагсаалтыг авч чадна', async function () {
+      userList = await getUserList();
+    });
+
+    it('массив байна', function () {
+      assert(Array.isArray(userList));
+    });
+
+    it('элементийн тоо зөв байна', function () {
+      assert.strictEqual(userList.length, icsi301Users.length);
+    });
+
+    it('хэрэглэгч бүрт нэг бичлэг байна', function () {
+      icsi301Users.forEach((realUser) => {
+        const user = findUser(userList, realUser);
+        const sameId = userList.filter((u) => u._id === user._id);
+        assert.strictEqual(sameId.length, 1, user._id + ' id-тай олон хэрэглэгч байна');
+        const extraProps = extraProperties(user, userListProperties);
+        assert.strictEqual(
+          extraProps.length,
+          0,
+          'хэрэглэгчийн объектод илүү шинж байна: ' + extraProps
         );
-        done();
       });
     });
   });
 
-  describe("test /user/list", function (done) {
+  describe('/user/:id шалгах', function () {
     let userList;
-    const cs142Users = cs142models.userListModel();
+    const icsi301Users = icsi301models.userListModel();
 
-    it("can get the list of user", function (done) {
-      http.get(
-        {
-          hostname: host,
-          port: port,
-          path: "/user/list",
-        },
-        function (response) {
-          let responseBody = "";
-          response.on("data", function (chunk) {
-            responseBody += chunk;
-          });
-
-          response.on("end", function () {
-            assert.strictEqual(
-              response.statusCode,
-              200,
-              "HTTP response status code not OK"
-            );
-            userList = JSON.parse(responseBody);
-            done();
-          });
-        }
-      );
+    it('хэрэглэгчдийн жагсаалтыг авч чадна', async function () {
+      userList = await getUserList();
     });
 
-    it("is an array", function (done) {
-      assert(Array.isArray(userList));
-      done();
-    });
+    it('/user/:id-аар хэрэглэгч бүрийн дэлгэрэнгүйг авч чадна', async function () {
+      // Хүсэлтүүдийг зэрэг явуулаад бүгд дуусахыг хүлээнэ.
+      await Promise.all(
+        icsi301Users.map(async (realUser) => {
+          const id = findUser(userList, realUser)._id;
+          const { status, body: userInfo } = await get('/user/' + id);
+          assert.strictEqual(status, 200, 'HTTP хариултын төлөв OK биш байна');
+          assert.strictEqual(userInfo._id, id);
+          assert.strictEqual(userInfo.first_name, realUser.first_name);
+          assert.strictEqual(userInfo.last_name, realUser.last_name);
+          assert.strictEqual(userInfo.location, realUser.location);
+          assert.strictEqual(userInfo.description, realUser.description);
+          assert.strictEqual(userInfo.occupation, realUser.occupation);
 
-    it("has the correct number elements", function (done) {
-      assert.strictEqual(userList.length, cs142Users.length);
-      done();
-    });
-
-    it("has an entry for each of the users", function (done) {
-      async.each(
-        cs142Users,
-        function (realUser, callback) {
-          const user = _.find(userList, {
-            first_name: realUser.first_name,
-            last_name: realUser.last_name,
-          });
-          assert(
-            user,
-            "could not find user " +
-              realUser.first_name +
-              " " +
-              realUser.last_name
-          );
-          assert.strictEqual(
-            _.countBy(userList, "_id")[user._id],
-            1,
-            "Multiple users with id:" + user._id
-          );
-          const extraProps = _.difference(
-            Object.keys(removeMongoProperties(user)),
-            userListProperties
-          );
+          const extraProps = extraProperties(userInfo, userDetailProperties);
           assert.strictEqual(
             extraProps.length,
             0,
-            "user object has extra properties: " + extraProps
+            'хэрэглэгчийн объектод илүү шинж байна: ' + extraProps
           );
-          callback();
-        },
-        done
+        })
       );
+    });
+
+    it('буруу хэрэглэгчийн id-д 400 төлөв буцаана', async function () {
+      const { status } = await get('/user/1');
+      assert.strictEqual(status, 400);
     });
   });
 
-  describe("test /user/:id", function (done) {
+  describe('/photosOfUser/:id шалгах', function () {
     let userList;
-    const cs142Users = cs142models.userListModel();
+    const icsi301Users = icsi301models.userListModel();
 
-    it("can get the list of user", function (done) {
-      http.get(
-        {
-          hostname: host,
-          port: port,
-          path: "/user/list",
-        },
-        function (response) {
-          let responseBody = "";
-          response.on("data", function (chunk) {
-            responseBody += chunk;
-          });
-
-          response.on("end", function () {
-            assert.strictEqual(
-              response.statusCode,
-              200,
-              "HTTP response status code not OK"
-            );
-            userList = JSON.parse(responseBody);
-            done();
-          });
-        }
-      );
+    it('хэрэглэгчдийн жагсаалтыг авч чадна', async function () {
+      userList = await getUserList();
     });
 
-    it("can get each of the user detail with /user/:id", function (done) {
-      async.each(
-        cs142Users,
-        function (realUser, callback) {
-          const user = _.find(userList, {
-            first_name: realUser.first_name,
-            last_name: realUser.last_name,
-          });
-          assert(
-            user,
-            "could not find user " +
-              realUser.first_name +
-              " " +
-              realUser.last_name
-          );
-          const id = user._id;
-          http.get(
-            {
-              hostname: host,
-              port: port,
-              path: "/user/" + id,
-            },
-            function (response) {
-              let responseBody = "";
-              response.on("data", function (chunk) {
-                responseBody += chunk;
-              });
+    it('/photosOfUser/:id-аар хэрэглэгч бүрийн зургийг авч чадна', async function () {
+      await Promise.all(
+        icsi301Users.map(async (realUser) => {
+          const id = findUser(userList, realUser)._id;
+          const { status, body: photos } = await get('/photosOfUser/' + id);
+          assert.strictEqual(status, 200, 'HTTP хариултын төлөв OK биш байна');
 
-              response.on("end", function () {
-                const userInfo = JSON.parse(responseBody);
-                assert.strictEqual(userInfo._id, id);
-                assert.strictEqual(userInfo.first_name, realUser.first_name);
-                assert.strictEqual(userInfo.last_name, realUser.last_name);
-                assert.strictEqual(userInfo.location, realUser.location);
-                assert.strictEqual(userInfo.description, realUser.description);
-                assert.strictEqual(userInfo.occupation, realUser.occupation);
+          const realPhotos = icsi301models.photoOfUserModel(realUser._id);
+          assert.strictEqual(photos.length, realPhotos.length, 'буцаасан зургийн тоо буруу');
 
-                const extraProps = _.difference(
-                  Object.keys(removeMongoProperties(userInfo)),
-                  userDetailProperties
-                );
+          realPhotos.forEach((realPhoto) => {
+            const matches = photos.filter((p) => p.file_name === realPhoto.file_name);
+            assert.strictEqual(matches.length, 1, realPhoto.file_name + ' зургийг хайж байна');
+            const photo = matches[0];
+            const extraProps1 = extraProperties(photo, photoProperties);
+            assert.strictEqual(
+              extraProps1.length,
+              0,
+              'зургийн объектод илүү шинж байна: ' + extraProps1
+            );
+            assert.strictEqual(photo.user_id, id);
+            assertEqualDates(photo.date_time, realPhoto.date_time);
+            assert.strictEqual(photo.file_name, realPhoto.file_name);
+
+            if (realPhoto.comments) {
+              assert.strictEqual(
+                photo.comments.length,
+                realPhoto.comments.length,
+                realPhoto.file_name + ' зургийн сэтгэгдлүүд'
+              );
+
+              realPhoto.comments.forEach((realComment) => {
+                const comment = photo.comments.find((c) => c.comment === realComment.comment);
+                assert(comment, 'сэтгэгдэл олдсонгүй: ' + realComment.comment);
+                const extraProps2 = extraProperties(comment, commentProperties);
                 assert.strictEqual(
-                  extraProps.length,
+                  extraProps2.length,
                   0,
-                  "user object has extra properties: " + extraProps
+                  'сэтгэгдлийн объектод илүү шинж байна: ' + extraProps2
                 );
-                callback();
-              });
-            }
-          );
-        },
-        done
-      );
-    });
+                assertEqualDates(comment.date_time, realComment.date_time);
 
-    it("can return a 400 status on an invalid user id", function (done) {
-      http.get(
-        {
-          hostname: host,
-          port: port,
-          path: "/user/1",
-        },
-        function (response) {
-          let responseBody = "";
-          response.on("data", function (chunk) {
-            responseBody += chunk;
-          });
-
-          response.on("end", function () {
-            assert.strictEqual(response.statusCode, 400);
-            done();
-          });
-        }
-      );
-    });
-  });
-
-  describe("test /photosOfUser/:id", function (done) {
-    let userList;
-    const cs142Users = cs142models.userListModel();
-
-    it("can get the list of user", function (done) {
-      http.get(
-        {
-          hostname: host,
-          port: port,
-          path: "/user/list",
-        },
-        function (response) {
-          let responseBody = "";
-          response.on("data", function (chunk) {
-            responseBody += chunk;
-          });
-
-          response.on("end", function () {
-            assert.strictEqual(
-              response.statusCode,
-              200,
-              "HTTP response status code not OK"
-            );
-            userList = JSON.parse(responseBody);
-            done();
-          });
-        }
-      );
-    });
-
-    it("can get each of the user photos with /photosOfUser/:id", function (done) {
-      async.each(
-        cs142Users,
-        function (realUser, callback) {
-          // validate the the user is in the list once
-          const user = _.find(userList, {
-            first_name: realUser.first_name,
-            last_name: realUser.last_name,
-          });
-          assert(
-            user,
-            "could not find user " +
-              realUser.first_name +
-              " " +
-              realUser.last_name
-          );
-          let photos;
-          const id = user._id;
-          http.get(
-            {
-              hostname: host,
-              port: port,
-              path: "/photosOfUser/" + id,
-            },
-            function (response) {
-              let responseBody = "";
-              response.on("data", function (chunk) {
-                responseBody += chunk;
-              });
-              response.on("error", function (err) {
-                callback(err);
-              });
-
-              response.on("end", function () {
+                const extraProps3 = extraProperties(comment.user, userListProperties);
                 assert.strictEqual(
-                  response.statusCode,
-                  200,
-                  "HTTP response status code not OK"
+                  extraProps3.length,
+                  0,
+                  'сэтгэгдлийн хэрэглэгчийн объектод илүү шинж байна: ' + extraProps3
                 );
-                photos = JSON.parse(responseBody);
-
-                const real_photos = cs142models.photoOfUserModel(realUser._id);
-
-                assert.strictEqual(
-                  real_photos.length,
-                  photos.length,
-                  "wrong number of photos returned"
-                );
-                _.forEach(real_photos, function (real_photo) {
-                  const matches = _.filter(photos, {
-                    file_name: real_photo.file_name,
-                  });
-                  assert.strictEqual(
-                    matches.length,
-                    1,
-                    " looking for photo " + real_photo.file_name
-                  );
-                  const photo = matches[0];
-                  const extraProps1 = _.difference(
-                    Object.keys(removeMongoProperties(photo)),
-                    photoProperties
-                  );
-                  assert.strictEqual(
-                    extraProps1.length,
-                    0,
-                    "photo object has extra properties: " + extraProps1
-                  );
-                  assert.strictEqual(photo.user_id, id);
-                  assertEqualDates(photo.date_time, real_photo.date_time);
-                  assert.strictEqual(photo.file_name, real_photo.file_name);
-
-                  if (real_photo.comments) {
-                    assert.strictEqual(
-                      photo.comments.length,
-                      real_photo.comments.length,
-                      "comments on photo " + real_photo.file_name
-                    );
-
-                    _.forEach(real_photo.comments, function (real_comment) {
-                      const comment = _.find(photo.comments, {
-                        comment: real_comment.comment,
-                      });
-                      assert(comment);
-                      const extraProps2 = _.difference(
-                        Object.keys(removeMongoProperties(comment)),
-                        commentProperties
-                      );
-                      assert.strictEqual(
-                        extraProps2.length,
-                        0,
-                        "comment object has extra properties: " + extraProps2
-                      );
-                      assertEqualDates(
-                        comment.date_time,
-                        real_comment.date_time
-                      );
-
-                      const extraProps3 = _.difference(
-                        Object.keys(removeMongoProperties(comment.user)),
-                        userListProperties
-                      );
-                      assert.strictEqual(
-                        extraProps3.length,
-                        0,
-                        "comment user object has extra properties: " +
-                          extraProps3
-                      );
-                      assert.strictEqual(
-                        comment.user.first_name,
-                        real_comment.user.first_name
-                      );
-                      assert.strictEqual(
-                        comment.user.last_name,
-                        real_comment.user.last_name
-                      );
-                    });
-                  } else {
-                    assert(!photo.comments || photo.comments.length === 0);
-                  }
-                });
-                callback();
+                assert.strictEqual(comment.user.first_name, realComment.user.first_name);
+                assert.strictEqual(comment.user.last_name, realComment.user.last_name);
               });
+            } else {
+              assert(!photo.comments || photo.comments.length === 0);
             }
-          );
-        },
-        function (err) {
-          done();
-        }
+          });
+        })
       );
     });
 
-    it("can return a 400 status on an invalid id to photosOfUser", function (done) {
-      http.get(
-        {
-          hostname: host,
-          port: port,
-          path: "/photosOfUser/1",
-        },
-        function (response) {
-          let responseBody = "";
-          response.on("data", function (chunk) {
-            responseBody += chunk;
-          });
-
-          response.on("end", function () {
-            assert.strictEqual(response.statusCode, 400);
-            done();
-          });
-        }
-      );
+    it('photosOfUser-д буруу id өгвөл 400 төлөв буцаана', async function () {
+      const { status } = await get('/photosOfUser/1');
+      assert.strictEqual(status, 400);
     });
   });
 });

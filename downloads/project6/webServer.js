@@ -1,185 +1,185 @@
 /**
- * This builds on the webServer of previous projects in that it exports the
- * current directory via webserver listing on a hard code (see portno below)
- * port. It also establishes a connection to the MongoDB named 'cs142project6'.
+ * ICSI301 Төсөл 6-ын веб сервер. Төсөл 5-ын веб сервер дээр суурилсан бөгөөд
+ * 'icsi301project6' нэртэй MongoDB өгөгдлийн сантай холбогддог.
  *
- * To start the webserver run the command:
- *    node webServer.js
+ * Серверийг асаахдаа:
+ *    npm start        (эсвэл node webServer.js)
+ *    npm run dev      (серверийн код өөрчлөгдөх бүрт автоматаар дахин асна)
  *
- * Note that anyone able to connect to localhost:portNo will be able to fetch
- * any file accessible to the current user in the current directory or any of
- * its children.
+ * Анхааруулга: localhost:3000-д холбогдож чадах хэн ч dist/ хавтас доторх
+ * файлуудыг татаж авах боломжтой.
  *
- * This webServer exports the following URLs:
- * /            - Returns a text status message. Good for testing web server
- *                running.
- * /test        - Returns the SchemaInfo object of the database in JSON format.
- *                This is good for testing connectivity with MongoDB.
- * /test/info   - Same as /test.
- * /test/counts - Returns the population counts of the cs142 collections in the
- *                database. Format is a JSON object with properties being the
- *                collection name and the values being the counts.
+ * Энэ веб сервер дараах URL-уудыг өгнө:
+ * /test        - Өгөгдлийн сангийн SchemaInfo объектыг JSON хэлбэрээр буцаана.
+ *                MongoDB-тэй холбогдож байгаа эсэхийг шалгахад тохиромжтой.
+ * /test/info   - /test-тэй ижил.
+ * /test/counts - Өгөгдлийн сан дахь цуглуулга (collection) бүрийн объектын
+ *                тоог буцаана. Шинж нь цуглуулгын нэр, утга нь тоо байх JSON
+ *                объект.
  *
- * The following URLs need to be changed to fetch there reply values from the
- * database:
- * /user/list         - Returns an array containing all the User objects from
- *                      the database (JSON format).
- * /user/:id          - Returns the User object with the _id of id (JSON
- *                      format).
- * /photosOfUser/:id  - Returns an array with all the photos of the User (id).
- *                      Each photo should have all the Comments on the Photo
- *                      (JSON format).
+ * Дараах URL-ууд хариугаа өгөгдлийн сангаас авдаг болгож өөрчлөгдөх ёстой:
+ * /user/list         - Хажуугийн навигацийн жагсаалтад хэрэгтэй хэрэглэгчдийн
+ *                      массив (JSON).
+ * /user/:id          - _id нь id-тай хэрэглэгчийн дэлгэрэнгүй мэдээлэл (JSON).
+ * /photosOfUser/:id  - id-тай хэрэглэгчийн бүх зураг. Зураг бүр өөр дээрээ
+ *                      бичигдсэн бүх сэтгэгдлийг агуулна (JSON).
  */
 
-const mongoose = require("mongoose");
-mongoose.Promise = require("bluebird");
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import express from 'express';
+import mongoose from 'mongoose';
 
-const async = require("async");
+// User, Photo, SchemaInfo-гийн Mongoose схемийг ачаална.
+import User from './schema/user.js';
+import Photo from './schema/photo.js';
+import SchemaInfo from './schema/schemaInfo.js';
 
-const express = require("express");
+// XXX - Таны илгээх код энэ мөргүйгээр ажиллах ёстой. Тест ажиллуулахаас
+// болон илгээхээс өмнө энэ мөрийг устгаарай!
+import icsi301models from './src/modelData/photoApp.js';
+
+const portno = 3000; // Ашиглах портын дугаар
+const mongoUrl = 'mongodb://127.0.0.1/icsi301project6';
+const distDir = join(import.meta.dirname, 'dist');
+
+// mongoose.connect() нь Promise буцаана. Холболт тогтохоос өмнө ирсэн
+// хайлтуудыг Mongoose хүлээлгэж (buffer) байгаад холбогдсоны дараа ажиллуулна.
+mongoose
+  .connect(mongoUrl)
+  .then(() => console.log('MongoDB-д холбогдлоо: ' + mongoUrl))
+  .catch((err) => {
+    console.error('MongoDB-д холбогдож чадсангүй. mongod ажиллаж байгаа эсэхийг шалгана уу.', err.message);
+  });
+
 const app = express();
 
-// Load the Mongoose schema for User, Photo, and SchemaInfo
-const User = require("./schema/user.js");
-const Photo = require("./schema/photo.js");
-const SchemaInfo = require("./schema/schemaInfo.js");
-
-// XXX - Your submission should work without this line. Comment out or delete
-// this line for tests and before submission!
-const cs142models = require("./modelData/photoApp.js").cs142models;
-mongoose.set("strictQuery", false);
-mongoose.connect("mongodb://127.0.0.1/cs142project6", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-// We have the express static module
-// (http://expressjs.com/en/starter/static-files.html) do all the work for us.
-app.use(express.static(__dirname));
-
-app.get("/", function (request, response) {
-  response.send("Simple web server of files from " + __dirname);
-});
-
 /**
- * Use express to handle argument passing in the URL. This .get will cause
- * express to accept URLs with /test/<something> and return the something in
- * request.params.p1.
- * 
- * If implement the get as follows:
- * /test        - Returns the SchemaInfo object of the database in JSON format.
- *                This is good for testing connectivity with MongoDB.
- * /test/info   - Same as /test.
- * /test/counts - Returns an object with the counts of the different collections
- *                in JSON format.
+ * Express нь URL-ийн параметрийг задалж өгдөг. Доорх зам /test болон
+ * /test/<ямар нэг зүйл> хоёуланд нь тохирох ба <ямар нэг зүйл>-ийг
+ * request.params.p1-д өгнө. ({/:p1} нь Express 5-ын заавал биш параметр.)
+ *
+ * /test        - Өгөгдлийн сангийн SchemaInfo объектыг JSON хэлбэрээр буцаана.
+ * /test/info   - /test-тэй ижил.
+ * /test/counts - Цуглуулга бүрийн объектын тоог JSON хэлбэрээр буцаана.
  */
-app.get("/test/:p1", function (request, response) {
-  // Express parses the ":p1" from the URL and returns it in the request.params
-  // objects.
-  console.log("/test called with param1 = ", request.params.p1);
+app.get('/test{/:p1}', async (request, response) => {
+  // Express нь URL-ийн ":p1" хэсгийг ялгаж request.params объектод өгнө.
+  console.log('/test дуудагдлаа, param1 = ', request.params.p1);
 
-  const param = request.params.p1 || "info";
+  const param = request.params.p1 || 'info';
 
-  if (param === "info") {
-    // Fetch the SchemaInfo. There should only one of them. The query of {} will
-    // match it.
-    SchemaInfo.find({}, function (err, info) {
-      if (err) {
-        // Query returned an error. We pass it back to the browser with an
-        // Internal Service Error (500) error code.
-        console.error("Error in /user/info:", err);
-        response.status(500).send(JSON.stringify(err));
+  if (param === 'info') {
+    try {
+      // SchemaInfo ганцхан байх ёстой. {} хайлт түүнд тохирно.
+      const info = await SchemaInfo.findOne({});
+      if (!info) {
+        // Хайлт алдаагүй ч SchemaInfo объект олдсонгүй. Энэ нь мөн серверийн
+        // дотоод алдаа.
+        response.status(500).send('SchemaInfo алга');
         return;
       }
-      if (info.length === 0) {
-        // Query didn't return an error but didn't find the SchemaInfo object -
-        // This is also an internal error return.
-        response.status(500).send("Missing SchemaInfo");
-        return;
-      }
-
-      // We got the object - return it in JSON format.
-      console.log("SchemaInfo", info[0]);
-      response.end(JSON.stringify(info[0]));
-    });
-  } else if (param === "counts") {
-    // In order to return the counts of all the collections we need to do an
-    // async call to each collections. That is tricky to do so we use the async
-    // package do the work. We put the collections into array and use async.each
-    // to do each .count() query.
+      // Объект олдлоо. JSON хэлбэрээр буцаана.
+      console.log('SchemaInfo', info);
+      response.status(200).send(info);
+    } catch (err) {
+      // Хайлт алдаа буцаасан. Алдааг хөтөч рүү Internal Server Error (500)
+      // кодтой буцаана.
+      console.error('/test/info алдаа:', err);
+      response.status(500).send(JSON.stringify(err));
+    }
+  } else if (param === 'counts') {
+    // Бүх цуглуулгын тоог буцаахын тулд цуглуулга бүрт асинхрон
+    // countDocuments() хайлт хийнэ. Эдгээр хайлт бие биеэсээ хамааралгүй тул
+    // нэг нэгээр нь хүлээх (await) шаардлагагүй. Бүгдийг нэг дор эхлүүлээд
+    // Promise.all()-оор бүгд дуусахыг хүлээнэ. Ингэснээр татан авалт зэрэгцээ
+    // явагдана.
+    //
+    // Анхаар: дараах код хайлтуудыг ЦУВАА болгоно (эхнийх нь дуусахыг хүлээж
+    // байж дараагийнх эхэлнэ):
+    //     for (const col of collections) {
+    //       col.count = await col.collection.countDocuments({});
+    //     }
     const collections = [
-      { name: "user", collection: User },
-      { name: "photo", collection: Photo },
-      { name: "schemaInfo", collection: SchemaInfo },
+      { name: 'user', collection: User },
+      { name: 'photo', collection: Photo },
+      { name: 'schemaInfo', collection: SchemaInfo },
     ];
-    async.each(
-      collections,
-      function (col, done_callback) {
-        col.collection.countDocuments({}, function (err, count) {
-          col.count = count;
-          done_callback(err);
-        });
-      },
-      function (err) {
-        if (err) {
-          response.status(500).send(JSON.stringify(err));
-        } else {
-          const obj = {};
-          for (let i = 0; i < collections.length; i++) {
-            obj[collections[i].name] = collections[i].count;
-          }
-          response.end(JSON.stringify(obj));
-        }
-      }
-    );
+    try {
+      const counts = await Promise.all(
+        collections.map((col) => col.collection.countDocuments({}))
+      );
+      const obj = {};
+      collections.forEach((col, i) => {
+        obj[col.name] = counts[i];
+      });
+      response.status(200).send(obj);
+    } catch (err) {
+      response.status(500).send(JSON.stringify(err));
+    }
   } else {
-    // If we know understand the parameter we return a (Bad Parameter) (400)
-    // status.
-    response.status(400).send("Bad param " + param);
+    // Ойлгохгүй параметр ирвэл Bad Request (400) төлөв буцаана.
+    response.status(400).send('Буруу параметр ' + param);
   }
 });
 
 /**
- * URL /user/list - Returns all the User objects.
+ * URL /user/list - Бүх хэрэглэгчийн объектыг буцаана.
  */
-app.get("/user/list", function (request, response) {
-  response.status(200).send(cs142models.userListModel());
+app.get('/user/list', (request, response) => {
+  response.status(200).send(icsi301models.userListModel());
 });
 
 /**
- * URL /user/:id - Returns the information for User (id).
+ * URL /user/:id - id-тай хэрэглэгчийн мэдээллийг буцаана.
  */
-app.get("/user/:id", function (request, response) {
+app.get('/user/:id', (request, response) => {
   const id = request.params.id;
-  const user = cs142models.userModel(id);
+  const user = icsi301models.userModel(id);
   if (user === null) {
-    console.log("User with _id:" + id + " not found.");
-    response.status(400).send("Not found");
+    console.log('_id:' + id + ' хэрэглэгч олдсонгүй.');
+    response.status(400).send('Олдсонгүй');
     return;
   }
   response.status(200).send(user);
 });
 
 /**
- * URL /photosOfUser/:id - Returns the Photos for User (id).
+ * URL /photosOfUser/:id - id-тай хэрэглэгчийн зургуудыг буцаана.
  */
-app.get("/photosOfUser/:id", function (request, response) {
+app.get('/photosOfUser/:id', (request, response) => {
   const id = request.params.id;
-  const photos = cs142models.photoOfUserModel(id);
+  const photos = icsi301models.photoOfUserModel(id);
   if (photos.length === 0) {
-    console.log("Photos for user with _id:" + id + " not found.");
-    response.status(400).send("Not found");
+    console.log('_id:' + id + ' хэрэглэгчийн зураг олдсонгүй.');
+    response.status(400).send('Олдсонгүй');
     return;
   }
   response.status(200).send(photos);
 });
 
-const server = app.listen(3000, function () {
+// dist/ доторх файлуудыг (index.html, JS багц, зураг) express.static
+// (https://expressjs.com/en/starter/static-files.html) модуль үйлчилнэ.
+app.use(express.static(distDir));
+
+// Гүн холбоос (deep linking): BrowserRouter нь /users/:userId гэх мэт URL
+// ашигладаг. Хөтчийг сэргээх (refresh) үед ийм URL серверт ирэх тул дээрх
+// замуудын алинд нь ч тохироогүй GET хүсэлтэд аппын index.html-ийг буцаана.
+// Ингэснээр React Router URL-ийг уншиж зөв харагдацыг рендерлэнэ.
+app.use((request, response, next) => {
+  if (request.method !== 'GET') {
+    next();
+    return;
+  }
+  response.sendFile(join(distDir, 'index.html'));
+});
+
+const server = app.listen(portno, () => {
   const port = server.address().port;
-  console.log(
-    "Listening at http://localhost:" +
-      port +
-      " exporting the directory " +
-      __dirname
-  );
+  const base = 'http://localhost:' + port;
+  console.log(base + ' хаягаар ' + distDir + ' хавтсыг үйлчилж байна');
+  console.log('MongoDB-тэй холбогдсон эсэхийг шалгах: ' + base + '/test/info, ' + base + '/test/counts');
+  if (!existsSync(distDir)) {
+    console.log('dist/ хавтас алга. Эхлээд npm run build (эсвэл npm run build:w) командыг ажиллуулна уу.');
+  }
 });

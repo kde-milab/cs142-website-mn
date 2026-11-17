@@ -1,21 +1,16 @@
-"use strict";
-
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 /**
- * Create a Mongoose Schema.
+ * Өгөгдлийн сангийн схемийн мэдээллийн (SchemaInfo) Mongoose схем.
  */
-const schemaInfo = new mongoose.Schema({
-    version: String,
-    load_date_time: {type: Date, default: Date.now},
+const schemaInfoSchema = new mongoose.Schema({
+  version: String,
+  load_date_time: { type: Date, default: Date.now },
 });
 
 /**
- * Create a Mongoose Model.
+ * schemaInfoSchema-г ашиглан SchemaInfo Mongoose модель үүсгэнэ.
  */
-const SchemaInfo = mongoose.model('SchemaInfo', schemaInfo);
+const SchemaInfo = mongoose.model('SchemaInfo', schemaInfoSchema);
 
-/**
- * Make this available to our application.
- */
-module.exports = SchemaInfo;
+export default SchemaInfo;

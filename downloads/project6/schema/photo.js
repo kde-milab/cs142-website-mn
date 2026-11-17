@@ -1,39 +1,34 @@
-"use strict";
-
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
 /**
- * Define the Mongoose Schema for a Comment.
+ * Сэтгэгдлийн (Comment) Mongoose схем.
  */
 const commentSchema = new mongoose.Schema({
-  // The text of the comment.
+  // Сэтгэгдлийн текст.
   comment: String,
-  // The date and time when the comment was created.
+  // Сэтгэгдэл бичсэн огноо, цаг.
   date_time: { type: Date, default: Date.now },
-  // The ID of the user who created the comment.
+  // Сэтгэгдэл бичсэн хэрэглэгчийн ID.
   user_id: mongoose.Schema.Types.ObjectId,
 });
 
 /**
- * Define the Mongoose Schema for a Photo.
+ * Зургийн (Photo) Mongoose схем.
  */
 const photoSchema = new mongoose.Schema({
-  // Name of the file containing the photo (in the project6/images directory).
+  // Зургийн файлын нэр (public/images хавтаст байрлана).
   file_name: String,
-  // The date and time when the photo was added to the database.
+  // Зургийг өгөгдлийн санд нэмсэн огноо, цаг.
   date_time: { type: Date, default: Date.now },
-  // The ID of the user who created the photo.
+  // Зургийн эзэн хэрэглэгчийн ID.
   user_id: mongoose.Schema.Types.ObjectId,
-  // Array of comment objects representing the comments made on this photo.
+  // Энэ зураг дээр бичсэн сэтгэгдлүүдийн массив.
   comments: [commentSchema],
 });
 
 /**
- * Create a Mongoose Model for a Photo using the photoSchema.
+ * photoSchema-г ашиглан Photo Mongoose модель үүсгэнэ.
  */
-const Photo = mongoose.model("Photo", photoSchema);
+const Photo = mongoose.model('Photo', photoSchema);
 
-/**
- * Make this available to our application.
- */
-module.exports = Photo;
+export default Photo;
